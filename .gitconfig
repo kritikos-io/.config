@@ -1,0 +1,16 @@
+[user]
+	name = Αλέξανδρος Κρητικός
+	email = akritikos@outlook.com
+	signingkey = C5F2F1EC
+[commit]
+	gpgsign = true
+#WIN ONLY [gpg]
+#WIN ONLY 	program = c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
+[core]
+	autocrlf = true
+#WIN ONLY sshCommand = 'C:\\Windows\\System32\\OpenSSH\\ssh.exe'
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
