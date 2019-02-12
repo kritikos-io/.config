@@ -1,6 +1,6 @@
 # dotfiles
 
-A collection of my personal configuration for system elements and my software of choice.
+A collection of my personal configuration for system elements and my software of choice, meant to be added as a submodule under development repos
 
 ## Usage
 
