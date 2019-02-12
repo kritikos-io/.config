@@ -10,6 +10,7 @@
 #WIN ONLY 	helper = wincred
 [core]
 	autocrlf = true
+	symlinks = true
 #WIN ONLY sshCommand = 'C:\\Windows\\System32\\OpenSSH\\ssh.exe'
 #WIN ONLY editor = \"C:/Program Files/Microsoft VS Code/code.exe\" --wait
 [filter "lfs"]
