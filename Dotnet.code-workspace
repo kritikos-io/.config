@@ -1,0 +1,12 @@
+{
+  "folders": [
+		{
+			"Name": "Dotfiles",
+			"path": "."
+		},
+    {
+			"Name": "Project Code",
+      "path": ".."
+    }
+  ]
+}
