@@ -468,3 +468,5 @@ appSettings.local.json
 connectionStrings.json
 .sonarqube
 *.coverage.xml
+# NuGet Symbol Packages
+*.snupkg

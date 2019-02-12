@@ -12,6 +12,11 @@ A collection of my personal configuration for system elements and my software of
 >
 > Additionally, symlink _Resharper.sln.DotSettings_ next to your solution file, and replace _Resharper_ on the link target filename with the name of your solution file.
 
+## Visual Studio Code Integration
+
+- Symlink .vscode/settings.json to your repo root .vscode folder
+- Symlink Dotnet.code-workspace to the root of your repo
+
 ## Benefits
 
 - Centralized .gitignore for .Net environment
