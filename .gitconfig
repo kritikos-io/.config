@@ -1,39 +1,36 @@
 [user]
-	name = Alexandros Kritikos
-	email = akritikos@outlook.com
-	signingkey = C5F2F1EC
 [commit]
 	gpgsign = true
-#WIN ONLY [gpg]
-#WIN ONLY 	program = c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
-#WIN ONLY [credential]
-#WIN ONLY 	helper = wincred
+[gpg]
+	program = c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
+[credential]
+	helper = wincred
 [core]
 	autocrlf = true
 	symlinks = true
-#WIN ONLY sshCommand = 'C:\\Windows\\System32\\OpenSSH\\ssh.exe'
-#WIN ONLY editor = \"C:/Program Files/Microsoft VS Code/code.exe\" --wait
+	sshCommand = 'C:\\Windows\\System32\\OpenSSH\\ssh.exe'
+	editor = \"C:/Program Files/Microsoft VS Code/code.exe\" --wait
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 [merge]
-#WIN ONLY 	tool = vscode
+	tool = vscode
 [diff]
-#WIN ONLY 	guitool = vscode
+	guitool = vscode
 [pull]
 	rebase = false
 [fetch]
 	prune = false
 [rebase]
 	autoStash = false
-#WIN ONLY [difftool "vscode"]
-#WIN ONLY 	path = C:/Program Files/Microsoft VS Code/code.exe
-#WIN ONLY 	cmd = \"C:/Program Files/Microsoft VS Code/code.exe\" --wait --diff \"$LOCAL\" \"$REMOTE\"
-#WIN ONLY [mergetool "vscode"]
-#WIN ONLY 	path = C:/Program Files/Microsoft VS Code/code.exe
-#WIN ONLY 	cmd = "\"C:/Program Files/Microsoft VS Code/code.exe\" --wait \"$MERGED\" "
+[difftool "vscode"]
+	path = C:/Program Files/Microsoft VS Code/code.exe
+	cmd = \"C:/Program Files/Microsoft VS Code/code.exe\" --wait --diff \"$LOCAL\" \"$REMOTE\"
+[mergetool "vscode"]
+	path = C:/Program Files/Microsoft VS Code/code.exe
+	cmd = "\"C:/Program Files/Microsoft VS Code/code.exe\" --wait \"$MERGED\" "
 [winUpdater]
 	recentlySeenVersion = 2.20.1.windows.1
 [alias]
