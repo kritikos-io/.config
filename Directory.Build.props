@@ -1,6 +1,5 @@
 <Project>
 	<PropertyGroup Label="Project">
-		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -9,6 +8,10 @@
 	<ItemGroup Label="Code Analysis">
 		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\dotfiles\stylecop.json" Link="stylecop.json" />
 	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Debug Settings">
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
 
 	<PropertyGroup Label="Package">
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
@@ -25,7 +28,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Label="Nugets">
-		<PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.108">
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.94">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
@@ -34,23 +37,23 @@
 	<ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
 		<!-- Required for nugets hosted on github & github enterprise
 		Minimum version: VisualStudio 15.3 for public repos, 15.7 for private repos -->
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-beta2-18618-05">
+		<PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.0.0-beta2-18618-05">
+		<PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.0.0-*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta2-18618-05">
+		<PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.Tfs.Git" Version="1.0.0-beta2-18618-05">
+		<PackageReference Include="Microsoft.SourceLink.Tfs.Git" Version="1.0.0-*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
