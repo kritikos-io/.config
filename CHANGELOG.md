@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 04/03/2019
+
+- Forced generation of DebugSymbols
+- Set Resharper to put attributes in their own line
+
 ## 12/02/2019
 
 - Added common gitignore for .net stack
