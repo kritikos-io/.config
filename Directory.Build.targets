@@ -1,0 +1,10 @@
+<Project>
+	<PropertyGroup>
+		<!-- Pack task from sdk defaults to PackageId=AssemblyName if not already set
+		and afterwards sets IsPackable=true if PackageId is set, marking all packages
+		as packable.
+		Since Directory.Build.targets is imported after user properties, we check if
+		a package id is explictly set and mark packable projects accordingly -->
+		<IsPackable Condition="'$(PackageId)' == ''">false</IsPackable>
+	</PropertyGroup>
+</Project>

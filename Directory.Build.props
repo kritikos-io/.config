@@ -14,6 +14,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="Package">
+		<PackageId></PackageId>
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<!-- Optional: Declare that the Repository URL can be published to NuSpec -->
@@ -34,7 +35,7 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+	<ItemGroup Condition="$(IsPackable) == 'true'">
 		<!-- Required for nugets hosted on github & github enterprise
 		Minimum version: VisualStudio 15.3 for public repos, 15.7 for private repos -->
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*">
