@@ -3,6 +3,11 @@
 		<LangVersion>latest</LangVersion>
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+		<!-- We only target a single framework hence the subdir is not needed -->
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<!-- Same but for runtime assemblies -->
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup Label="Code Analysis">
@@ -15,6 +20,7 @@
 
 	<PropertyGroup Label="Package">
 		<PackageId></PackageId>
+		<Company>Kritikos IO</Company>
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<!-- Optional: Declare that the Repository URL can be published to NuSpec -->
@@ -59,4 +65,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+
+	<!-- This target is replaced by GitInfo when restored. Allows Version.targets to rely on it before restore. -->
+	<Target Name="GitVersion" />
 </Project>

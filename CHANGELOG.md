@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 - Prevents packaging files that don't have PackageId explictly set leveraging Directory.Build.targets
 - Disables SourceLink for non packagable projects
 - Moves VS Code workspace settings to proper file
+- Supresses warning when using preview releases of Net Core
+- Removes framework and runtime identifiers from build path
+- Adds dummy target to be updated by GitInfo
 
 ## 04/03/2019
 
