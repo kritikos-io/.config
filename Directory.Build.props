@@ -4,6 +4,11 @@
 		<LangVersion>latest</LangVersion>
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+		<!-- We only target a single framework hence the subdir is not needed -->
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<!-- Same but for runtime assemblies -->
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup Label="Code Analysis">
@@ -15,6 +20,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="Package">
+		<PackageId></PackageId>
+		<Company>Kritikos IO</Company>
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<!-- Optional: Declare that the Repository URL can be published to NuSpec -->
@@ -35,28 +42,6 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
-		<!-- Required for nugets hosted on github & github enterprise
-		Minimum version: VisualStudio 15.3 for public repos, 15.7 for private repos -->
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-*">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.0.0-*">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-*">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.Tfs.Git" Version="1.0.0-*">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
+	<!-- This target is replaced by GitInfo when restored. Allows Version.targets to rely on it before restore. -->
+	<Target Name="GitVersion" />
 </Project>
