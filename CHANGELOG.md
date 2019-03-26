@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 26/03/2019
 
 - Fixes company name
+- Removes Git For Windows last seen version
 
 ## 21/03/2019
 

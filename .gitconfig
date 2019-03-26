@@ -31,8 +31,6 @@
 [mergetool "vscode"]
 	path = C:/Program Files/Microsoft VS Code/code.exe
 	cmd = "\"C:/Program Files/Microsoft VS Code/code.exe\" --wait \"$MERGED\" "
-[winUpdater]
-	recentlySeenVersion = 2.20.1.windows.1
 [alias]
 	clone = 'clone --recursive'
 	lgfull = log --oneline --decorate --color --graph
