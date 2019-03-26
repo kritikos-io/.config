@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 26/03/2019
+
+- Fixes company name
+
 ## 21/03/2019
 
 - Removes sourcelink from build props, can not compile with multiple sources. You should now install
