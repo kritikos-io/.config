@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 21/03/2019
+
+- Removes sourcelink from build props, can not compile with multiple sources. You should now install
+the sourcelink package of your repo provider
+
 ## 06/03/2019
 
 - Prevents packaging files that don't have PackageId explictly set leveraging Directory.Build.targets
