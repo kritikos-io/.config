@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 27/03/2019
 
 - Removes documentation requirement for partials
+- Ignores distributable libraries in source control
 
 ## 26/03/2019
 

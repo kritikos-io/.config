@@ -470,3 +470,4 @@ connectionStrings.json
 *.coverage.xml
 # NuGet Symbol Packages
 *.snupkg
+**/wwwroot/dist/*
