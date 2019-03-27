@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 27/03/2019
+
+- Removes documentation requirement for partials
+
 ## 26/03/2019
 
 - Fixes company name
