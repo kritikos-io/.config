@@ -1,5 +1,6 @@
 <Project>
 	<PropertyGroup Label="Project">
+		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -35,7 +36,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Label="Nugets">
-		<PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.114">
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
