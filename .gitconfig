@@ -6,36 +6,36 @@
 	gpgsign = true
 #WIN ONLY [gpg]
 #WIN ONLY 	program = c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
-#WIN ONLY [credential]
-#WIN ONLY 	helper = wincred
 [core]
 	autocrlf = true
 	symlinks = true
 #WIN ONLY sshCommand = 'C:\\Windows\\System32\\OpenSSH\\ssh.exe'
-#WIN ONLY editor = \"C:/Program Files/Microsoft VS Code/code.exe\" --wait
+#GUI ONLY editor = code --wait
+#CLI ONLY editor = vim
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 [merge]
-#WIN ONLY 	tool = vscode
+	renormalize = true
+	conflictStyle = diff3
+#GUI ONLY tool = vscode
+#CLI ONLY tool = vimdiff3
 [diff]
-#WIN ONLY 	guitool = vscode
+	guitool = vscode
+#CLI ONLY tool = vimdiff3
+#GUI ONLY tool= vscode
 [pull]
-	rebase = false
+	rebase = true
 [fetch]
-	prune = false
+	prune = true
 [rebase]
-	autoStash = false
-#WIN ONLY [difftool "vscode"]
-#WIN ONLY 	path = C:/Program Files/Microsoft VS Code/code.exe
-#WIN ONLY 	cmd = \"C:/Program Files/Microsoft VS Code/code.exe\" --wait --diff \"$LOCAL\" \"$REMOTE\"
-#WIN ONLY [mergetool "vscode"]
-#WIN ONLY 	path = C:/Program Files/Microsoft VS Code/code.exe
-#WIN ONLY 	cmd = "\"C:/Program Files/Microsoft VS Code/code.exe\" --wait \"$MERGED\" "
-[winUpdater]
-	recentlySeenVersion = 2.20.1.windows.1
+	autoStash = true
 [alias]
 	clone = 'clone --recursive'
 	lgfull = log --oneline --decorate --color --graph
