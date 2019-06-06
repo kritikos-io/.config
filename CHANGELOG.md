@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 06/06/2019
+
+- Adds new option for default import placement
+- Adds Serilog roslyn analysers for common logging errors in .Net projects
+
 ## 08/05/2019
 
 - Sanitizes gitconfig as much as possible for Windows/Linux interop

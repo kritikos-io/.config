@@ -57,6 +57,8 @@ csharp_prefer_braces = false:none
 # Wrapping options
 csharp_preserve_single_line_statements = false:none
 csharp_preserve_single_line_blocks = true
+# Namespace location
+csharp_using_directive_placement = inside_namespace:suggestion
 
 [*.{json,yml,md,ruleset}]
 indent_style = space
