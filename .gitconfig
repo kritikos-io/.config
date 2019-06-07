@@ -40,3 +40,5 @@
 	clone = 'clone --recursive'
 	lgfull = log --oneline --decorate --color --graph
 	lg = log --oneline --decorate --color
+[i18n]
+	filesEncoding = utf-8

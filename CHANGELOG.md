@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 07/06/2019
+
+- Sets default file encoding as UTF-8
+
 ## 06/06/2019
 
 - Adds new option for default import placement
