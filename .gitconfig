@@ -30,8 +30,12 @@
 	guitool = vscode
 #CLI ONLY	tool = vimdiff3
 #GUI ONLY	tool= vscode
+[submodule]
+	recurse = true
 [pull]
 	rebase = true
+[push]
+	recurseSubmodules = on-demand
 [fetch]
 	prune = true
 [rebase]
