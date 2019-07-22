@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 23/07/2019
+
+- Ignores VS cache globally
+
 ## 07/06/2019
 
 - Sets default file encoding as UTF-8
