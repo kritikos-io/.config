@@ -17,7 +17,7 @@
 			"**/CVS": true,
 			"**/.DS_Store": true,
 			"dotfiles": true, // added as a secondary folder
-			".vs": true, // Visual Studio cache
+			"**/.vs": true, // Visual Studio cache
 			"*.sln.DotSettings.user": true, // managed by Resharper
 			".gitmodules": true, // managed by git
 			"{src,tests}/*/{bin,obj}": true, // build artifacts
