@@ -42,8 +42,8 @@
 [pull]
 	rebase = true
 [push]
+	recurseSubmodules = true
 	followTags = true
-	gpgSign = true
 [rebase]
 	autoStash = true
 	autosquash = true
