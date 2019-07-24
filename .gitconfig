@@ -42,7 +42,7 @@
 [pull]
 	rebase = true
 [push]
-	recurseSubmodules = true
+	recurseSubmodules = on-demand
 	followTags = true
 [rebase]
 	autoStash = true
