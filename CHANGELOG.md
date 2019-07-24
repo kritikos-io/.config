@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 24/07/2019
+
+- Adds some minor tweaks for submodules
+- Orders gitconfig by configuration group name (apart from [user])
+
 ## 23/07/2019
 
 - Ignores VS cache globally

@@ -2,47 +2,58 @@
 	name = Alexandros Kritikos
 	email = akritikos@outlook.com
 	signingkey = C5F2F1EC
+[alias]
+	clone = 'clone --recurse-submodules'
+	lgfull = log --oneline --decorate --color --graph
+	lg = log --oneline --decorate --color
+[column]
+	ui = auto,row,dense
 [commit]
 	gpgsign = true
-#WIN ONLY	[gpg]
-#WIN ONLY	program = c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
 [core]
 	autocrlf = true
 	symlinks = true
-#WIN ONLY	sshCommand = 'C:\\Windows\\System32\\OpenSSH\\ssh.exe'
-#GUI ONLY	editor = code --wait
-#CLI ONLY	editor = vim
-[mergetool "vscode"]
-	cmd = code --wait $MERGED
+	hideDotFiles = true
+	##WIN ONLY sshCommand = 'C:\\Windows\\System32\\OpenSSH\\ssh.exe'
+	##GUI ONLY editor = code --wait
+	##CLI ONLY editor = vim
+[diff]
+	# guitool = vscode
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
+[fetch]
+	prune = true
+	recurseSubmodules = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[gpg]
+	##WIN ONLY program = c:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
+[i18n]
+	filesEncoding = utf-8
 [merge]
 	renormalize = true
 	conflictStyle = diff3
-#GUI ONLY	tool = vscode
-#CLI ONLY	tool = vimdiff3
-[diff]
-	guitool = vscode
-#CLI ONLY	tool = vimdiff3
-#GUI ONLY	tool= vscode
-[submodule]
-	recurse = true
+	# tool = vscode
+[mergetool "vscode"]
+	cmd = code.exe --wait \"$MERGED\"
 [pull]
 	rebase = true
 [push]
-	recurseSubmodules = on-demand
-[fetch]
-	prune = true
+	recurseSubmodules = true
+	followTags = true
+	gpgSign = true
 [rebase]
 	autoStash = true
-[alias]
-	clone = 'clone --recursive'
-	lgfull = log --oneline --decorate --color --graph
-	lg = log --oneline --decorate --color
-[i18n]
-	filesEncoding = utf-8
+	autosquash = true
+[status]
+	submoduleSummary = true
+	renames = true
+	showStash = true
+[submodule]
+	active = .
+	recurse = true
+[tag]
+	forceSignAnnotated = true
