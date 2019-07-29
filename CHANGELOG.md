@@ -9,8 +9,13 @@ All notable changes to this project will be documented in this file.
 - Adds gulpfile.js for common sass/js tasks
 - Adds a task to restore node modules
 - Adds Microsoft Code Analysis as an analyzer
+<<<<<<< HEAD
 - Adds default handing for json files
 - Recreates analyzer ruleset
+||||||| 87536d2... Adds default handing for json files
+- Adds default handing for json files
+=======
+>>>>>>> parent of 87536d2... Adds default handing for json files
 
 ## 24/07/2019
 
