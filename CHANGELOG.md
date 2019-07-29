@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 - Libman libraries should not be commited to source control
 - Removes compiled sass & js assets from source control
+- Adds gulpfile.js for common sass/js tasks
+- Adds a task to restore node modules
 
 ## 24/07/2019
 

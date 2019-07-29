@@ -7,4 +7,8 @@
 		a package id is explictly set and mark packable projects accordingly -->
 		<IsPackable Condition="'$(PackageId)' == ''">false</IsPackable>
 	</PropertyGroup>
+
+	<Target Name="RestoreNpmAssets">
+		<Exec Command="npm install" />
+	</Target>
 </Project>
