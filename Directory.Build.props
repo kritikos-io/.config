@@ -50,6 +50,10 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+		<Content Include="**\*.json" Exclude="bin\**\*;obj\**\*" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
 	<!-- This target is replaced by GitInfo when restored. Allows Version.targets to rely on it before restore. -->
 	<Target Name="GitVersion" />
 </Project>
