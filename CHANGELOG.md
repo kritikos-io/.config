@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Removes compiled sass & js assets from source control
 - Adds gulpfile.js for common sass/js tasks
 - Adds a task to restore node modules
+- Adds Microsoft Code Analysis as an analyzer
 
 ## 24/07/2019
 
