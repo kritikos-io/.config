@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="AKritikos Ruleset" Description="Common ruleset for projects" ToolsVersion="15.0">
+<RuleSet Name="Kritikos Ruleset" Description="Common roslyn analyser configuration" ToolsVersion="10.0">
   <Rules AnalyzerId="AsyncUsageAnalyzers" RuleNamespace="AsyncUsageAnalyzers">
     <Rule Id="AvoidAsyncSuffix" Action="Warning" />
     <Rule Id="AvoidAsyncVoid" Action="Warning" />
