@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 29/07/2019
+
+- Libman libraries should not be commited to source control
+- Removes compiled sass & js assets from source control
+
 ## 24/07/2019
 
 - Adds some minor tweaks for submodules

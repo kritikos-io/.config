@@ -470,3 +470,7 @@ connectionStrings.json
 *.coverage.xml
 # NuGet Symbol Packages
 *.snupkg
+# Libraries managed by libman
+**/wwwroot/dist/*
+# Compiled assets
+**/wwwroot/assets/*
