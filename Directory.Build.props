@@ -11,6 +11,10 @@
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
 
+	<ItemGroup Label="Code Analysis">
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\dotfiles\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Debug Settings">
 		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
