@@ -1,8 +1,0 @@
-- task: UseDotNet@2
-  displayName: Install .NET Core SDK 3
-  inputs:
-    packageType: sdk
-    version: 3.0.100-preview7-012821
-    includePreviewVersions: true
-    installationPath: '$Pipeline.Workspace/.sdk'
-    performMultiLevelLookup: true
