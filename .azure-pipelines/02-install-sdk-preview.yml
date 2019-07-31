@@ -1,0 +1,5 @@
+- task: UseDotNet@2
+  displayName: Install .NET Core SDK 3
+  inputs:
+    packageType: sdk
+    version: 2.2.203
