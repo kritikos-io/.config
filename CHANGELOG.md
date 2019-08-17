@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 17/08/2019
+
+- Enables Nullable Context by default on all projects
+
 ## 30/07/2019
 
 - Ruleset now ignores CA2007

@@ -2,6 +2,7 @@
 	<PropertyGroup Label="Project">
 		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
 		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
