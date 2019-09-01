@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 02/09/2019
+
+- Ignores missing documentation (enabled by generating doc xml)
+
 ## 17/08/2019
 
 - Enables Nullable Context by default on all projects
