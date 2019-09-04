@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Allows partial elements to be undocumented
 - Allows literal strings to be hardcoded instead of in resx files
 - Adds new editorConfig settings
+- Changes default language version to preview in order to use C# 8.0 features
 
 ## 02/09/2019
 

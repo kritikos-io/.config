@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup Label="Project">
 		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
-		<LangVersion>latest</LangVersion>
+		<LangVersion>preview</LangVersion>
 		<Nullable>enable</Nullable>
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
