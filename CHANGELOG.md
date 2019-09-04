@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Allows partial elements to be undocumented
 - Allows literal strings to be hardcoded instead of in resx files
+- Adds new editorConfig settings
 
 ## 02/09/2019
 
