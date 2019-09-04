@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 04/09/2019
+
+- Allows partial elements to be undocumented
+- Allows literal strings to be hardcoded instead of in resx files
+
 ## 02/09/2019
 
 - Ignores missing documentation (enabled by generating doc xml)
