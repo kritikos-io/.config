@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup Label="Project">
-		<RootNamespace>Nessos.$(MSBuildProjectName)</RootNamespace>
+		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -22,7 +22,7 @@
 
 	<PropertyGroup Label="Package">
 		<PackageId></PackageId>
-		<Company>Nessos Information Technologies S.A.</Company>
+		<Company>Kritikos IO</Company>
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<!-- Optional: Declare that the Repository URL can be published to NuSpec -->
