@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 24/09/2019
+
+- Sets only library files as packable and fixes package ID to Corp.AssemblyName
+
 ## 04/09/2019
 
 - Allows partial elements to be undocumented
