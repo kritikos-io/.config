@@ -2,7 +2,6 @@
 	<PropertyGroup Label="Project">
 		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
 		<LangVersion>latest</LangVersion>
-		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>1591</NoWarn>
 		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
@@ -13,7 +12,12 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-	<ItemGroup Label="Code Analysis">
+	<PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset')">
+		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
+	</PropertyGroup>
+
+	<ItemGroup Label="Code Analysis Configuration"
+	           Condition="Exists('$(MSBuildThisFileDirectory)\dotfiles\stylecop.json')">
 		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\dotfiles\stylecop.json" Link="stylecop.json" />
 	</ItemGroup>
 
