@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 01/10/2019
+
+- Reenables analyzer rules
+
 ## 24/09/2019
 
 - Sets only library files as packable and fixes package ID to Corp.AssemblyName
