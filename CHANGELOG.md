@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 02/10/2019
+
+- Adds default tasks for dotnet projects
+
 ## 01/10/2019
 
 - Reenables analyzer rules
