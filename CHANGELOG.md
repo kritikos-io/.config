@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Removes dotfiles from workspace roots to avoid duplicate tasks
 - Stops hiding dotfiles folder
+- Hides .vscode, access via vs code config
 
 ## 02/10/2019
 
