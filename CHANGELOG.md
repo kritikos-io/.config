@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 03/10/2019
+
+- Removes dotfiles from workspace roots to avoid duplicate tasks
+- Stops hiding dotfiles folder
+
 ## 02/10/2019
 
 - Adds default tasks for dotnet projects

@@ -1,13 +1,8 @@
 {
-  "folders": [
+	"folders": [
 		{
-			"Name": "Dotfiles",
-			"path": "."
-		},
-    {
-			"Name": "Project Code",
-      "path": ".."
-    }
+			"path": ".."
+		}
 	],
 	"settings": {
 		"files.exclude": {
@@ -16,7 +11,6 @@
 			"**/.hg": true,
 			"**/CVS": true,
 			"**/.DS_Store": true,
-			"dotfiles": true, // added as a secondary folder
 			"**/.vs": true, // Visual Studio cache
 			"*.sln.DotSettings.user": true, // managed by Resharper
 			".gitmodules": true, // managed by git
