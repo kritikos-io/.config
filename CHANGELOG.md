@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 09/10/2019
 
 - Removes commented out rules
+- Updates Microsoft.CodeAnalysis.FxCopAnalyzers
 
 ## 03/10/2019
 
