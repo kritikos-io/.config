@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Removes commented out rules
 - Updates Microsoft.CodeAnalysis.FxCopAnalyzers
+- Allows multiple types per file (Razor Pages hell)
 
 ## 03/10/2019
 
