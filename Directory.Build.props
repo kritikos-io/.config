@@ -12,13 +12,12 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-	<PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset')">
-		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotfiles\dotnet.ruleset</CodeAnalysisRuleset>
+	<PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\.config\dotnet.ruleset')">
+		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\.config\dotnet.ruleset</CodeAnalysisRuleset>
 	</PropertyGroup>
 
-	<ItemGroup Label="Code Analysis Configuration"
-	           Condition="Exists('$(MSBuildThisFileDirectory)\dotfiles\stylecop.json')">
-		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\dotfiles\stylecop.json" Link="stylecop.json" />
+	<ItemGroup Label="Code Analysis Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\.config\stylecop.json')">
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\.config\stylecop.json" Link="stylecop.json" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Debug Settings">
@@ -29,7 +28,8 @@
 		<PackageId></PackageId>
 		<Company>Kritikos IO</Company>
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
-		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<!-- VS 2019 can fetch them through snupkg -->
+		<!--<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>-->
 		<!-- Optional: Declare that the Repository URL can be published to NuSpec -->
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -51,6 +51,23 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="SerilogAnalyzer" Version="0.15.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Label="SourceLink" Condition="$(IsPackable)">
+		<PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.0.0-beta2-19367-01" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-beta2-19367-01" PrivateAssets="All"/>
+
+		<SourceLinkGitLabHost Include="git.kritikos.io" />
+		<SourceLinkGitHubHost Include="github.com" />
+		<SourceLinkBitBucketHost Include="bitbucket.org" />
+	</ItemGroup>
+
+	<ItemGroup Label="Versioning">
+		<PackageReference Include="GitInfo" Version="2.0.20">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
