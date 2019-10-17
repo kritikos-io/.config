@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup Label="Project">
 		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
-		<LangVersion>latest</LangVersion>
+		<LangVersion>8.0</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>1591</NoWarn>
 		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
@@ -67,7 +67,7 @@
 	</ItemGroup>
 
 	<ItemGroup Label="Versioning">
-		<PackageReference Include="GitInfo" Version="2.0.20">
+		<PackageReference Include="GitInfo" Version="2.0.21">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>

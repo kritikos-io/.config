@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 17/10/2019
+
+- Updates GitInfo nuget
+
 ## 09/10/2019
 
 - Removes commented out rules
