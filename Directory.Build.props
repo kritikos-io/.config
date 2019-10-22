@@ -54,6 +54,15 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="SmartanAlyzers.ExceptionAnalyzer" Version="1.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="SmartAnalyzers.MultithreadingAnalyzer" Version="1.1.31">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+
 	</ItemGroup>
 
 	<ItemGroup Label="SourceLink" Condition="$(IsPackable)">
