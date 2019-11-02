@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 02/11/2019
+
+- Brings Resharper configuration up to date
+
 ## 22/10/2019
 
 - Provides additional analyzers for exception handling and multithreaded scenarios
