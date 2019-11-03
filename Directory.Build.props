@@ -27,6 +27,7 @@
 	<PropertyGroup Label="Package">
 		<PackageId></PackageId>
 		<Company>Kritikos IO</Company>
+		<Authors>Alexandros Kritikos</Authors>
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
 		<!-- VS 2019 can fetch them through snupkg -->
 		<!--<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>-->
