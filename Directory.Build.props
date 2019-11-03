@@ -62,7 +62,6 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-
 	</ItemGroup>
 
 	<ItemGroup Label="SourceLink" Condition="$(IsPackable)">
@@ -74,4 +73,15 @@
 		<SourceLinkGitHubHost Include="github.com" />
 		<SourceLinkBitBucketHost Include="bitbucket.org" />
 	</ItemGroup>
+
+	<ItemGroup Label="License Import" Condition="Exists('$(MSBuildThisFileDirectory)\LICENSE.md')">
+		<None Include="..\..\LICENSE.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<PropertyGroup Label="License" Condition="Exists('$(MSBuildThisFileDirectory)\LICENSE.md')">
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+	</PropertyGroup>
 </Project>
