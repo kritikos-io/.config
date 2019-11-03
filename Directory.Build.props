@@ -74,14 +74,4 @@
 		<SourceLinkGitHubHost Include="github.com" />
 		<SourceLinkBitBucketHost Include="bitbucket.org" />
 	</ItemGroup>
-
-	<ItemGroup Label="Versioning">
-		<PackageReference Include="GitInfo" Version="2.0.21">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
-	<!-- This target is replaced by GitInfo when restored. Allows Version.targets to rely on it before restore. -->
-	<Target Name="GitVersion" />
 </Project>
