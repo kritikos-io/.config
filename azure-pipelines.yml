@@ -11,6 +11,10 @@ trigger:
       - develop
       - feature/*
       - bugfix/*
+  paths:
+    include:
+      - src/*
+      - tests/*
 variables:
   - group: Environment
 
