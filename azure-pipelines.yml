@@ -5,14 +5,17 @@ resources:
         submodules: true
         lfs: true
 trigger:
+  batch: true
   branches:
     include:
       - master
       - develop
       - feature/*
       - bugfix/*
+      - release/*
   paths:
     include:
+      - azure-pipelines.yml
       - src/*
       - tests/*
 variables:
@@ -23,18 +26,44 @@ jobs:
   pool:
     vmImage: windows-latest
   steps:
-  - powershell: |
-      dotnet tool install --tool-path .. gitversion.tool
+  - task: DotNetCoreCLI@2
+    displayName: Restoring nugets
+    inputs:
+      command: 'restore'
+      noCache: false
+      restoreDirectory: '$(Pipeline.Workspace)/.nuget/packages'
+      arguments: -Project2ProjectTimeOut 20
+      verbosityRestore: Normal
+
+  # - task: PublishPipelineArtifact@1
+  #   inputs:
+  #     path: $(Pipeline.Workspace)/.nuget/packages
+  #     artifact: Nugets
+
+  - task: PowerShell@2
+    inputs:
+      targetType: inline
+      script: |
+        dotnet tool install --tool-path .. gitversion.tool
+      pwsh: true
     displayName: Installing Dotnet Tools
 
-  - powershell: |
-      $git = $(../dotnet-gitversion /output json /showvariable NugetVersion)
-      echo "##vso[task.setvariable variable=gitVersion;isOutput=true]$(../dotnet-gitversion /output json /showvariable NugetVersion)"
-    name: versioning
+  - task: PowerShell@2
+    inputs:
+      targetType: inline
+      script: |
+        $git = $(../dotnet-gitversion /output json /showvariable NugetVersion)
+        echo "##vso[task.setvariable variable=gitVersion;isOutput=true]$(../dotnet-gitversion /output json /showvariable SemVer)"
+      pwsh: true
     displayName: Setting version from git
+    name: versioning
 
-  - powershell: |
-      echo "Current version: $(versioning.gitVersion)"
+  - task: PowerShell@2
+    inputs:
+      targetType: inline
+      script: |
+        echo "Current version: $(versioning.gitVersion)"
+      pwsh: true
     displayName: Shows currently compiling version
 
 - job: Building
@@ -48,10 +77,17 @@ jobs:
   - checkout: self
     fetchDepth: 1
 
+  # - task: DownloadPipelineArtifact@2
+  #   inputs:
+  #     artifactName: Nugets
+  #     targetPath: '$(Pipeline.Workspace)/.nuget/packages'
+
   - task: DotNetCoreCLI@2
     displayName: Restoring nugets
     inputs:
       command: 'restore'
+      noCache: false
+      restoreDirectory: '$(Pipeline.Workspace)/.nuget/packages'
       arguments: -Project2ProjectTimeOut 20
       verbosityRestore: Normal
 
@@ -100,12 +136,18 @@ jobs:
   - checkout: self
     fetchDepth: 1
 
+  # - task: DownloadPipelineArtifact@2
+  #   inputs:
+  #     artifactName: Nugets
+  #     targetPath: '$(Pipeline.Workspace)/.nuget/packages'
+
   - task: DotNetCoreCLI@2
-    name: dotnetRestore
     displayName: Restoring nugets
     inputs:
       command: 'restore'
-      arguments: -Project2ProjectTimeOut 20 --packages "$(Build.BinariesDirectory)/.nuget)
+      noCache: false
+      restoreDirectory: '$(Pipeline.Workspace)/.nuget/packages'
+      arguments: -Project2ProjectTimeOut 20
       verbosityRestore: Normal
 
   - task: DotNetCoreCLI@2
