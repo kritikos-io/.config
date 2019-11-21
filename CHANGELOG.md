@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 21/11/2019
+
+- Adds coverlet to xUnit test projects to calculate code coverage
+- Updates readme with importan information
+
 ## 02/11/2019
 
 - Brings Resharper configuration up to date
