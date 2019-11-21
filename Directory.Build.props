@@ -2,7 +2,6 @@
 	<PropertyGroup Label="Project">
 		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
 		<LangVersion>8.0</LangVersion>
-		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>1591</NoWarn>
 		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
