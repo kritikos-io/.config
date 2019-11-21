@@ -38,4 +38,4 @@ In order to avoid duplicate PackageReference definitions and unpredictable behav
 - Embedded Github/Gitlab sourcelink for packable projects under repo
 - Resharper configuration that follows stylecop/ruleset configuration
 
-[buildProps]: (Directory.Build.props)
+[buildProps]: Directory.Build.props
