@@ -76,6 +76,13 @@
 		<SourceLinkBitBucketHost Include="bitbucket.org" />
 	</ItemGroup>
 
+	<ItemGroup Label="TestCoverage" Condition="$(IsTest)">
+		<PackageReference Include="coverlet.msbuild" Version="2.7.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
 	<ItemGroup Label="License Import" Condition="Exists('$(MSBuildThisFileDirectory)\LICENSE.md')">
 		<None Include="..\..\LICENSE.md">
 			<Pack>True</Pack>
