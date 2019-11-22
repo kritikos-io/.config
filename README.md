@@ -25,9 +25,29 @@ In order to avoid duplicate PackageReference definitions and unpredictable behav
 - Microsoft.SourceLink.GitLab
 - StyleCop.Analyzers
 
+To update them, tick their verison numbers in the [Directory.Build.props][buildProps] file and reload the solution.
+
+## Azure DevOps integration
+
+The [azure-pipelines.yml][pipeline] file is preconfigured for dotnet projects with the following services:
+
+- SonarCloud
+- Coveralls
+- CodeCov
+- Nuget.org publishing
+
+In order to make it work, copy it to the root of your project, replace the value of ```SONAR_PROJECT``` at the pipeline variables section and make sure your pipeline has the following variables set on the DevOps portal:
+
+- GITHUB_KEY: GitHub access token
+- SONAR_ORG: SonarCloud organization
+- SONAR_KEY: SonarCloud token
+- SONAR_URL: SonarCloud host url
+- CODECOV_KEY: **REPO SPECIFIC** access token
+- COVERALLS_KEY: **REPO SPECIFIC** access token
+
 ## Visual Studio Code Integration
 
-- Symlink .vscode/settings.json to your repo root .vscode folder
+- Symlink .vscode folder to your repo root .vscode folder
 - Symlink Dotnet.code-workspace to the root of your repo
 
 ## Benefits
@@ -39,3 +59,4 @@ In order to avoid duplicate PackageReference definitions and unpredictable behav
 - Resharper configuration that follows stylecop/ruleset configuration
 
 [buildProps]: Directory.Build.props
+[pipeline]: .config/azure-pipelines.yml

@@ -5,7 +5,8 @@ All notable changes to this project will be documented in this file.
 ## 21/11/2019
 
 - Adds coverlet to xUnit test projects to calculate code coverage
-- Updates readme with importan information
+- Updates readme with important information
+- Provides a simplified version of DevOps pipeline configuration
 
 ## 02/11/2019
 
