@@ -15,14 +15,15 @@ Additionally, symlink _Resharper.sln.DotSettings_ next to your solution file, an
 
 In order to avoid duplicate PackageReference definitions and unpredictable behavior, the following nugets should be handled by [Directory.Build.props][buildProps] **only**:
 
+- coverlet.collector
 - coverlet.msbuild
 - Microsoft.CodeAnalysis.FxCopAnalyzers
-- SerilogAnalyzer
-- SmartanAlyzers.ExceptionAnalyzer
-- SmartAnalyzers.MultithreadingAnalyzer
 - Microsoft.SourceLink.Bitbucket.Git
 - Microsoft.SourceLink.GitHub
 - Microsoft.SourceLink.GitLab
+- SerilogAnalyzer
+- SmartanAlyzers.ExceptionAnalyzer
+- SmartAnalyzers.MultithreadingAnalyzer
 - StyleCop.Analyzers
 
 To update them, tick their verison numbers in the [Directory.Build.props][buildProps] file and reload the solution.
