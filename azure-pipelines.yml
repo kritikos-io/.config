@@ -102,7 +102,7 @@ jobs:
     condition: ne(variables['Build.Reason'], 'PullRequest')
     displayName: SonarCloud (commit)
   - pwsh: |
-      ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Version)" /o:"$(SONAR_ORG)" /d:sonar.host.url="$(SONAR_URL)" /d:sonar.login="$(SONAR_KEY)" /d:sonar.cs.opencover.reportsPaths="$(build.artifactStagingDirectory)/coverage/coverage.opencover.xml" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth=$(GITHUB_KEY) /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestId)" /d:sonar.pullrequest.provider="github"
+      ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Version)" /o:"$(SONAR_ORG)" /d:sonar.host.url="$(SONAR_URL)" /d:sonar.login="$(SONAR_KEY)" /d:sonar.cs.opencover.reportsPaths="$(build.artifactStagingDirectory)/coverage/coverage.opencover.xml" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth=$(GITHUB_KEY) /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestNumber)" /d:sonar.pullrequest.provider="github"
     condition: eq(variables['Build.Reason'], 'PullRequest')
     displayName: SonarCloud (PR)
   - task: DotNetCoreCLI@2
@@ -130,8 +130,8 @@ jobs:
     condition: ne(variables['Build.Reason'], 'PullRequest')
     displayName: Push Coverage (commit)
   - pwsh: |
-      ../csmacnz.Coveralls --repoToken "$(COVERALLS_KEY)" --opencover -i $(build.artifactStagingDirectory)/coverage/coverage.opencover.xml --useRelativePaths --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)" --pullRequest "$(System.PullRequest.PullRequestId)"
-      ../codecov --token "$(CodeCovApiKey)" --file $(build.artifactStagingDirectory)/coverage/coverage.opencover.xml --branch "$(Build.SourceBranchName)" --sha "$(Build.SourceVersion)" --pr "$(System.PullRequest.PullRequestId)"
+      ../csmacnz.Coveralls --repoToken "$(COVERALLS_KEY)" --opencover -i $(build.artifactStagingDirectory)/coverage/coverage.opencover.xml --useRelativePaths --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)" --pullRequest "$(System.PullRequest.PullRequestNumber)"
+      ../codecov --token "$(CodeCovApiKey)" --file $(build.artifactStagingDirectory)/coverage/coverage.opencover.xml --branch "$(Build.SourceBranchName)" --sha "$(Build.SourceVersion)" --pr "$(System.PullRequest.PullRequestNumber)"
     condition: eq(variables['Build.Reason'], 'PullRequest')
     displayName: Push Coverage (PR)
 - job: Publish
