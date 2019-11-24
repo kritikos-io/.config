@@ -32,7 +32,7 @@ jobs:
       displayName: Install GitVersion
     - pwsh: |
         echo "##vso[task.setvariable variable=gitVersion;isOutput=true]$(../dotnet-gitversion /output json /showvariable SemVer)"
-        "Current version: $(../dotnet-gitversion /output json /showvariable NugetVersion)"
+        "Current version: $(../dotnet-gitversion /output json /showvariable SemVer)"
       displayName: Sets SemVer
       name: versioning
 - job: Build
@@ -92,7 +92,6 @@ jobs:
     COVERALLS_KEY: $(CoverallsApiKey)
   steps:
   - checkout: self
-    fetchDepth: 1
   - pwsh: |
       dotnet tool install --tool-path .. dotnet-sonarscanner
       dotnet tool install --tool-path .. coveralls.net
@@ -103,7 +102,7 @@ jobs:
     condition: ne(variables['Build.Reason'], 'PullRequest')
     displayName: SonarCloud (commit)
   - pwsh: |
-      ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Version)" /o:"$(SONAR_ORG)" /d:sonar.host.url="$(SONAR_URL)" /d:sonar.login="$(SONAR_KEY)" /d:sonar.cs.opencover.reportsPaths="$(build.artifactStagingDirectory)/coverage/coverage.opencover.xml" /d:sonar.branch.name="$(Build.SourceBranchName)" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth=$(GITHUB_KEY) /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestId)" /d:sonar.pullrequest.provider="github"
+      ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Version)" /o:"$(SONAR_ORG)" /d:sonar.host.url="$(SONAR_URL)" /d:sonar.login="$(SONAR_KEY)" /d:sonar.cs.opencover.reportsPaths="$(build.artifactStagingDirectory)/coverage/coverage.opencover.xml" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth=$(GITHUB_KEY) /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestId)" /d:sonar.pullrequest.provider="github"
     condition: eq(variables['Build.Reason'], 'PullRequest')
     displayName: SonarCloud (PR)
   - task: DotNetCoreCLI@2
