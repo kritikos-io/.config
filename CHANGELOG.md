@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 29/11/2019
+
+- Updates Roslyn Analyzers
+- Updates Microsoft SourceLink
+
 ## 21/11/2019
 
 - Adds coverlet to xUnit test projects to calculate code coverage
