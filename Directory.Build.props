@@ -10,6 +10,7 @@
 		<!-- Same but for runtime assemblies -->
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 		<Nullable>enable</Nullable>
+		<IsTest>false</IsTest>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\.config\dotnet.ruleset')">
