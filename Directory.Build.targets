@@ -5,9 +5,10 @@
 
 	<PropertyGroup Label="Conditions">
 		<IsStandard>$([System.Text.RegularExpressions.Regex]::IsMatch('$(TargetFramework)', '^netstandard\d'))</IsStandard>
-		<IsPackable>$(IsStandard)</IsPackable>
 		<IsTest>false</IsTest>
-		<IsTest Condition="$(MSBuildProjectName.ToLowerInvariant().EndsWith('tests'))">true</IsTest>
+		<IsTest Condition="$(MSBuildProjectName.ToLowerInvariant().EndsWith('tests'))">True</IsTest>
+		<IsPackable>false</IsPackable>
+		<IsPackable Condition="($(IsStandard) OR $(PackAsTool)) AND !$(IsTest)">true</IsPackable>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Package" Condition="$(IsStandard)">

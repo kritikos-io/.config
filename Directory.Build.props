@@ -4,6 +4,7 @@
 		<LangVersion>8.0</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>1591</NoWarn>
+		<WarnOnPackingNonPackableProject>true</WarnOnPackingNonPackableProject>
 		<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
 		<!-- We only target a single framework hence the subdir is not needed -->
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
