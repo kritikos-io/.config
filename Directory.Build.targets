@@ -8,6 +8,7 @@
 		<IsTest>false</IsTest>
 		<IsTest Condition="$(MSBuildProjectName.ToLowerInvariant().EndsWith('tests'))">True</IsTest>
 		<IsPackable>false</IsPackable>
+		<PackAsTool>false</PackAsTool>
 		<IsPackable Condition="($(IsStandard) OR $(PackAsTool)) AND !$(IsTest)">true</IsPackable>
 	</PropertyGroup>
 
