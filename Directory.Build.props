@@ -14,6 +14,11 @@
 		<IsTest>false</IsTest>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ProjectCapability Include="DynamicFileNesting" />
+		<ProjectCapability Include="DynamicDependentFile" />
+	</ItemGroup>
+
 	<PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\.config\dotnet.ruleset')">
 		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\.config\dotnet.ruleset</CodeAnalysisRuleset>
 	</PropertyGroup>
@@ -33,13 +38,9 @@
 		<!-- Optional: Include PDB in the built .nupkg to enable debugging -->
 		<!-- VS 2019 can fetch them through snupkg -->
 		<!--<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>-->
-		<!-- Optional: Declare that the Repository URL can be published to NuSpec -->
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
-		<!-- This is useful if you generate files during the build -->
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
