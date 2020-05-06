@@ -12,6 +12,9 @@
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 		<Nullable>enable</Nullable>
 		<IsTest>false</IsTest>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+		<RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
 	</PropertyGroup>
 
 	<ItemGroup>
