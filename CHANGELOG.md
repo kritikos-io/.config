@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 04/01/2021
+
+- Updates analyzers
+- Replaces Microsoft.CodeAnalysis.FxCopAnalyzers with Microsoft.CodeAnalysis.NetAnalyzers
+- Updates LangVersion to C# 9
+
 ## 29/11/2019
 
 - Updates Roslyn Analyzers
