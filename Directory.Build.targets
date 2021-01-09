@@ -4,15 +4,18 @@
 	</Target>
 
 	<PropertyGroup Label="Conditions">
-		<IsStandard>$([System.Text.RegularExpressions.Regex]::IsMatch('$(TargetFramework)', '^netstandard\d'))</IsStandard>
 		<IsTest>false</IsTest>
-		<IsTest Condition="$(MSBuildProjectName.ToLowerInvariant().EndsWith('tests'))">True</IsTest>
-		<IsPackable>false</IsPackable>
-		<PackAsTool>false</PackAsTool>
-		<IsPackable Condition="($(IsStandard) OR $(PackAsTool)) AND !$(IsTest)">true</IsPackable>
+		<IsTest Condition="'$(IsTestProject)' == 'true' OR $(MSBuildProjectName.ToLowerInvariant().EndsWith('tests')) OR $(MSBuildProjectFullPath.ToLowerInvariant().EndsWith('tests'))">true</IsTest>
 	</PropertyGroup>
 
-	<PropertyGroup Label="Package" Condition="$(IsStandard)">
-		<PackageId>Kritikos.$(MSBuildProjectName)</PackageId>
+	<PropertyGroup Label="SDK Functionality" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True' OR '$(UsingMicrosoftNETSdkWorker)' == 'True'">
+		<IsPackable>false</IsPackable>
+		<PackAsTool>false</PackAsTool>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Test Functionality" Condition="$(IsTest)">
+		<Nullable>disable</Nullable>
+		<IsPackable>false</IsPackable>
+		<PackAsTool>false</PackAsTool>
 	</PropertyGroup>
 </Project>
