@@ -37,6 +37,8 @@
         "/property:GenerateFullPaths=true",
         // Do not generate summary otherwise it leads to duplicate errors in Problems panel
         "/consoleloggerparameters:NoSummary",
+        // Create CI compatible deterministic build
+        "-p:TF_BUILD=true",
       ],
       "dependsOn": [
         "restore"
@@ -66,7 +68,6 @@
         "normal",
         "--collect:'XPlat Code Coverage'",
         "/p:CopyLocalLockFileAssemblies=true",
-        "-p:TF_BUILD=true",
         "/p:SkipAutoProps=true",
         "/p:CollectCoverage=true",
         "/p:CoverletOutput=../../TestResults/",
@@ -101,9 +102,12 @@
         "/nologo",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
+        // Asks user for version number
+        "-p:Version=${input:version}",
       ],
       "dependsOn": [
         "clean",
+        "build",
         "test",
       ],
       "group": {
@@ -137,6 +141,15 @@
         "reveal": "silent"
       },
       "problemMatcher": "$msCompile"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "version",
+      "description": "Semantic version of project",
+      "default": "1.0.0",
+      "password": false
     }
   ]
 }

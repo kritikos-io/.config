@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## 09/01/2021
 
 - Tunes VS Code integration
+- Updates .NET analyzers and workflow
+- VS Code now asks for semantic version on build/pack
 
 ## 04/01/2021
 
