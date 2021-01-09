@@ -4,6 +4,24 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "restore",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "restore",
+        "--verbosity",
+        "minimal"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
       "label": "build",
       "command": "dotnet",
       "type": "shell",
@@ -12,7 +30,9 @@
         "--configuration",
         "Release",
         "--no-restore",
-        "/nologo",
+        "--nologo",
+        "--verbosity",
+        "minimal",
         // Ask dotnet build to generate full paths for file names.
         "/property:GenerateFullPaths=true",
         // Do not generate summary otherwise it leads to duplicate errors in Problems panel
@@ -28,15 +48,43 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "restore",
+      "label": "test",
       "command": "dotnet",
       "type": "shell",
       "args": [
-        "restore"
+        "test",
+        "--no-restore",
+        "--no-build",
+        "--nologo",
+        "--logger",
+        "trx",
+        "--configuration",
+        "Debug",
+        "--results-directory",
+        "./TestResults",
+        "--verbosity",
+        "normal",
+        "--collect:'XPlat Code Coverage'",
+        "/p:CopyLocalLockFileAssemblies=true",
+        "-p:TF_BUILD=true",
+        "/p:SkipAutoProps=true",
+        "/p:CollectCoverage=true",
+        "/p:CoverletOutput=../../TestResults/",
+        "/p:MergeWith=./TestResults/coverage.json",
+        "/p:CoverletOutputFormat=\"opencover%2ccobertura%2cjson\""
       ],
-      "group": "build",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "dependsOn": [],
       "presentation": {
-        "reveal": "silent"
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
       },
       "problemMatcher": "$msCompile"
     },
@@ -55,9 +103,13 @@
         "/consoleloggerparameters:NoSummary",
       ],
       "dependsOn": [
-        "build"
+        "clean",
+        "test",
       ],
-      "group": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -65,6 +117,24 @@
         "panel": "shared",
         "showReuseMessage": true,
         "clear": false
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "clean",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "clean",
+        "--verbosity",
+        "minimal"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent"
       },
       "problemMatcher": "$msCompile"
     }

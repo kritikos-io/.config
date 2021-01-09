@@ -14,8 +14,11 @@
 			"**/.vs": true, // Visual Studio cache
 			".vscode": true,
 			"*.sln.DotSettings.user": true, // managed by Resharper
-			".gitmodules": true, // managed by git
+			"**/.gitmodules": true, // managed by git
 			"{src,tests}/*/{bin,obj}": true, // build artifacts
+		},
+		"files.associations": {
+			"**/ci/azure/{steps,stages}/*/*.yml": "azure-pipelines"
 		}
 	}
 }
