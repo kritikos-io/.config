@@ -50,22 +50,22 @@
 		<ProjectCapability Include="DynamicDependentFile" />
 	</ItemGroup>
 
-<!-- Use submodule .NET ruleset for analyzers -->
-<PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\.config\dotnet.ruleset')">
-	<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\.config\dotnet.ruleset</CodeAnalysisRuleset>
-</PropertyGroup>
+	<!-- Use submodule .NET ruleset for analyzers -->
+	<PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\.config\dotnet.ruleset')">
+		<CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\.config\dotnet.ruleset</CodeAnalysisRuleset>
+	</PropertyGroup>
 
-<!-- Use submodule stylecop configuration -->
-<ItemGroup Label="Code Analysis Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\.config\stylecop.json')">
-	<AdditionalFiles Include="$(MSBuildThisFileDirectory)\.config\stylecop.json" Link="stylecop.json" />
-</ItemGroup>
+	<!-- Use submodule stylecop configuration -->
+	<ItemGroup Label="Code Analysis Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\.config\stylecop.json')">
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\.config\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
 
-<!-- Uses pretty xunit configuration -->
-<ItemGroup Label="xUnit Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
-	<AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json" Link="xunit.runner.json">
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</AdditionalFiles>
-</ItemGroup>
+	<!-- Uses pretty xunit configuration -->
+	<ItemGroup Label="xUnit Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json" Link="xunit.runner.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</AdditionalFiles>
+	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Debug Settings">
 		<DebugSymbols>true</DebugSymbols>
