@@ -4,7 +4,7 @@
 		<RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
 		<!-- Generate documentation file and ignore warnings for undocumented elements -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<NoWarn>1591</NoWarn>
+		<NoWarn>$(NoWarn);1591</NoWarn>
 		<!-- Error out upon trying to package projects marked as not packable -->
 		<WarnOnPackingNonPackableProject>true</WarnOnPackingNonPackableProject>
 		<!-- Disable warnings on preview SDK versions -->
