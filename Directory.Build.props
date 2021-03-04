@@ -15,6 +15,8 @@
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 		<!-- Enable lock files -->
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<!-- Locked mode should only be enabled on CI -->
+		<RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
 		<!-- Disable nugets from SDK fallback folders -->
 		<DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
 		<!-- Enable nullable context by default for all projects -->
@@ -45,11 +47,6 @@
 		<ContinuousIntegrationBuild Condition="'$(APPVEYOR)' == 'true'">true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 
-	<!-- Restore only locked nuget packages on automated builds -->
-	<PropertyGroup Label="CI" Condition="'$(ContinuousIntegrationBuild)' == 'true'">
-		<RestoreLockedMode>true</RestoreLockedMode>
-	</PropertyGroup>
-
 	<!-- Enable custom nesting for files -->
 	<ItemGroup>
 		<ProjectCapability Include="DynamicFileNesting" />
@@ -66,6 +63,15 @@
 		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json" />
 	</ItemGroup>
 
+	<!-- Disable packable/publishable for test projects -->
+	<PropertyGroup Label="Output Modifiers">
+		<InTestFolder>false</InTestFolder>
+		<InTestFolder Condition="'$([System.IO.Directory]::GetParent($(MSBuildProjectDirectory)).Name)' == 'tests'">true</InTestFolder>
+		<IsTest Condition="$(MSBuildProjectName.ToLowerInvariant().EndsWith('tests'))">true</IsTest>
+		<IsPackable Condition="'$(IsTest)' == 'true' OR '$(InTestFolder)' == 'true'">false</IsPackable>
+		<IsPublishable Condition="'$(IsTest)' == 'true' OR '$(InTestFolder)' == 'true'">false</IsPublishable>
+	</PropertyGroup>
+
 	<!-- Uses pretty xunit configuration -->
 	<ItemGroup Label="xUnit Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
 		<AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json" Link="xunit.runner.json">
@@ -73,9 +79,10 @@
 		</AdditionalFiles>
 	</ItemGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Debug Settings">
-		<DebugSymbols>true</DebugSymbols>
-	</PropertyGroup>
+	<!-- Project internals are exposed to projects named $(Project).Tests by default -->
+	<ItemGroup Condition="@(InternalsVisibleToSuffix->Count()) == 0 AND @(InternalsVisibleTo->Count()) == 0">
+		<InternalsVisibleToSuffix Include=".Tests" />
+	</ItemGroup>
 
 	<PropertyGroup Label="Package">
 		<PackageId>$(RootNamespace)</PackageId>
@@ -91,7 +98,14 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
-	<ItemGroup Label="Nugets" Condition="!$(IsTest)">
+	<ItemGroup Label="Test Dependencies" Condition="'$(IsTest)'=='true'">
+		<PackageReference Include="coverlet.msbuild" Version="3.0.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Label="Nugets" Condition="'$(IsTest)' != 'true'">
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -122,13 +136,6 @@
 		<SourceLinkGitLabHost Include="git.kritikos.io" />
 		<SourceLinkGitHubHost Include="github.com" />
 		<SourceLinkBitBucketHost Include="bitbucket.org" />
-	</ItemGroup>
-
-	<ItemGroup Label="TestCoverage" Condition="$(IsTest)">
-		<PackageReference Include="coverlet.msbuild" Version="3.0.2">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Label="License Import" Condition="Exists('$(MSBuildThisFileDirectory)\LICENSE.md')">

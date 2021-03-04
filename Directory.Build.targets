@@ -3,10 +3,21 @@
 		<Exec Command="npm install" />
 	</Target>
 
-	<PropertyGroup Label="Conditions">
-		<IsTest>false</IsTest>
-		<IsTest Condition="'$(IsTestProject)' == 'true' OR $(MSBuildProjectName.ToLowerInvariant().EndsWith('tests')) OR $(MSBuildProjectFullPath.ToLowerInvariant().EndsWith('tests'))">true</IsTest>
-	</PropertyGroup>
+	<Target Name="AddInternalsVisibleTo" BeforeTargets="BeforeCompile">
+		<!-- Handle InternalsVisibleTo -->
+		<ItemGroup Condition="'@(InternalsVisibleTo->Count())' &gt; 0">
+			<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+				<_Parameter1>%(InternalsVisibleTo.Identity)</_Parameter1>
+			</AssemblyAttribute>
+		</ItemGroup>
+
+		<!-- Handle InternalsVisibleToSuffix -->
+		<ItemGroup Condition="@(InternalsVisibleToSuffix->Count()) &gt; 0">
+			<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo" Condition="$(AssemblyName.EndsWith(%(InternalsVisibleToSuffix.Identity))) == 'false'">
+				<_Parameter1>$(AssemblyName)%(InternalsVisibleToSuffix.Identity)</_Parameter1>
+			</AssemblyAttribute>
+		</ItemGroup>
+	</Target>
 
 	<PropertyGroup Label="SDK Functionality" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True' OR '$(UsingMicrosoftNETSdkWorker)' == 'True'">
 		<IsPackable>false</IsPackable>
@@ -14,7 +25,6 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="Test Functionality" Condition="$(IsTest) == 'true'">
-		<Nullable>disable</Nullable>
 		<IsPackable>false</IsPackable>
 		<PackAsTool>false</PackAsTool>
 	</PropertyGroup>
