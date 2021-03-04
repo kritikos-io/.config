@@ -83,7 +83,6 @@
 		<!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	</PropertyGroup>
 
 	<ItemGroup Label="Nugets" Condition="!$(IsTest)">
@@ -132,5 +131,6 @@
 
 	<PropertyGroup Label="License" Condition="Exists('$(MSBuildThisFileDirectory)\LICENSE.md')">
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 </Project>
