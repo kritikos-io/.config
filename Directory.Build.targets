@@ -13,7 +13,7 @@
 		<PackAsTool>false</PackAsTool>
 	</PropertyGroup>
 
-	<PropertyGroup Label="Test Functionality" Condition="$(IsTest)">
+	<PropertyGroup Label="Test Functionality" Condition="$(IsTest) == 'true'">
 		<Nullable>disable</Nullable>
 		<IsPackable>false</IsPackable>
 		<PackAsTool>false</PackAsTool>
