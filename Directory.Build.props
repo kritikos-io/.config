@@ -28,7 +28,7 @@
     <!-- Use latest language version supported by the SDK -->
     <LangVersion>latest</LangVersion>
     <!-- Use deterministic builds -->
-    <Deterministic>true</Deterministic>
+    <!-- <Deterministic>true</Deterministic> -->
   </PropertyGroup>
 
   <!-- Sets deterministic source paths for CI builds -->
@@ -64,11 +64,11 @@
   </ItemGroup>
 
   <!-- Use common AssemblyInfo versioning -->
-  <ItemGroup Label="AssemblyInfo Versioning" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo.cs')">
-    <Compile Include="$(MSBuildThisFileDirectory)\AssemblyInfo.cs" Link="Properties\AssemblyInfo.cs" />
+  <ItemGroup Label="AssemblyInfo Versioning" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs')">
+    <Compile Include="$(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs" Link="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
-  <PropertyGroup Label="Disable AssemblyInfo Generation" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo.cs')">
+  <PropertyGroup Label="Disable AssemblyInfo Generation" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs')">
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
@@ -107,6 +107,8 @@
     <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup Label="Test Dependencies" Condition="'$(IsTest)'=='true'">
@@ -148,13 +150,4 @@
     <SourceLinkGitHubHost Include="github.com" />
     <SourceLinkBitBucketHost Include="bitbucket.org" />
   </ItemGroup>
-
-  <ItemGroup Label="License Import" Condition="Exists('$(MSBuildThisFileDirectory)\LICENSE.md')">
-    <None Include="$(MSBuildThisFileDirectory)\LICENSE.md" Pack="true" PackagePath="" />
-  </ItemGroup>
-
-  <PropertyGroup Label="License" Condition="Exists('$(MSBuildThisFileDirectory)\LICENSE.md')">
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-  </PropertyGroup>
 </Project>
