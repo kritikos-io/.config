@@ -69,15 +69,6 @@ parameters:
 - name: coverageOnMac
   type: boolean
   default: false
-- name: testOnWindows
-  type: boolean
-  default: false
-- name: testOnLinux
-  type: boolean
-  default: false
-- name: testOnMac
-  type: boolean
-  default: false
 - name: sonarOnWindows
   type: boolean
   default: false
