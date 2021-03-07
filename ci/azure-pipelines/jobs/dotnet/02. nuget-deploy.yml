@@ -1,7 +1,10 @@
 parameters:
 - name: environment
   type: string
-  default: 'kritikos-io'
+  default: 'Kritikos IO'
+- name: jobName
+  type: string
+  default: kritikos-io
 - name: packagesToPush
   type: string
   default: '*.nupkg'
@@ -13,7 +16,7 @@ parameters:
   default: nuget
 
 jobs:
-- deployment: ${{ parameters.environment }}
+- deployment: ${{ parameters.jobName }}
   displayName: Push nugets to ${{ parameters.environment }}
   environment: ${{ parameters.environment }}
   strategy:
