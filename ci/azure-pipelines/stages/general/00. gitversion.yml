@@ -9,7 +9,7 @@ stages:
   jobs:
   - job: Version
     steps:
-      - template: ../../steps/general/1. dotnet-tool.yml
+      - template: ../../steps/general/01. dotnet-tool.yml
         parameters:
           toolName: gitversion.tool
       - pwsh: ../dotnet-gitversion /output buildserver
