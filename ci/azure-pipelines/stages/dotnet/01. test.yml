@@ -11,15 +11,9 @@ parameters:
 - name: buildArgs
   type: string
   default: ''
-- name: publishCoverage
-  type: boolean
-  default: false
 - name: coverageDirectory
   type: string
   default: $(build.artifactStagingDirectory)/coverage/.
-- name: sonarAnalysis
-  type: boolean
-  default: true
 - name: sonarHost
   type: string
   default: https://sonarcloud.io
@@ -57,12 +51,6 @@ parameters:
 - name: coverageArtifactName
   type: string
   default: $(Build.Repository.Name)-$(Build.BuildNumber)-coverage
-- name: uploadCodeCov
-  type: boolean
-  default: true
-- name: uploadCoveralls
-  type: boolean
-  default: true
 - name: testOnWindows
   type: boolean
   default: false
@@ -72,7 +60,51 @@ parameters:
 - name: testOnMac
   type: boolean
   default: false
-
+- name: coverageOnWindows
+  type: boolean
+  default: false
+- name: coverageOnLinux
+  type: boolean
+  default: false
+- name: coverageOnMac
+  type: boolean
+  default: false
+- name: testOnWindows
+  type: boolean
+  default: false
+- name: testOnLinux
+  type: boolean
+  default: false
+- name: testOnMac
+  type: boolean
+  default: false
+- name: sonarOnWindows
+  type: boolean
+  default: false
+- name: sonarOnLinux
+  type: boolean
+  default: false
+- name: sonarOnMac
+  type: boolean
+  default: false
+- name: codecovOnWindows
+  type: boolean
+  default: false
+- name: codecovOnLinux
+  type: boolean
+  default: false
+- name: codecovOnMac
+  type: boolean
+  default: false
+- name: coverallsOnWindows
+  type: boolean
+  default: false
+- name: coverallsOnLinux
+  type: boolean
+  default: false
+- name: coverallsOnMac
+  type: boolean
+  default: false
 
 stages:
 - stage: Test
@@ -87,9 +119,9 @@ stages:
         sdkVersion: ${{ parameters.sdkVersion }}
         configuration: ${{ parameters.configuration }}
         buildArgs: ${{ parameters.buildArgs }}
-        publishCoverage: ${{ parameters.publishCoverage }}
+        publishCoverage: ${{ parameters.coverageOnLinux }}
         coverageDirectory: ${{ parameters.coverageDirectory }}
-        sonarAnalysis: true
+        sonarAnalysis: ${{ parameters.sonarOnLinux }}
         sonarHost: ${{ parameters.sonarHost }}
         sonarProject: ${{ parameters.sonarProject }}
         sonarOrganization: ${{ parameters.sonarOrganization }}
@@ -100,38 +132,38 @@ stages:
         coverageTool: ${{ parameters.coverageTool }}
         summaryFile: ${{ parameters.summaryFile }}
         coverageArtifactName: ${{ parameters.coverageArtifactName }}
-        uploadCodeCov: ${{ parameters.uploadCodeCov }}
-        uploadCoveralls: ${{ parameters.uploadCoveralls }}
-- ${{ if parameters.testOnWindows }}:
-    - template: ../../jobs/dotnet/01. test.yml
-      parameters:
-        image: ${{ parameters.image }}
-        useCache: ${{ parameters.useCache }}
-        sdkVersion: ${{ parameters.sdkVersion }}
-        configuration: ${{ parameters.configuration }}
-        buildArgs: ${{ parameters.buildArgs }}
-        publishCoverage: ${{ parameters.publishCoverage }}
-        coverageDirectory: ${{ parameters.coverageDirectory }}
-        sonarAnalysis: false
-        coverageTool: ${{ parameters.coverageTool }}
-        summaryFile: ${{ parameters.summaryFile }}
-        coverageArtifactName: ${{ parameters.coverageArtifactName }}
-        uploadCodeCov: false
-        uploadCoveralls: false
-- ${{ if parameters.testOnMac }}:
-    - template: ../../jobs/dotnet/01. test.yml
-      parameters:
-        image: ${{ parameters.image }}
-        useCache: ${{ parameters.useCache }}
-        sdkVersion: ${{ parameters.sdkVersion }}
-        configuration: ${{ parameters.configuration }}
-        buildArgs: ${{ parameters.buildArgs }}
-        publishCoverage: false
-        coverageDirectory: ${{ parameters.coverageDirectory }}
-        sonarAnalysis: false
-        coverageTool: ${{ parameters.coverageTool }}
-        summaryFile: ${{ parameters.summaryFile }}
-        coverageArtifactName: ${{ parameters.coverageArtifactName }}
-        uploadCodeCov: false
-        uploadCoveralls: false
+        uploadCodeCov: ${{ parameters.codecovOnLinux }}
+        uploadCoveralls: ${{ parameters.coverallsOnLinux }}
+  - ${{ if parameters.testOnWindows }}:
+      - template: ../../jobs/dotnet/01. test.yml
+        parameters:
+          image: ${{ parameters.image }}
+          useCache: ${{ parameters.useCache }}
+          sdkVersion: ${{ parameters.sdkVersion }}
+          configuration: ${{ parameters.configuration }}
+          buildArgs: ${{ parameters.buildArgs }}
+          publishCoverage: ${{ parameters.coverageOnWindows }}
+          coverageDirectory: ${{ parameters.coverageDirectory }}
+          sonarAnalysis: ${{ parameters.sonarOnWindows }}
+          coverageTool: ${{ parameters.coverageTool }}
+          summaryFile: ${{ parameters.summaryFile }}
+          coverageArtifactName: ${{ parameters.coverageArtifactName }}
+          uploadCodeCov: ${{ parameters.codecovOnWindows }}
+          uploadCoveralls: ${{ parameters.coverallsOnWindows }}
+  - ${{ if parameters.testOnMac }}:
+      - template: ../../jobs/dotnet/01. test.yml
+        parameters:
+          image: ${{ parameters.image }}
+          useCache: ${{ parameters.useCache }}
+          sdkVersion: ${{ parameters.sdkVersion }}
+          configuration: ${{ parameters.configuration }}
+          buildArgs: ${{ parameters.buildArgs }}
+          publishCoverage: ${{ parameters.coverageOnMac }}
+          coverageDirectory: ${{ parameters.coverageDirectory }}
+          sonarAnalysis: ${{ parameters.sonarOnMac }}
+          coverageTool: ${{ parameters.coverageTool }}
+          summaryFile: ${{ parameters.summaryFile }}
+          coverageArtifactName: ${{ parameters.coverageArtifactName }}
+          uploadCodeCov: ${{ parameters.codecovOnMac }}
+          uploadCoveralls: ${{ parameters.coverallsOnMac }}
 
