@@ -29,7 +29,7 @@ parameters:
   default: $(GitHubApiKey)
 
 steps:
-- template: ../java/install-jdk.yml
+- template: ../java/00. install-jdk.yml
   parameters:
     jdkVersion: 11
 - template: 01. dotnet-tool.yml
