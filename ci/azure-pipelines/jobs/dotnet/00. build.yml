@@ -56,7 +56,7 @@ jobs:
     - checkout: self
       fetchDepth: 1
     - ${{ if parameters.useCache }}:
-        - template: ../../steps/nuget/01. nuget-cache.yml
+        - template: ../../steps/nuget/00. nuget-cache.yml
     - template: ../../steps/dotnet/00. install-sdk.yml
       parameters:
         sdkVersion: 5.x
