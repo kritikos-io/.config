@@ -52,6 +52,8 @@ parameters:
 jobs:
 - job:
   displayName: on ${{ parameters.image }}
+  pool:
+    vmImage: ${{ parameters.image }}
   steps:
     - checkout: self
       fetchDepth: 1
