@@ -1,4 +1,13 @@
 parameters:
+- name: linuxImage
+  type: string
+  default: ubuntu-latest
+- name: windowsImage
+  type: string
+  default: windows-latest
+- name: macOsImage
+  type: string
+  default: macOS-latest
 - name: useCache
   type: boolean
   default: true
