@@ -18,7 +18,7 @@ parameters:
   type: string
   default: Kritikos
 - name: dependsOn
-  type: stageList
+  type: projectList
   default:
     - Build
     - Test
