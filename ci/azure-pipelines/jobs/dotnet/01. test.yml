@@ -8,6 +8,15 @@ parameters:
 - name: sdkVersion
   default: 5.x
   type: string
+- name: updateAssemblyInfo
+  type: boolean
+  default: false
+- name: assemblyInfoPath
+  type: string
+  default: $(Build.SourcesDirectory)
+- name: assemblyInfoArtifactName
+  type: string
+  default: AssemblyInfo
 - name: configuration
   type: string
   default: $(BuildConfiguration)

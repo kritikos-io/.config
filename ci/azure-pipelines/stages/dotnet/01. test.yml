@@ -5,6 +5,15 @@ parameters:
 - name: sdkVersion
   default: 5.x
   type: string
+- name: updateAssemblyInfo
+  type: boolean
+  default: false
+- name: assemblyInfoPath
+  type: string
+  default: $(Build.SourcesDirectory)
+- name: assemblyInfoArtifactName
+  type: string
+  default: AssemblyInfo
 - name: configuration
   type: string
   default: $(BuildConfiguration)
@@ -108,6 +117,9 @@ stages:
         image: linux-latest
         useCache: ${{ parameters.useCache }}
         sdkVersion: ${{ parameters.sdkVersion }}
+        updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
+        assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
+        assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
         configuration: ${{ parameters.configuration }}
         buildArgs: ${{ parameters.buildArgs }}
         publishCoverage: ${{ parameters.coverageOnLinux }}
@@ -131,6 +143,9 @@ stages:
           image: windows-latest
           useCache: ${{ parameters.useCache }}
           sdkVersion: ${{ parameters.sdkVersion }}
+          updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
+          assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
+          assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }}
           publishCoverage: ${{ parameters.coverageOnWindows }}
@@ -147,6 +162,9 @@ stages:
           image: macOS-latest
           useCache: ${{ parameters.useCache }}
           sdkVersion: ${{ parameters.sdkVersion }}
+          updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
+          assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
+          assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }}
           publishCoverage: ${{ parameters.coverageOnMac }}
