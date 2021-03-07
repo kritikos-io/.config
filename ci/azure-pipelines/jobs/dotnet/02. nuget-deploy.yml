@@ -4,7 +4,7 @@ parameters:
   default: 'kritikos-io'
 - name: packagesToPush
   type: string
-  default: $(Pipeline.Workspace)/${{ parameters.artifact }}/*.nupkg
+  default: '*.nupkg'
 - name: feedName
   type: string
   default: Kritikos
@@ -24,5 +24,5 @@ jobs:
             artifact: ${{ parameters.artifact }}
           - template: ../../steps/nuget/01. nuget-push.yml
             parameters:
-              packagesToPush: ${{ parameters.packagesToPush }}
+              packagesToPush: $(Pipeline.Workspace)/${{ parameters.artifact }}/${{ parameters.packagesToPush }}
               feedName: ${{ parameters.feedName }}

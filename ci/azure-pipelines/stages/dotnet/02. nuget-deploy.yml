@@ -1,7 +1,7 @@
 parameters:
 - name: packagesToPush
   type: string
-  default: $(Pipeline.Workspace)/nuget/*.nupkg
+  default: '*.nupkg'
 - name: artifact
   type: string
   default: nuget
@@ -29,14 +29,14 @@ stages:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
-          packagesToPush: ${{ parameters.packagesToPush }}
+          packagesToPush: $(Pipeline.Workspace)/${{ parameters.artifact }}/${{ parameters.packagesToPush }}
           environment: ${{ parameters.environmentPullRequest }}
           feedName: ${{ parameters.feedNamePullRequest }}
   - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
-          packagesToPush: ${{ parameters.packagesToPush }}
+          packagesToPush: $(Pipeline.Workspace)/${{ parameters.artifact }}/${{ parameters.packagesToPush }}
           environment: ${{ parameters.environmentRelease }}
           feedName: ${{ parameters.feedNameRelease }}
 
