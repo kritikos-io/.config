@@ -119,13 +119,8 @@ stages:
         publishCoverage: ${{ parameters.coverageOnLinux }}
         coverageDirectory: ${{ parameters.coverageDirectory }}
         sonarAnalysis: ${{ parameters.sonarOnLinux }}
-        sonarHost: ${{ parameters.sonarHost }}
-        sonarProject: ${{ parameters.sonarProject }}
-        sonarOrganization: ${{ parameters.sonarOrganization }}
-        sonarApiKey: ${{ parameters.sonarApiKey }}
         sonarOnPullRequests: ${{ parameters.sonarOnPullRequests }}
         sonarPullRequestProvider: ${{ parameters.sonarPullRequestProvider }}
-        githubApiKey: ${{ parameters.githubApiKey }}
         coverageTool: ${{ parameters.coverageTool }}
         summaryFile: ${{ parameters.summaryFile }}
         coverageArtifactName: ${{ parameters.coverageArtifactName }}
@@ -145,6 +140,8 @@ stages:
           publishCoverage: ${{ parameters.coverageOnWindows }}
           coverageDirectory: ${{ parameters.coverageDirectory }}
           sonarAnalysis: ${{ parameters.sonarOnWindows }}
+          sonarOnPullRequests: ${{ parameters.sonarOnPullRequests }}
+          sonarPullRequestProvider: ${{ parameters.sonarPullRequestProvider }}
           coverageTool: ${{ parameters.coverageTool }}
           summaryFile: ${{ parameters.summaryFile }}
           coverageArtifactName: ${{ parameters.coverageArtifactName }}
@@ -164,6 +161,8 @@ stages:
           publishCoverage: ${{ parameters.coverageOnMac }}
           coverageDirectory: ${{ parameters.coverageDirectory }}
           sonarAnalysis: ${{ parameters.sonarOnMac }}
+          sonarOnPullRequests: ${{ parameters.sonarOnPullRequests }}
+          sonarPullRequestProvider: ${{ parameters.sonarPullRequestProvider }}
           coverageTool: ${{ parameters.coverageTool }}
           summaryFile: ${{ parameters.summaryFile }}
           coverageArtifactName: ${{ parameters.coverageArtifactName }}
