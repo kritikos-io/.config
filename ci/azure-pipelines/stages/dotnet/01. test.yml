@@ -123,7 +123,7 @@ stages:
   - ${{ if parameters.testOnLinux }}:
     - template: ../../jobs/dotnet/01. test.yml
       parameters:
-        image: linux-latest
+        image: ${{ parameters.linuxImage }}
         useCache: ${{ parameters.useCache }}
         sdkVersion: ${{ parameters.sdkVersion }}
         updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
@@ -149,7 +149,7 @@ stages:
   - ${{ if parameters.testOnWindows }}:
       - template: ../../jobs/dotnet/01. test.yml
         parameters:
-          image: windows-latest
+          image: ${{ parameters.windowsImage }}
           useCache: ${{ parameters.useCache }}
           sdkVersion: ${{ parameters.sdkVersion }}
           updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
@@ -168,7 +168,7 @@ stages:
   - ${{ if parameters.testOnMac }}:
       - template: ../../jobs/dotnet/01. test.yml
         parameters:
-          image: macOS-latest
+          image: ${{ parameters.macOsImage }}
           useCache: ${{ parameters.useCache }}
           sdkVersion: ${{ parameters.sdkVersion }}
           updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
