@@ -1,0 +1,124 @@
+parameters:
+- name: useCache
+  type: boolean
+  default: true
+- name: sdkVersion
+  default: 5.x
+  type: string
+- name: updateAssemblyInfo
+  type: boolean
+  default: false
+- name: assemblyInfoPath
+  type: string
+  default: $(Build.SourcesDirectory)
+- name: assemblyInfoArtifactName
+  type: string
+  default: AssemblyInfo
+- name: configuration
+  type: string
+  default: $(BuildConfiguration)
+- name: buildArgs
+  type: string
+  default: ''
+- name: publishWeb
+  type: boolean
+  default: false
+- name: outputPath
+  type: string
+  default: $(build.artifactStagingDirectory)/publish
+- name: pathtoPublish
+  type: string
+  default: $(build.artifactStagingDirectory)/publish
+- name: publishArtifactName
+  type: string
+  default: '$(Build.Repository.Name)-$(Build.BuildNumber)'
+- name: projectsToPack
+  type: string
+  default: src/*/*.csproj
+- name: packDirectory
+  type: string
+  default: $(build.artifactStagingDirectory)/nuget
+- name: nugetArtifactName
+  type: string
+  default: 'nuget'
+- name: buildOnWindows
+  type: boolean
+  default: false
+- name: buildOnLinux
+  type: boolean
+  default: false
+- name: buildOnMac
+  type: boolean
+  default: false
+- name: packOnWindows
+  type: boolean
+  default: false
+- name: packOnLinux
+  type: boolean
+  default: false
+- name: packOnMac
+  type: boolean
+  default: false
+
+stages:
+- stage: Build
+  displayName: Build artifacts
+  dependsOn: Version
+  jobs:
+    - ${{ if parameters.buildOnLinux }}:
+      - template: ../../jobs/dotnet/00. build.yml
+        parameters:
+          image: ubuntu-latest
+          useCache: ${{ parameters.useCache }}
+          updateAssemblyInfo: ${{ parameters.sdkVersion }}
+          assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
+          assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
+          sdkVersion: ${{ parameters.sdkVersion }}
+          configuration: ${{ parameters.configuration }}
+          buildArgs: ${{ parameters.buildArgs }}
+          publishWeb: ${{ parameters.publishWeb }}
+          outputPath: ${{ parameters.outputPath }}
+          pathtoPublish: ${{ parameters.pathtoPublish }}
+          publishArtifactName: ${{ parameters.publishArtifactName }}
+          producePackedArtifacts: ${{ parameters.packOnLinux }}
+          projectsToPack: ${{ parameters.projectsToPack }}
+          packDirectory: ${{ parameters.packDirectory }}
+          nugetArtifactName: ${{ parameters.nugetArtifactName }}
+    - ${{ if parameters.buildOnWindows }}:
+      - template: ../../jobs/dotnet/00. build.yml
+        parameters:
+          image: windows-latest
+          useCache: ${{ parameters.useCache }}
+          updateAssemblyInfo: ${{ parameters.sdkVersion }}
+          assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
+          assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
+          sdkVersion: ${{ parameters.sdkVersion }}
+          configuration: ${{ parameters.configuration }}
+          buildArgs: ${{ parameters.buildArgs }}
+          publishWeb: ${{ parameters.publishWeb }}
+          outputPath: ${{ parameters.outputPath }}
+          pathtoPublish: ${{ parameters.pathtoPublish }}
+          publishArtifactName: ${{ parameters.publishArtifactName }}
+          producePackedArtifacts: ${{ parameters.packOnWindows }}
+          projectsToPack: ${{ parameters.projectsToPack }}
+          packDirectory: ${{ parameters.packDirectory }}
+          nugetArtifactName: ${{ parameters.nugetArtifactName }}
+    - ${{ if parameters.buildOnMac }}:
+      - template: ../../jobs/dotnet/00. build.yml
+        parameters:
+          image: macOS-latest
+          useCache: ${{ parameters.useCache }}
+          updateAssemblyInfo: ${{ parameters.sdkVersion }}
+          assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
+          assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
+          sdkVersion: ${{ parameters.sdkVersion }}
+          configuration: ${{ parameters.configuration }}
+          buildArgs: ${{ parameters.buildArgs }}
+          publishWeb: ${{ parameters.publishWeb }}
+          outputPath: ${{ parameters.outputPath }}
+          pathtoPublish: ${{ parameters.pathtoPublish }}
+          publishArtifactName: ${{ parameters.publishArtifactName }}
+          producePackedArtifacts: ${{ parameters.packOnMac }}
+          projectsToPack: ${{ parameters.projectsToPack }}
+          packDirectory: ${{ parameters.packDirectory }}
+          nugetArtifactName: ${{ parameters.nugetArtifactName }}

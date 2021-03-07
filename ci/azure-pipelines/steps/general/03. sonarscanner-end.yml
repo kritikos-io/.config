@@ -1,0 +1,9 @@
+parameters:
+- name: sonarApiKey
+  type: string
+  default: $(sonarApiKey)
+
+steps:
+- pwsh: |
+    ../dotnet-sonarscanner end /d:sonar.login="${{ parameters.sonarApiKey }}"
+  displayName: Publish SonarCloud Results

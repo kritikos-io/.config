@@ -1,0 +1,137 @@
+parameters:
+- name: useCache
+  type: boolean
+  default: true
+- name: sdkVersion
+  default: 5.x
+  type: string
+- name: configuration
+  type: string
+  default: $(BuildConfiguration)
+- name: buildArgs
+  type: string
+  default: ''
+- name: publishCoverage
+  type: boolean
+  default: false
+- name: coverageDirectory
+  type: string
+  default: $(build.artifactStagingDirectory)/coverage/.
+- name: sonarAnalysis
+  type: boolean
+  default: true
+- name: sonarHost
+  type: string
+  default: https://sonarcloud.io
+- name: sonarProject
+  type: string
+  default: $(SONAR_PROJECT)
+- name: sonarOrganization
+  type: string
+  default: $(sonarOrganization)
+- name: sonarApiKey
+  type: string
+  default: $(sonarApiKey)
+- name: sonarOnPullRequests
+  type: boolean
+  default: true
+- name: sonarPullRequestProvider
+  type: string
+  values:
+    - github
+    - vsts
+    - bitbucketcloud
+  default: github
+- name: githubApiKey
+  type: string
+  default: $(GitHubApiKey)
+- name: coverageTool
+  default: cobertura
+  type: string
+  values:
+  - cobertura
+  - jacoco
+- name: summaryFile
+  type: string
+  default: '$(build.artifactStagingDirectory)/coverage/coverage.cobertura.xml'
+- name: coverageArtifactName
+  type: string
+  default: $(Build.Repository.Name)-$(Build.BuildNumber)-coverage
+- name: uploadCodeCov
+  type: boolean
+  default: true
+- name: uploadCoveralls
+  type: boolean
+  default: true
+- name: testOnWindows
+  type: boolean
+  default: true
+- name: testOnLinux
+  type: boolean
+  default: true
+- name: testOnMac
+  type: boolean
+  default: false
+
+
+stages:
+- stage: Test
+  displayName: Run tests
+  dependsOn: Version
+  jobs:
+  - ${{ if parameters.testOnLinux }}:
+    - template: ../../jobs/dotnet/01. test.yml
+      parameters:
+        image: ${{ parameters.image }}
+        useCache: ${{ parameters.useCache }}
+        sdkVersion: ${{ parameters.sdkVersion }}
+        configuration: ${{ parameters.configuration }}
+        buildArgs: ${{ parameters.buildArgs }}
+        publishCoverage: ${{ parameters.publishCoverage }}
+        coverageDirectory: ${{ parameters.coverageDirectory }}
+        sonarAnalysis: true
+        sonarHost: ${{ parameters.sonarHost }}
+        sonarProject: ${{ parameters.sonarProject }}
+        sonarOrganization: ${{ parameters.sonarOrganization }}
+        sonarApiKey: ${{ parameters.sonarApiKey }}
+        sonarOnPullRequests: ${{ parameters.sonarOnPullRequests }}
+        sonarPullRequestProvider: ${{ parameters.sonarPullRequestProvider }}
+        githubApiKey: ${{ parameters.githubApiKey }}
+        coverageTool: ${{ parameters.coverageTool }}
+        summaryFile: ${{ parameters.summaryFile }}
+        coverageArtifactName: ${{ parameters.coverageArtifactName }}
+        uploadCodeCov: ${{ parameters.uploadCodeCov }}
+        uploadCoveralls: ${{ parameters.uploadCoveralls }}
+- ${{ if parameters.testOnWindows }}:
+    - template: ../../jobs/dotnet/01. test.yml
+      parameters:
+        image: ${{ parameters.image }}
+        useCache: ${{ parameters.useCache }}
+        sdkVersion: ${{ parameters.sdkVersion }}
+        configuration: ${{ parameters.configuration }}
+        buildArgs: ${{ parameters.buildArgs }}
+        publishCoverage: ${{ parameters.publishCoverage }}
+        coverageDirectory: ${{ parameters.coverageDirectory }}
+        sonarAnalysis: false
+        coverageTool: ${{ parameters.coverageTool }}
+        summaryFile: ${{ parameters.summaryFile }}
+        coverageArtifactName: ${{ parameters.coverageArtifactName }}
+        uploadCodeCov: false
+        uploadCoveralls: false
+- ${{ if parameters.testOnMac }}:
+    - template: ../../jobs/dotnet/01. test.yml
+      parameters:
+        image: ${{ parameters.image }}
+        useCache: ${{ parameters.useCache }}
+        sdkVersion: ${{ parameters.sdkVersion }}
+        configuration: ${{ parameters.configuration }}
+        buildArgs: ${{ parameters.buildArgs }}
+        publishCoverage: false
+        coverageDirectory: ${{ parameters.coverageDirectory }}
+        sonarAnalysis: false
+        coverageTool: ${{ parameters.coverageTool }}
+        summaryFile: ${{ parameters.summaryFile }}
+        coverageArtifactName: ${{ parameters.coverageArtifactName }}
+        uploadCodeCov: false
+        uploadCoveralls: false
+

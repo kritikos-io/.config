@@ -1,7 +1,12 @@
 {
   "folders": [
     {
-      "path": ".."
+      "path": "..",
+      "name": "Source"
+    },
+    {
+      "path": "ci\\azure-pipelines",
+      "name": "Azure DevOps"
     }
   ],
   "settings": {
