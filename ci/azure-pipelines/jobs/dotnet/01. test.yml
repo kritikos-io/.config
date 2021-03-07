@@ -106,8 +106,6 @@ jobs:
         artifactName: ${{ parameters.coverageArtifactName }}
   - ${{ if parameters.sonarAnalysis }}:
     - template: ../../steps/general/03. sonarscanner-end.yml
-      parameters:
-        sonarApiKey: ${{ parameters.sonarApiKey }}
   - ${{ if parameters.uploadCodeCov }}:
       - template: ../../steps/general/04. codecov.yml
   - ${{ if parameters.uploadCoveralls }}:
