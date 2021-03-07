@@ -1,0 +1,14 @@
+stages:
+- stage: Intellicode
+  displayName: Train Intellicode model
+  dependsOn: Version
+  jobs:
+  - template: ../../jobs/dotnet/03. intellicode.yml
+    parameters:
+      useCache: ${{ parameters.useCache }}
+      updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
+      assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
+      assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
+      sdkVersion: ${{ parameters.sdkVersion }}
+      configuration: ${{ parameters.configuration }}
+      buildArgs: ${{ parameters.buildArgs }}
