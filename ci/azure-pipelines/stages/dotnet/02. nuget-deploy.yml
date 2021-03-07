@@ -1,7 +1,7 @@
 parameters:
 - name: packagesToPush
   type: string
-  default: $(Pipeline.Workspace)/${{ parameters.artifact }}/*.nupkg
+  default: $(Pipeline.Workspace)/nuget/*.nupkg
 - name: artifact
   type: string
   default: nuget
