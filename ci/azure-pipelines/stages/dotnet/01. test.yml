@@ -65,10 +65,10 @@ parameters:
   default: true
 - name: testOnWindows
   type: boolean
-  default: true
+  default: false
 - name: testOnLinux
   type: boolean
-  default: true
+  default: false
 - name: testOnMac
   type: boolean
   default: false
