@@ -17,16 +17,13 @@ parameters:
 - name: feedNameRelease
   type: string
   default: Kritikos
-- name: dependsOn
-  type: projectList
-  default:
-    - Build
-    - Test
 
 stages:
 - stage: Deploy
   displayName: Deploys nugets
-  dependsOn: ${{ parameters.dependsOn }}
+  dependsOn:
+    - Build
+    - Test
   jobs:
   - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
