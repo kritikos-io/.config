@@ -14,5 +14,5 @@ steps:
   displayName: Install JDK ${{ parameters.jdkVersion }}
   inputs:
     versionSpec: ${{ parameters.jdkVersion }}
-    jdkArchitectureOption: ${{ parameters.jdkArchitecture }}
+    jdkArchitectureOption: ${{ parameters.jdkArch }}
     jdkSourceOption: PreInstalled
