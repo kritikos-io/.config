@@ -70,7 +70,7 @@ stages:
         parameters:
           image: ubuntu-latest
           useCache: ${{ parameters.useCache }}
-          updateAssemblyInfo: ${{ parameters.sdkVersion }}
+          updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
           assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
@@ -89,7 +89,7 @@ stages:
         parameters:
           image: windows-latest
           useCache: ${{ parameters.useCache }}
-          updateAssemblyInfo: ${{ parameters.sdkVersion }}
+          updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
           assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
@@ -108,7 +108,7 @@ stages:
         parameters:
           image: macOS-latest
           useCache: ${{ parameters.useCache }}
-          updateAssemblyInfo: ${{ parameters.sdkVersion }}
+          updateAssemblyInfo: ${{ parameters.updateAssemblyInfo }}
           assemblyInfoPath: ${{ parameters.assemblyInfoPath }}
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
