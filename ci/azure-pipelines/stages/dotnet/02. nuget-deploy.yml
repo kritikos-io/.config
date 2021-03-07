@@ -1,0 +1,45 @@
+parameters:
+- name: packagesToPush
+  type: string
+  default: $(Pipeline.Workspace)/${{ parameters.artifact }}/*.nupkg
+- name: artifact
+  type: string
+  default: nuget
+- name: environment-pr
+  type: string
+  default: 'kritikos-io'
+- name: feedName-pr
+  type: string
+  default: Kritikos
+- name: environment-release
+  type: string
+  default: 'kritikos-io'
+- name: feedName-release
+  type: string
+  default: Kritikos
+- name: dependsOn
+  type: stageList
+  default:
+    - Build
+    - Test
+
+stages:
+- stage: Deploy
+  displayName: Deploys nugets
+  dependsOn: ${{ parameters.dependsOn }}
+  jobs:
+  - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+      - template: ../../jobs/dotnet/02. nuget-deploy.yml
+        parameters:
+          artifact: ${{ parameters.artifact }}
+          packagesToPush: ${{ parameters.packagesToPush }}
+          environment: ${{ parameters.environment-pr }}
+          feedName: ${{ parameters.feedName-pr }}
+  - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
+      - template: ../../jobs/dotnet/02. nuget-deploy.yml
+        parameters:
+          artifact: ${{ parameters.artifact }}
+          packagesToPush: ${{ parameters.packagesToPush }}
+          environment: ${{ parameters.environment-release }}
+          feedName: ${{ parameters.feedName-release }}
+
