@@ -32,18 +32,6 @@ parameters:
 - name: coverageDirectory
   type: string
   default: $(build.artifactStagingDirectory)/coverage/.
-- name: sonarHost
-  type: string
-  default: https://sonarcloud.io
-- name: sonarProject
-  type: string
-  default: $(SONAR_PROJECT)
-- name: sonarOrganization
-  type: string
-  default: $(sonarOrganization)
-- name: sonarApiKey
-  type: string
-  default: $(sonarApiKey)
 - name: sonarOnPullRequests
   type: boolean
   default: true
@@ -54,9 +42,6 @@ parameters:
     - vsts
     - bitbucketcloud
   default: github
-- name: githubApiKey
-  type: string
-  default: $(GitHubApiKey)
 - name: coverageTool
   default: cobertura
   type: string

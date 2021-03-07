@@ -2,18 +2,6 @@ parameters:
 - name: coverageDirectory
   type: string
   default: $(build.artifactStagingDirectory)/coverage/
-- name: sonarHost
-  type: string
-  default: https://sonarcloud.io
-- name: sonarProject
-  type: string
-  default: $(SONAR_PROJECT)
-- name: sonarOrganization
-  type: string
-  default: $(sonarOrganization)
-- name: sonarApiKey
-  type: string
-  default: $(sonarApiKey)
 - name: sonarOnPullRequests
   type: boolean
   default: true
@@ -24,9 +12,6 @@ parameters:
     - vsts
     - bitbucketcloud
   default: github
-- name: githubApiKey
-  type: string
-  default: $(GitHubApiKey)
 
 steps:
 - template: ../java/00. install-jdk.yml
@@ -37,12 +22,12 @@ steps:
     toolName: dotnet-sonarscanner
 - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
   - pwsh: |
-      ../dotnet-sonarscanner begin /k:"${{ parameters.sonarProject }}" /v:"$(Build.BuildNumber)" /o:"${{ parameters.sonarOrganization }}" /d:sonar.host.url="${{ parameters.sonarHost }}" /d:sonar.login="${{ parameters.sonarApiKey }}" /d:sonar.cs.opencover.reportsPaths="${{ parameters.coverageDirectory }}/coverage.opencover.xml" /d:sonar.branch.name="$(Build.SourceBranchName)" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth="${{ parameters.githubApiKey }}" /d:sonar.exclusions="tests/**"
+      ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Build.BuildNumber)" /o:"$(SonarCloudOrganization)" /d:sonar.host.url="$(SonarCloudHost)" /d:sonar.login="$(SonarCloudApiKey)" /d:sonar.cs.opencover.reportsPaths="${{ parameters.coverageDirectory }}/coverage.opencover.xml" /d:sonar.branch.name="$(Build.SourceBranchName)" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth="$(GitHubApiKey)" /d:sonar.exclusions="tests/**"
     condition: ne(variables['Build.Reason'], 'PullRequest')
     displayName: SonarCloud (CI)
 - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
   - ${{ if parameters.sonarOnPullRequests }}:
     - pwsh: |
-        ../dotnet-sonarscanner begin /k:"${{ parameters.sonarProject }}" /v:"$(Build.BuildNumber)" /o:"${{ parameters.sonarOrganization }}" /d:sonar.host.url="${{ parameters.sonarHost }}" /d:sonar.login="${{ parameters.sonarApiKey }}" /d:sonar.cs.opencover.reportsPaths="${{ parameters.coverageDirectory }}/coverage.opencover.xml" /d:sonar.branch.name="$(Build.SourceBranchName)" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth="${{ parameters.githubApiKey }}" /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestId)" /d:sonar.pullrequest.provider="${{ parameters.github }}" /d:sonar.exclusions="tests/**"
+        ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Build.BuildNumber)" /o:"$(SonarCloudOrganization)" /d:sonar.host.url="$(SonarCloudHost)" /d:sonar.login="$(SonarCloudApiKey)" /d:sonar.cs.opencover.reportsPaths="${{ parameters.coverageDirectory }}/coverage.opencover.xml" /d:sonar.branch.name="$(Build.SourceBranchName)" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth="$(GitHubApiKey)" /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestId)" /d:sonar.pullrequest.provider="github" /d:sonar.exclusions="tests/**"
       condition: eq(variables['Build.Reason'], 'PullRequest')
       displayName: SonarCloud (Pull Request)

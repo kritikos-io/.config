@@ -32,18 +32,9 @@ parameters:
 - name: sonarAnalysis
   type: boolean
   default: true
-- name: sonarHost
-  type: string
-  default: https://sonarcloud.io
 - name: sonarProject
   type: string
   default: $(SONAR_PROJECT)
-- name: sonarOrganization
-  type: string
-  default: $(sonarOrganization)
-- name: sonarApiKey
-  type: string
-  default: $(sonarApiKey)
 - name: sonarOnPullRequests
   type: boolean
   default: true
@@ -54,9 +45,6 @@ parameters:
     - vsts
     - bitbucketcloud
   default: github
-- name: githubApiKey
-  type: string
-  default: $(GitHubApiKey)
 - name: coverageTool
   default: cobertura
   type: string
@@ -98,13 +86,8 @@ jobs:
     - template: ../../steps/general/02. sonarscanner-begin.yml
       parameters:
         coverageDirectory: ${{ parameters.coverageDirectory }}
-        sonarHost: ${{ parameters.sonarHost }}
-        sonarProject: ${{ parameters.sonarProject }}
-        sonarOrganization: ${{ parameters.sonarOrganization }}
-        sonarApiKey: ${{ parameters.sonarApiKey }}
         sonarOnPullRequests: ${{ parameters.sonarOnPullRequests }}
         sonarPullRequestProvider: ${{ parameters.sonarPullRequestProvider }}
-        githubApiKey: ${{ parameters.githubApiKey }}
   - template: ../../steps/dotnet/02. dotnet-build.yml
     parameters:
       configuration: ${{ parameters.configuration }}
