@@ -105,7 +105,7 @@ stages:
   - ${{ if parameters.testOnLinux }}:
     - template: ../../jobs/dotnet/01. test.yml
       parameters:
-        image: ${{ parameters.image }}
+        image: linux-latest
         useCache: ${{ parameters.useCache }}
         sdkVersion: ${{ parameters.sdkVersion }}
         configuration: ${{ parameters.configuration }}
@@ -128,7 +128,7 @@ stages:
   - ${{ if parameters.testOnWindows }}:
       - template: ../../jobs/dotnet/01. test.yml
         parameters:
-          image: ${{ parameters.image }}
+          image: windows-latest
           useCache: ${{ parameters.useCache }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
@@ -144,7 +144,7 @@ stages:
   - ${{ if parameters.testOnMac }}:
       - template: ../../jobs/dotnet/01. test.yml
         parameters:
-          image: ${{ parameters.image }}
+          image: macOS-latest
           useCache: ${{ parameters.useCache }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
