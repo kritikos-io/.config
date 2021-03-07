@@ -5,16 +5,16 @@ parameters:
 - name: artifact
   type: string
   default: nuget
-- name: environment-pr
+- name: environmentPullRequest
   type: string
   default: 'kritikos-io'
-- name: feedName-pr
+- name: feedNamePullRequest
   type: string
   default: Kritikos
-- name: environment-release
+- name: environmentRelease
   type: string
   default: 'kritikos-io'
-- name: feedName-release
+- name: feedNameRelease
   type: string
   default: Kritikos
 - name: dependsOn
@@ -33,13 +33,13 @@ stages:
         parameters:
           artifact: ${{ parameters.artifact }}
           packagesToPush: ${{ parameters.packagesToPush }}
-          environment: ${{ parameters.environment-pr }}
-          feedName: ${{ parameters.feedName-pr }}
+          environment: ${{ parameters.environmentPullRequest }}
+          feedName: ${{ parameters.feedNamePullRequest }}
   - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
           packagesToPush: ${{ parameters.packagesToPush }}
-          environment: ${{ parameters.environment-release }}
-          feedName: ${{ parameters.feedName-release }}
+          environment: ${{ parameters.environmentRelease }}
+          feedName: ${{ parameters.feedNameRelease }}
 
