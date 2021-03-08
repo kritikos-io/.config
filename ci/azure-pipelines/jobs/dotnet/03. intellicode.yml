@@ -30,8 +30,8 @@ jobs:
   pool:
     vmImage: windows-latest
   steps:
-    - checkout: self
-      fetchDepth: 1
+    # - checkout: self
+    #   fetchDepth: 1
     - ${{ if parameters.useCache }}:
         - template: ../../steps/nuget/00. nuget-cache.yml
     - template: ../../steps/dotnet/00. install-sdk.yml
