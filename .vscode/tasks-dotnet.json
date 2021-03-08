@@ -83,7 +83,7 @@
         "--logger",
         "trx",
         "--configuration",
-        "Debug",
+        "Release",
         "--results-directory",
         "./TestResults",
         "--verbosity",
