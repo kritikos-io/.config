@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,csharp,fsharp,aspnetcore,dotnetcore,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,csharp,fsharp,aspnetcore,dotnetcore,node
 
@@ -1019,4 +1018,5 @@ $RECYCLE.BIN/
 !*.code-workspace
 !.vscode/tasks-*.json
 AssemblyInfo/*
-TestResults/*
+TestResults
+upload/*
