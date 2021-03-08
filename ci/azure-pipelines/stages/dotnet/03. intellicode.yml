@@ -38,4 +38,4 @@ stages:
       sdkVersion: ${{ parameters.sdkVersion }}
       configuration: ${{ parameters.configuration }}
       buildArgs: ${{ parameters.buildArgs }}
-      branch: ${{ parameters.buildArgs }}
+      branch: ${{ parameters.branch }}
