@@ -1,0 +1,207 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "version",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "gitversion",
+        "/updateassemblyinfo",
+        "AssemblyInfo/AssemblyInfo.cs",
+        "/ensureassemblyinfo"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "restore",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "restore",
+        "--verbosity",
+        "minimal"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "build",
+        "--configuration",
+        "Release",
+        "--no-restore",
+        "--nologo",
+        "--verbosity",
+        "minimal",
+        // Ask dotnet build to generate full paths for file names.
+        "/property:GenerateFullPaths=true",
+        // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+        "/consoleloggerparameters:NoSummary",
+        // Create CI compatible deterministic build
+        "-p:TF_BUILD=true"
+      ],
+      "dependsOn": [
+        "version",
+        "restore"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "test",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "test",
+        "--no-restore",
+        "--no-build",
+        "--nologo",
+        "--logger",
+        "trx",
+        "--configuration",
+        "Debug",
+        "--results-directory",
+        "./TestResults",
+        "--verbosity",
+        "normal",
+        "--collect:'XPlat Code Coverage'",
+        "/p:CopyLocalLockFileAssemblies=true",
+        "/p:SkipAutoProps=true",
+        "/p:CollectCoverage=true",
+        "/p:CoverletOutput=../../TestResults/",
+        "/p:MergeWith=./TestResults/coverage.json",
+        "/p:CoverletOutputFormat=\"opencover%2ccobertura%2cjson\""
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "dependsOn": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "pack",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "pack",
+        "--configuration",
+        "Release",
+        "--output",
+        "packages",
+        "/nologo",
+        "--no-restore",
+        "--no-build",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary",
+        // Create CI compatible deterministic build
+        "-p:TF_BUILD=true"
+      ],
+      "dependsOn": [
+        "clean",
+        "build",
+        "test"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "publish",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "publish",
+        "--configuration",
+        "Release",
+        "--output",
+        "upload",
+        "--nologo",
+        "--no-restore",
+        "--no-build",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary",
+        // Create CI compatible deterministic build
+        "-p:TF_BUILD=true"
+      ],
+      "dependsOn": [
+        "clean",
+        "build",
+        "test"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "clean",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "clean",
+        "--verbosity",
+        "minimal"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

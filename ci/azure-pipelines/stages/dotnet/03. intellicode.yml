@@ -26,7 +26,7 @@ parameters:
 
 stages:
 - stage: Intellicode
-  displayName: Train Intellicode model
+  displayName: Intellicode
   dependsOn: Version
   jobs:
   - template: ../../jobs/dotnet/03. intellicode.yml
