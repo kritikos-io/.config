@@ -1,55 +1,62 @@
-/// <binding ProjectOpened='watch' />
-"use strict";
-var webroot = "./wwwroot/";
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
-var rename = require('gulp-rename');
-var del = require('del');
-
-var paths = {
-  scss: webroot + "lib/sass/*.{sc,sa,c}ss",
-  js: webroot + "lib/js/*.js",
+const { dest, series, src, watch, lastRun } = require("gulp");
+const uglify = require("gulp-uglify");
+const rename = require("gulp-rename");
+const sass = require("gulp-sass");
+const sourcemaps = require("gulp-sourcemaps");
+const del = require("del");
+const clean = require("gulp-clean");
+const webroot = "./wwwroot/";
+const paths = {
+  scss: webroot + "src/scss/*.scss",
+  sass: webroot + "src/sass/*.sass",
+  css: webroot + "src/css/*.css",
+  js: webroot + "src/js/*.js",
+  ts: webroot + "src/ts/*.ts",
   cssDest: webroot + "assets/css/",
   jsDest: webroot + "assets/js/"
 };
 
-gulp.task('compile:sass', function () {
-  return gulp.src(paths.scss)
+const cssWatcher = watch(paths.scss);
+const jsWatcher = watch(paths.js);
+const tsWatcher = watch(paths.ts);
+
+function compileSass() {
+  return src([paths.scss, paths.css, paths.sass], { since: lastRun(compileSass) })
     .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
-    .pipe(gulp.dest(paths.cssDest))
+    .pipe(dest(paths.cssDest))
     .pipe(sass({ outputStyle: 'compressed', sourceMap: 'true' }).on('error', sass.logError))
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('.', { includeContent: false }))
-    .pipe(gulp.dest(paths.cssDest));
-});
+    .pipe(dest(paths.cssDest));
+}
 
-gulp.task('compile:js', function () {
-  return gulp.src(paths.js)
-    .pipe(gulp.dest(paths.jsDest))
+function compileJs() {
+  return src(paths.js, { since: lastRun(compileJs) })
+    .pipe(dest(paths.jsDest))
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('.', { includeContent: false }))
-    .pipe(gulp.dest(paths.jsDest));
-});
+    .pipe(dest(paths.jsDest));
+}
 
-gulp.task('compile', gulp.parallel('compile:sass', 'compile:js'));
+function compileTs() {
+  return src(paths.ts, { since: lastRun(compileTs) });
+}
 
-gulp.task('clean:css', function () {
-  return del(paths.cssDest + "/*.{css,map}");
-});
+async function watcher(callback) {
+  cleaner();
+  jsWatcher.on("change", compileJs);
+  cssWatcher.on("change", compileSass);
+  tsWatcher.on("change", compileTs);
+  callback();
+}
 
-gulp.task('clean:js', function () {
-  return del(paths.jsDest + "/*.{js,map}");
-});
+async function cleaner() {
+  del(paths.cssDest);
+  del(paths.jsDest);
+}
 
-gulp.task('clean', gulp.parallel('clean:css', 'clean:js'));
-
-gulp.task('watch', function () {
-  gulp.watch(paths.scss).on('change', gulp.task('compile:sass'));
-  gulp.watch(paths.js).on('change', gulp.task('compile:js'));
-});
-
-gulp.task('default', gulp.series('clean', gulp.parallel('compile:sass', 'compile:js'), 'watch'));
+exports.clean = cleaner;
+exports.compile = series(compileJs, compileTs, compileSass);
+exports.watch = watcher;
