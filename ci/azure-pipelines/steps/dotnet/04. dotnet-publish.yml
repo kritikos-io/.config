@@ -5,6 +5,9 @@ parameters:
 - name: configuration
   type: string
   default: $(BuildConfiguration)
+- name: publishArgs
+  type: string
+  default: ''
 - name: publishWeb
   type: boolean
   default: false
@@ -20,4 +23,4 @@ steps:
     projects: ${{ parameters.projectPath }}
     configuration: ${{ parameters.configuration }}
     publishWebProjects: ${{ parameters.publishWeb }}
-    arguments: --no-restore --no-build --no-self-contained --nologo -o ${{ parameters.outputPath }}
+    arguments: --no-restore --no-build --no-self-contained --nologo -o ${{ parameters.outputPath }} ${{ parameters.publishArgs }}

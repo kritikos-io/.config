@@ -38,6 +38,9 @@ parameters:
 - name: pathtoPublish
   type: string
   default: $(build.artifactStagingDirectory)/publish
+- name: publishArgs
+  type: string
+  default: ''
 - name: publishArtifactName
   type: string
   default: '$(Build.Repository.Name)-$(Build.BuildNumber)'
@@ -68,6 +71,24 @@ parameters:
 - name: packOnMac
   type: boolean
   default: false
+- name: publishOnWindows
+  type: boolean
+  default: false
+- name: publishOnLinux
+  type: boolean
+  default: false
+- name: publishOnMac
+  type: boolean
+  default: false
+- name: windowsArch
+  type: string
+  default: win-x64
+- name: linuxArch
+  type: string
+  default: linux-x64
+- name: macOsArch
+  type: string
+  default: osx-x64
 
 stages:
 - stage: Build
@@ -84,7 +105,9 @@ stages:
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
-          buildArgs: ${{ parameters.buildArgs }}
+          buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.linuxArch }}
+          producePublishArtifacts: publishOnLinux
+          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.linuxArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
@@ -103,7 +126,9 @@ stages:
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
-          buildArgs: ${{ parameters.buildArgs }}
+          buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.windowsArch }}
+          producePublishArtifacts: publishOnWindows
+          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.windowsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
@@ -122,7 +147,9 @@ stages:
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
-          buildArgs: ${{ parameters.buildArgs }}
+          buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.macOsArch }}
+          producePublishArtifacts: publishOnMac
+          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.macOsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
           pathtoPublish: ${{ parameters.pathtoPublish }}

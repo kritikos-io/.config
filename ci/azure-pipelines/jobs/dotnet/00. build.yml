@@ -23,6 +23,9 @@ parameters:
 - name: buildArgs
   type: string
   default: ''
+- name: producePublishArtifacts
+  type: boolean
+  default: false
 - name: publishWeb
   type: boolean
   default: false
@@ -72,15 +75,16 @@ jobs:
       parameters:
         configuration: ${{ parameters.configuration }}
         buildArgs: ${{ parameters.buildArgs }}
-    - template: ../../steps/dotnet/04. dotnet-publish.yml
-      parameters:
-        configuration: ${{ parameters.configuration }}
-        publishWeb: ${{ parameters.publishWeb }}
-        outputPath: ${{ parameters.outputPath }}
-    - template: ../../steps/general/06. publish-build-artifact.yml
-      parameters:
-        pathtoPublish: ${{ parameters.pathtoPublish }}
-        artifactName: ${{ parameters.publishArtifactName }}-${{ parameters.image }}
+    - ${{ if parameters.producePublishArtifacts }}:
+      - template: ../../steps/dotnet/04. dotnet-publish.yml
+        parameters:
+          configuration: ${{ parameters.configuration }}
+          publishWeb: ${{ parameters.publishWeb }}
+          outputPath: ${{ parameters.outputPath }}
+      - template: ../../steps/general/06. publish-build-artifact.yml
+        parameters:
+          pathtoPublish: ${{ parameters.pathtoPublish }}
+          artifactName: ${{ parameters.publishArtifactName }}-${{ parameters.image }}
     - ${{ if parameters.producePackedArtifacts }}:
       - template: ../../steps/dotnet/04. dotnet-pack.yml
         parameters:
