@@ -26,6 +26,9 @@ parameters:
 - name: producePublishArtifacts
   type: boolean
   default: false
+- name: publishArgs
+  type: string
+  default: ''
 - name: publishWeb
   type: boolean
   default: false
@@ -78,6 +81,7 @@ jobs:
     - ${{ if parameters.producePublishArtifacts }}:
       - template: ../../steps/dotnet/04. dotnet-publish.yml
         parameters:
+          publishArgs: ${{ parameters.publishArgs }}
           configuration: ${{ parameters.configuration }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
