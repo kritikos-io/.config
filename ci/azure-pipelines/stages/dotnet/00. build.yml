@@ -105,7 +105,7 @@ stages:
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
-          buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.linuxArch }}
+          buildArgs: ${{ parameters.buildArgs }}
           producePublishArtifacts: ${{ parameters.publishOnLinux }}
           publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.linuxArch }}
           publishWeb: ${{ parameters.publishWeb }}
@@ -126,7 +126,7 @@ stages:
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
-          buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.windowsArch }}
+          buildArgs: ${{ parameters.buildArgs }}
           producePublishArtifacts: ${{ parameters.publishOnWindows }}
           publishArgs: ${{ parameters.publishArgs }} --runtime ${{ parameters.windowsArch }}
           publishWeb: ${{ parameters.publishWeb }}
@@ -147,7 +147,7 @@ stages:
           assemblyInfoArtifactName: ${{ parameters.assemblyInfoArtifactName }}
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
-          buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.macOsArch }}
+          buildArgs: ${{ parameters.buildArgs }}
           producePublishArtifacts: ${{ parameters.publishOnMac }}
           publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.macOsArch }}
           publishWeb: ${{ parameters.publishWeb }}
