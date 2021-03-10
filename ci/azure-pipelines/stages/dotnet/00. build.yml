@@ -41,6 +41,9 @@ parameters:
 - name: publishArgs
   type: string
   default: ''
+- name: projectsToPublish
+  type: string
+  default: src/*/*.csproj
 - name: publishArtifactName
   type: string
   default: '$(Build.Repository.Name)-$(Build.BuildNumber)'
@@ -110,6 +113,7 @@ stages:
           publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.linuxArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
+          projectsToPublish: ${{ parameters.projectsToPublish }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
           publishArtifactName: ${{ parameters.publishArtifactName }}
           producePackedArtifacts: ${{ parameters.packOnLinux }}
@@ -131,6 +135,7 @@ stages:
           publishArgs: ${{ parameters.publishArgs }} --runtime ${{ parameters.windowsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
+          projectsToPublish: ${{ parameters.projectsToPublish }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
           publishArtifactName: ${{ parameters.publishArtifactName }}
           producePackedArtifacts: ${{ parameters.packOnWindows }}
@@ -152,6 +157,7 @@ stages:
           publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.macOsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
+          projectsToPublish: ${{ parameters.projectsToPublish }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
           publishArtifactName: ${{ parameters.publishArtifactName }}
           producePackedArtifacts: ${{ parameters.packOnMac }}

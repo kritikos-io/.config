@@ -32,6 +32,9 @@ parameters:
 - name: publishWeb
   type: boolean
   default: false
+- name: projectsToPublish
+  type: string
+  default: src/*/*.csproj
 - name: outputPath
   type: string
   default: $(build.artifactStagingDirectory)/publish
@@ -81,6 +84,7 @@ jobs:
     - ${{ if parameters.producePublishArtifacts }}:
       - template: ../../steps/dotnet/04. dotnet-publish.yml
         parameters:
+          projectPath: ${{ parameters.projectsToPublish }}
           publishArgs: ${{ parameters.publishArgs }}
           configuration: ${{ parameters.configuration }}
           publishWeb: ${{ parameters.publishWeb }}
