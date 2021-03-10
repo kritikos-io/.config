@@ -107,7 +107,7 @@ stages:
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }}
           producePublishArtifacts: ${{ parameters.publishOnLinux }}
-          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.linuxArch }} --self-contained
+          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.linuxArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
@@ -128,7 +128,7 @@ stages:
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }}
           producePublishArtifacts: ${{ parameters.publishOnWindows }}
-          publishArgs: ${{ parameters.publishArgs }} --runtime ${{ parameters.windowsArch }} --self-contained
+          publishArgs: ${{ parameters.publishArgs }} --runtime ${{ parameters.windowsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
@@ -149,7 +149,7 @@ stages:
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }}
           producePublishArtifacts: ${{ parameters.publishOnMac }}
-          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.macOsArch }} --self-contained
+          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.macOsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
           pathtoPublish: ${{ parameters.pathtoPublish }}

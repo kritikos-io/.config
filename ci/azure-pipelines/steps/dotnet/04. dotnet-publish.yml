@@ -23,4 +23,4 @@ steps:
     projects: ${{ parameters.projectPath }}
     configuration: ${{ parameters.configuration }}
     publishWebProjects: ${{ parameters.publishWeb }}
-    arguments: --no-restore --no-build --no-self-contained --nologo -o ${{ parameters.outputPath }} ${{ parameters.publishArgs }}
+    arguments: --no-restore --no-build --nologo -o ${{ parameters.outputPath }} ${{ parameters.publishArgs }}
