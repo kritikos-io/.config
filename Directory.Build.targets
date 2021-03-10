@@ -19,6 +19,15 @@
     </ItemGroup>
   </Target>
 
+  <Target Name="AfterBuild" Condition="$(PackageVersion) == '1.0.0'">
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="PackAssembly" />
+    </GetAssemblyIdentity>
+    <PropertyGroup>
+      <PackageVersion>%(PackAssembly.Version)</PackageVersion>
+    </PropertyGroup>
+  </Target>
+
   <PropertyGroup Label="SDK Functionality" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True' OR '$(UsingMicrosoftNETSdkWorker)' == 'True'">
     <IsPackable>false</IsPackable>
     <PackAsTool>false</PackAsTool>
