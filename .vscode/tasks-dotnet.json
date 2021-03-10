@@ -9,6 +9,8 @@
       "type": "shell",
       "args": [
         "gitversion",
+        "/showvariable",
+        "SemVer",
         "/updateassemblyinfo",
         "AssemblyInfo/AssemblyInfo.cs",
         "/ensureassemblyinfo"
@@ -54,12 +56,10 @@
         "--nologo",
         "--verbosity",
         "minimal",
-        // Ask dotnet build to generate full paths for file names.
         "/property:GenerateFullPaths=true",
-        // Do not generate summary otherwise it leads to duplicate errors in Problems panel
         "/consoleloggerparameters:NoSummary",
-        // Create CI compatible deterministic build
-        "-p:TF_BUILD=true"
+        "-p:TF_BUILD=true",
+        "/p:Version=${input:version}"
       ],
       "dependsOn": [
         "version",
@@ -123,13 +123,13 @@
         "packages",
         "/nologo",
         "--no-restore",
-        "--no-build",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        // Create CI compatible deterministic build
-        "-p:TF_BUILD=true"
+        "-p:TF_BUILD=true",
+        "/p:Version=${input:version}"
       ],
       "dependsOn": [
+        "cleanPackages",
         "clean",
         "build",
         "test"
@@ -160,13 +160,13 @@
         "upload",
         "--nologo",
         "--no-restore",
-        "--no-build",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        // Create CI compatible deterministic build
-        "-p:TF_BUILD=true"
+        "-p:TF_BUILD=true",
+        "/p:Version=${input:version}"
       ],
       "dependsOn": [
+        "cleanPublish",
         "clean",
         "build",
         "test"
@@ -191,6 +191,8 @@
       "type": "shell",
       "args": [
         "clean",
+        "-c",
+        "Release",
         "--verbosity",
         "minimal"
       ],
@@ -202,6 +204,35 @@
         "reveal": "silent"
       },
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "cleanPackages",
+      "command": "rm",
+      "type": "shell",
+      "args": [
+        "packages/*"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "cleanPublish",
+      "command": "rm",
+      "type": "shell",
+      "args": [
+        "upload/*"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "version",
+      "type": "command",
+      "command": "shellCommand.execute",
+      "args":{
+        "command": "dotnet gitversion /showvariable SemVer",
+        "cwd": "${workspaceFolder}"
+      }
     }
   ]
 }
