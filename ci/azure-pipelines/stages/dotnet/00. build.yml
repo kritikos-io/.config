@@ -106,7 +106,7 @@ stages:
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.linuxArch }}
-          producePublishArtifacts: publishOnLinux
+          producePublishArtifacts: ${{ parameters.publishOnLinux }}
           publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.linuxArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
@@ -127,8 +127,8 @@ stages:
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.windowsArch }}
-          producePublishArtifacts: publishOnWindows
-          publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.windowsArch }}
+          producePublishArtifacts: ${{ parameters.publishOnWindows }}
+          publishArgs: ${{ parameters.publishArgs }} --runtime ${{ parameters.windowsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
@@ -148,7 +148,7 @@ stages:
           sdkVersion: ${{ parameters.sdkVersion }}
           configuration: ${{ parameters.configuration }}
           buildArgs: ${{ parameters.buildArgs }} --runtime ${{ parameters.macOsArch }}
-          producePublishArtifacts: publishOnMac
+          producePublishArtifacts: ${{ parameters.publishOnMac }}
           publishArgs:  ${{ parameters.publishArgs }} --runtime ${{ parameters.macOsArch }}
           publishWeb: ${{ parameters.publishWeb }}
           outputPath: ${{ parameters.outputPath }}
