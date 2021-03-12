@@ -115,7 +115,7 @@ stages:
           outputPath: ${{ parameters.outputPath }}
           projectsToPublish: ${{ parameters.projectsToPublish }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
-          publishArtifactName: ${{ parameters.publishArtifactName }}
+          publishArtifactName: ${{ parameters.publishArtifactName }}-linux
           producePackedArtifacts: ${{ parameters.packOnLinux }}
           projectsToPack: ${{ parameters.projectsToPack }}
           packDirectory: ${{ parameters.packDirectory }}
@@ -137,7 +137,7 @@ stages:
           outputPath: ${{ parameters.outputPath }}
           projectsToPublish: ${{ parameters.projectsToPublish }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
-          publishArtifactName: ${{ parameters.publishArtifactName }}
+          publishArtifactName: ${{ parameters.publishArtifactName }}-win
           producePackedArtifacts: ${{ parameters.packOnWindows }}
           projectsToPack: ${{ parameters.projectsToPack }}
           packDirectory: ${{ parameters.packDirectory }}
@@ -159,7 +159,7 @@ stages:
           outputPath: ${{ parameters.outputPath }}
           projectsToPublish: ${{ parameters.projectsToPublish }}
           pathtoPublish: ${{ parameters.pathtoPublish }}
-          publishArtifactName: ${{ parameters.publishArtifactName }}
+          publishArtifactName: ${{ parameters.publishArtifactName }}-mac
           producePackedArtifacts: ${{ parameters.packOnMac }}
           projectsToPack: ${{ parameters.projectsToPack }}
           packDirectory: ${{ parameters.packDirectory }}
