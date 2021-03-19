@@ -58,8 +58,8 @@
         "minimal",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "-p:TF_BUILD=true",
-        "/p:Version=${input:version}"
+        "-p:TF_BUILD=true"
+        // "/p:Version=${input:version}"
       ],
       "dependsOn": [
         "version",
@@ -78,18 +78,18 @@
       "args": [
         "test",
         "--no-restore",
-        "--no-build",
         "--nologo",
         "--logger",
         "trx",
         "--configuration",
-        "Release",
+        "Debug",
         "--results-directory",
         "./TestResults",
         "--verbosity",
         "normal",
         "--collect:'XPlat Code Coverage'",
         "/p:CopyLocalLockFileAssemblies=true",
+        "/consoleloggerparameters:NoSummary",
         "/p:SkipAutoProps=true",
         "/p:CollectCoverage=true",
         "/p:CoverletOutput=../../TestResults/",
@@ -125,8 +125,8 @@
         "--no-restore",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "-p:TF_BUILD=true",
-        "/p:Version=${input:version}"
+        "-p:TF_BUILD=true"
+        // "/p:Version=${input:version}"
       ],
       "dependsOn": [
         "cleanPackages",
@@ -162,8 +162,8 @@
         "--no-restore",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "-p:TF_BUILD=true",
-        "/p:Version=${input:version}"
+        "-p:TF_BUILD=true"
+        // "/p:Version=${input:version}"
       ],
       "dependsOn": [
         "cleanPublish",
