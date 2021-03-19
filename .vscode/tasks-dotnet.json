@@ -1,6 +1,4 @@
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
     {
@@ -59,7 +57,7 @@
         "minimal",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "-p:TF_BUILD=true"
+        "/p:TF_BUILD=true"
       ],
       "dependsOn": [
         "version",
@@ -122,14 +120,14 @@
         "--configuration",
         "Release",
         "--no-restore",
-        "/nologo",
+        "--nologo",
         "--verbosity",
         "minimal",
         "--output",
         "packages",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "-p:TF_BUILD=true"
+        "/p:TF_BUILD=true"
       ],
       "dependsOn": [
         "cleanPackages",
@@ -166,7 +164,7 @@
         "upload",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "-p:TF_BUILD=true"
+        "/p:TF_BUILD=true"
       ],
       "dependsOn": [
         "cleanPublish",
