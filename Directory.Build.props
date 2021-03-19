@@ -28,7 +28,7 @@
     <!-- Use latest language version supported by the SDK -->
     <LangVersion>latest</LangVersion>
     <!-- Use deterministic builds -->
-    <!-- <Deterministic>true</Deterministic> -->
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <!-- Sets deterministic source paths for CI builds -->
