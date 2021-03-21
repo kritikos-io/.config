@@ -27,8 +27,7 @@ stages:
 - stage: AzureDeploy
   displayName: Deploy to azure webApp
   dependsOn:
-    - Build
-    - Test
+    - Deploy
   jobs:
   - ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
     - template: ../../jobs/general/01.azureapp.yml
