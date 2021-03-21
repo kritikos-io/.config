@@ -36,7 +36,7 @@ stages:
         subscription: ${{ parameters.subscription }}
         resourceGroup: ${{ parameters.resourceGroup }}
         webApp: ${{ parameters.webApp }}
-        slotName: ${{ parameters.slotName }}
+        slotName: ${{ parameters.slotNameStage }}
         deployToSlot: ${{ parameters.deployToSlot }}
         artifact: ${{ parameters.artifact }}
         packagesToPush: ${{ parameters.packagesToPush }}
@@ -48,7 +48,7 @@ stages:
         subscription: ${{ parameters.subscription }}
         resourceGroup: ${{ parameters.resourceGroup }}
         webApp: ${{ parameters.webApp }}
-        slotName: ${{ parameters.slotName }}
+        slotName: ${{ parameters.slotNameDevel }}
         deployToSlot: ${{ parameters.deployToSlot }}
         artifact: ${{ parameters.artifact }}
         packagesToPush: ${{ parameters.packagesToPush }}
