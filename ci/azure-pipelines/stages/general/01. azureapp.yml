@@ -29,7 +29,7 @@ stages:
   dependsOn: Deploy
   jobs:
   - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
-    - template: ../../jobs/general/01.azureapp.yml
+    - template: ../../jobs/general/01. azureapp.yml
       parameters:
         jobName: ${{ parameters.slotNameStage }}
         environment: ${{ parameters.environment }}
@@ -41,7 +41,7 @@ stages:
         artifact: ${{ parameters.artifact }}
         packagesToPush: ${{ parameters.packagesToPush }}
   - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
-    - template: ../../jobs/general/01.azureapp.yml
+    - template: ../../jobs/general/01. azureapp.yml
       parameters:
         jobName: ${{ parameters.slotNameDevel }}
         environment: ${{ parameters.environment }}
