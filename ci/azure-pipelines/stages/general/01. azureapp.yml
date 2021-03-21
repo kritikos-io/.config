@@ -59,6 +59,6 @@ stages:
       strategy:
         runOnce:
           deploy:
-          steps:
-            - download: current
-              artifact: ${{ parameters.artifact }}
+            steps:
+              - download: current
+                artifact: ${{ parameters.artifact }}

@@ -26,18 +26,18 @@ jobs:
   displayName: Deploy app ${{ parameters.webApp }} ${{ parameters.slotName }}
   environment: ${{ parameters.environment }}
   strategy:
-   runOnce:
-    deploy:
-     steps:
-      - download: current
-        artifact: ${{ parameters.artifact }}
-      - template: ../../steps/general/10. azureapp.yml
-        parameters:
-          subscription: ${{ parameters.subscription }}
-          resourceGroup: ${{ parameters.resourceGroup }}
-          webApp: ${{ parameters.webApp }}
-          slotName: ${{ parameters.slotName }}
-          deployToSlot: ${{ parameters.deployToSlot }}
-          artifact: ${{ parameters.artifact }}
-          packagesToPush: ${{ parameters.packagesToPush }}
+    runOnce:
+      deploy:
+        steps:
+          - download: current
+            artifact: ${{ parameters.artifact }}
+          - template: ../../steps/general/10. azureapp.yml
+            parameters:
+              subscription: ${{ parameters.subscription }}
+              resourceGroup: ${{ parameters.resourceGroup }}
+              webApp: ${{ parameters.webApp }}
+              slotName: ${{ parameters.slotName }}
+              deployToSlot: ${{ parameters.deployToSlot }}
+              artifact: ${{ parameters.artifact }}
+              packagesToPush: ${{ parameters.packagesToPush }}
 
