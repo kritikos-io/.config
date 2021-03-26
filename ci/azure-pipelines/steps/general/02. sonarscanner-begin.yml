@@ -28,6 +28,6 @@ steps:
 - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
   - ${{ if parameters.sonarOnPullRequests }}:
     - pwsh: |
-        ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Build.BuildNumber)" /o:"$(SonarCloudOrganization)" /d:sonar.host.url="$(SonarCloudHost)" /d:sonar.login="$(SonarCloudApiKey)" /d:sonar.cs.opencover.reportsPaths="${{ parameters.coverageDirectory }}/coverage.opencover.xml" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth="$(GitHubApiKey)" /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestNumber)" /d:sonar.pullrequest.provider="github" /d:sonar.exclusions="tests/**" /d:sonar.verbose=true
+        ../dotnet-sonarscanner begin /k:"$(SONAR_PROJECT)" /v:"$(Build.BuildNumber)" /o:"$(SonarCloudOrganization)" /d:sonar.host.url="$(SonarCloudHost)" /d:sonar.login="$(SonarCloudApiKey)" /d:sonar.cs.opencover.reportsPaths="${{ parameters.coverageDirectory }}/coverage.opencover.xml" /d:sonar.github.repository="$(Build.Repository.Name)" /d:sonar.github.oauth="$(GitHubApiKey)" /d:sonar.pullrequest.key="$(System.PullRequest.PullRequestNumber)" /d:sonar.pullrequest.branch="$(System.PullRequest.TargetBranch)" /d:sonar.pullrequest.base="$(System.PullRequest.TargetBranch)" /d:sonar.pullrequest.provider="github" /d:sonar.exclusions="tests/**" /d:sonar.verbose=true
       condition: eq(variables['Build.Reason'], 'PullRequest')
       displayName: SonarCloud (Pull Request)
