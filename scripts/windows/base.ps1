@@ -7,6 +7,8 @@ $links = $(Get-Item .).Parent.Parent
 $target = $links.Parent
 $dirName = $target.Name
 
+New-Item -ItemType Directory -Force -Path upload
+New-Item -ItemType Directory -Force -Path packages
 
 foreach($file in $files){
   New-Item -Path $target\$file -ItemType SymbolicLink -Value ".config\$file" -Force
