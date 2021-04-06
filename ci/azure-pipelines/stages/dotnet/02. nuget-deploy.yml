@@ -31,7 +31,7 @@ stages:
     - Build
     - Test
   jobs:
-  - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+  - ${{ if and(ne(variables['Build.Reason'], 'PullRequest'),or(eq(variables['Build.SourceBranchName'], 'master'),eq(variables['Build.SourceBranchName'], 'main'))) }}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
@@ -39,7 +39,7 @@ stages:
           environment: ${{ parameters.environmentRelease }}
           jobName: ${{ parameters.jobNameRelease }}
           feedName: ${{ parameters.feedNameRelease }}
-  - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
+  - ${{ if or(eq(variables['Build.Reason'], 'PullRequest'),or(eq(variables['Build.SourceBranchName'], 'master'),eq(variables['Build.SourceBranchName'], 'main')))}}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
