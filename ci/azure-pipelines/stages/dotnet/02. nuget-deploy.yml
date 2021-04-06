@@ -49,4 +49,6 @@ stages:
           feedName: ${{ parameters.feedNamePullRequest }}
   - job:
       displayName: Empty Job for compatibility
+      steps:
+        - pwsh: Write-Host "Nothing"
 
