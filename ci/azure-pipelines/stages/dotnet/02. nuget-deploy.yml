@@ -47,4 +47,6 @@ stages:
           environment: ${{ parameters.environmentPullRequest }}
           jobName: ${{ parameters.jobNamePullRequest }}
           feedName: ${{ parameters.feedNamePullRequest }}
+  - job:
+      displayName: Empty Job for compatibility
 
