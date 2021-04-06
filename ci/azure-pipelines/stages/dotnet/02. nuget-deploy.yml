@@ -49,4 +49,8 @@ stages:
           feedName: ${{ parameters.feedNamePullRequest }}
   - job:
     displayName: Empty Job for compatibility
-
+    steps:
+      - pwsh: Write-Host "Branch ${env:Build.SourceBranchName} ${env:Build.Build.SourceBranch}"
+        displayName: Echo Branch Name
+      - pwsh: Write-Host "Build Reason ${env:Build.Reason}"
+        displayName: Echo Build Reason
