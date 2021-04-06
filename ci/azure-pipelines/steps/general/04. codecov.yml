@@ -14,6 +14,6 @@ steps:
   - pwsh: ../codecov --file ${{ parameters.coverageDirectory }}/coverage.opencover.xml --branch "$(Build.SourceBranchName)" --sha "$(Build.SourceVersion)"
     displayName: Upload coverage to Codecov (CI)
 - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
-  - ${{ if parameters.sonarOnPullRequests }}:
+  - ${{ if parameters.coverageOnPullRequests }}:
     - pwsh: ../codecov --file ${{ parameters.coverageDirectory }}/coverage.opencover.xml --branch "$(Build.SourceBranchName)" --sha "$(Build.SourceVersion)" --pr "$(System.PullRequest.PullRequestId)"
       displayName: Upload coverage to Codecov (PR)
