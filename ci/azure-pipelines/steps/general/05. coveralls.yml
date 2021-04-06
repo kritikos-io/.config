@@ -14,6 +14,6 @@ steps:
   - pwsh: ../csmacnz.Coveralls --opencover --input "${{ parameters.coverageDirectory }}/coverage.opencover.xml" --useRelativePaths --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)" --serviceName "dev.azure.com" --serviceNumber "$(Build.BuildId)"
     displayName: Upload coverage to Coveralls (CI)
 - ${{ if eq(variables['Build.Reason'], 'PullRequest')}}:
-  - ${{ if parameters.sonarOnPullRequests }}:
+  - ${{ if parameters.coverageOnPullRequests }}:
     - pwsh: ../csmacnz.Coveralls --opencover --input "${{ parameters.coverageDirectory }}/coverage.opencover.xml"1 --useRelativePaths --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)" --serviceName "dev.azure.com" --serviceNumber "$(Build.BuildId)" --pullRequest "$(System.PullRequest.PullRequestId)"
       displayName: Upload coverage to Coveralls (PR)
