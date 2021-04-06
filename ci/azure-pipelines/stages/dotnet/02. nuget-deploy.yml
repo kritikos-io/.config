@@ -31,7 +31,9 @@ stages:
     - Build
     - Test
   jobs:
-  - ${{ if and(ne(variables['Build.Reason'], 'PullRequest'),or(eq(variables['Build.SourceBranchName'], 'master'),eq(variables['Build.SourceBranchName'], 'main'))) }}:
+  - job:
+    displayName: Empty Job for compatibility
+  - ${{ if and(ne(variables['Build.Reason'], 'PullRequest'),or(eq(variables['Build.SourceBranch'], 'refs/heads/main'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))) }}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
@@ -39,7 +41,7 @@ stages:
           environment: ${{ parameters.environmentRelease }}
           jobName: ${{ parameters.jobNameRelease }}
           feedName: ${{ parameters.feedNameRelease }}
-  - ${{ if or(eq(variables['Build.Reason'], 'PullRequest'),or(eq(variables['Build.SourceBranchName'], 'master'),eq(variables['Build.SourceBranchName'], 'main')))}}:
+  - ${{ if or(eq(variables['Build.Reason'], 'PullRequest'),and(ne(variables['Build.SourceBranch'], 'refs/heads/master'),ne(variables['Build.SourceBranch'], 'refs/heads/main'))) }}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
@@ -47,10 +49,3 @@ stages:
           environment: ${{ parameters.environmentPullRequest }}
           jobName: ${{ parameters.jobNamePullRequest }}
           feedName: ${{ parameters.feedNamePullRequest }}
-  - job:
-    displayName: Empty Job for compatibility
-    steps:
-      - pwsh: Write-Host Branch $(Build.SourceBranchName) $(Build.SourceBranch)
-        displayName: Echo Branch Name
-      - pwsh: Write-Host Build Reason $(Build.Reason)
-        displayName: Echo Build Reason
