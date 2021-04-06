@@ -284,6 +284,7 @@ __pycache__/
 mono_crash.*
 
 # Build results
+[Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 [Ll]ogs/
@@ -305,6 +306,9 @@ nunit-*.xml
 BenchmarkDotNet.Artifacts/
 
 # .NET Core
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
 
 # StyleCop
 StyleCopReport.xml
@@ -480,6 +484,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
 
 ### DotnetCore ###
 # .NET Core build folders
@@ -794,6 +801,14 @@ typings/
 .nuxt
 dist
 
+# Storybook build outputs
+.out
+.storybook-out
+storybook-static
+
+# rollup.js default build output
+dist/
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -817,6 +832,10 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Temporary folders
+tmp/
+temp/
 
 ### VisualStudioCode ###
 .vscode/*
@@ -879,6 +898,8 @@ $RECYCLE.BIN/
 # Benchmark Results
 
 # .NET Core
+
+# ASP.NET Scaffolding
 
 # StyleCop
 
@@ -1013,10 +1034,18 @@ $RECYCLE.BIN/
 
 # Ionide (cross platform F# VS Code tools) working folder
 
+# Fody - auto-generated XML schema
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,csharp,fsharp,aspnetcore,dotnetcore,node
 
-!*.code-workspace
-!.vscode/tasks-*.json
+# .NET Core
+**/Properties/launchSettings.json
 AssemblyInfo/*
 TestResults
+
+# Visual Studio Code
+!*.code-workspace
+!.vscode/tasks-*.json
+
 upload/*
+packages/*
