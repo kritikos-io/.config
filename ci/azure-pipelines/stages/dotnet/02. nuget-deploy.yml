@@ -50,7 +50,7 @@ stages:
   - job:
     displayName: Empty Job for compatibility
     steps:
-      - pwsh: Write-Host "Branch ${env:Build.SourceBranchName} ${env:Build.Build.SourceBranch}"
+      - pwsh: Write-Host Branch $(Build.SourceBranchName) $(Build.SourceBranch)
         displayName: Echo Branch Name
-      - pwsh: Write-Host "Build Reason ${env:Build.Reason}"
+      - pwsh: Write-Host Build Reason $(Build.Reason)
         displayName: Echo Build Reason
