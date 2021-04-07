@@ -35,7 +35,7 @@ stages:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
-          packagesToPush: $(Pipeline.Workspace)/${{ parameters.artifact }}/${{ parameters.packagesToPush }}
+          packagesToPush: ${{ parameters.packagesToPush }}
           environment: ${{ parameters.environmentRelease }}
           jobName: ${{ parameters.jobNameRelease }}
           feedName: ${{ parameters.feedNameRelease }}
@@ -43,7 +43,7 @@ stages:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
           artifact: ${{ parameters.artifact }}
-          packagesToPush: $(Pipeline.Workspace)/${{ parameters.artifact }}/${{ parameters.packagesToPush }}
+          packagesToPush: ${{ parameters.packagesToPush }}
           environment: ${{ parameters.environmentPullRequest }}
           jobName: ${{ parameters.jobNamePullRequest }}
           feedName: ${{ parameters.feedNamePullRequest }}
