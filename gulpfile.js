@@ -4,7 +4,6 @@ const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const sourcemaps = require("gulp-sourcemaps");
 const del = require("del");
-const clean = require("gulp-clean");
 const webroot = "./wwwroot/";
 const paths = {
   scss: webroot + "src/scss/*.scss",
