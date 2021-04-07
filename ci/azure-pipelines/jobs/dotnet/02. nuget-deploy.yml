@@ -25,6 +25,8 @@ jobs:
         steps:
           - download: current
             artifact: ${{ parameters.artifact }}
+          - pwsh: Write-Host Pushing to ${{ parameters.feedName }}
+            displayName: Output feed name
           - template: ../../steps/nuget/01. nuget-push.yml
             parameters:
               packagesToPush: $(Pipeline.Workspace)/${{ parameters.artifact }}/${{ parameters.packagesToPush }}
