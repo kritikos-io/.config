@@ -7,7 +7,6 @@ parameters:
   default: NugetKritikos
 
 steps:
-- pwsh: Write-Host pushing to ${{ parameters.feedName }}
 - task: NuGetCommand@2
   displayName: Push NuGet Package
   inputs:
