@@ -10,7 +10,7 @@ parameters:
   default: '*.nupkg'
 - name: feedName
   type: string
-  default: Kritikos
+  default: NugetKritikos
 - name: artifact
   type: string
   default: nuget

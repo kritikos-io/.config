@@ -4,9 +4,10 @@ parameters:
   default: $(Pipeline.Workspace)/pack/*.nupkg
 - name: feedName
   type: string
-  default: Kritikos
+  default: NugetKritikos
 
 steps:
+- pwsh: Write-Host pushing to ${{ parameters.feedName }}
 - task: NuGetCommand@2
   displayName: Push NuGet Package
   inputs:
