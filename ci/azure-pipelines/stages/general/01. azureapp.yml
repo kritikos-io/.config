@@ -28,8 +28,6 @@ stages:
   displayName: Deploy to azure webApp
   dependsOn: Deploy
   jobs:
-  - job:
-    displayName: Empty Job for compatibility
   - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
     - template: ../../jobs/general/01. azureapp.yml
       parameters:
@@ -54,3 +52,8 @@ stages:
         deployToSlot: ${{ parameters.deployToSlot }}
         artifact: ${{ parameters.artifact }}
         packagesToPush: ${{ parameters.packagesToPush }}
+  - ${{ if and(and(ne(variables['Build.SourceBranch'], 'refs/heads/master'),ne(variables['Build.SourceBranch'], 'refs/heads/main')),ne(variables['Build.SourceBranch'], 'refs/heads/develop')) }}:
+    - job:
+      displayName: Empty Job for compatibility
+      steps:
+        - checkout: none

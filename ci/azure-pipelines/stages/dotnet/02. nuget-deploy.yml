@@ -13,7 +13,7 @@ parameters:
   default: kritikos-io
 - name: feedNamePullRequest
   type: string
-  default: Kritikos
+  default: NugetKritikos
 - name: environmentRelease
   type: string
   default: 'kritikos-io'
@@ -22,7 +22,7 @@ parameters:
   default: kritikos-io
 - name: feedNameRelease
   type: string
-  default: Kritikos
+  default: NugetOrgKritikos
 
 stages:
 - stage: Deploy
@@ -31,8 +31,6 @@ stages:
     - Build
     - Test
   jobs:
-  - job:
-    displayName: Empty Job for compatibility
   - ${{ if and(ne(variables['Build.Reason'], 'PullRequest'),or(eq(variables['Build.SourceBranch'], 'refs/heads/main'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))) }}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
