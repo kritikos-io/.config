@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,csharp,fsharp,aspnetcore,dotnetcore,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,csharp,fsharp,aspnetcore,dotnetcore,node
+# Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,sonar,sonarqube,csharp,fsharp,aspnetcore,dotnetcore,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,sonar,sonarqube,csharp,fsharp,aspnetcore,dotnetcore,node
 
 ### ASPNETCore ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -837,6 +837,22 @@ dist/
 tmp/
 temp/
 
+### Sonar ###
+#Sonar generated dir
+/.sonar/
+
+### SonarQube ###
+# SonarQube ignore files.
+#
+# https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+# Sonar Scanner working directories
+.sonar/
+.scannerwork/
+
+# http://www.sonarlint.org/commandline/
+# SonarLint working directories, configuration files (including credentials)
+.sonarlint/
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/tasks.json
@@ -1036,7 +1052,11 @@ $RECYCLE.BIN/
 
 # Fody - auto-generated XML schema
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,csharp,fsharp,aspnetcore,dotnetcore,node
+### VisualStudio Patch ###
+# Additional files built by Visual Studio
+*.tlog
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,sonar,sonarqube,csharp,fsharp,aspnetcore,dotnetcore,node
 
 # .NET Core
 **/Properties/launchSettings.json
@@ -1047,5 +1067,14 @@ TestResults
 !*.code-workspace
 !.vscode/tasks-*.json
 
+## Web Assets managed by libman
+**/wwwroot/dist/*
+## Web Assets compiled
+**/wwwroot/assets/*
+
+## Coverage
+*.coverage.xml
+
+## Public Assets
 upload/*
 packages/*
