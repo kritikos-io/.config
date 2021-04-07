@@ -7,7 +7,7 @@ parameters:
   default: kritikos-io
 - name: packagesToPush
   type: string
-  default: '*.nupkg'
+  default: '*'
 - name: feedName
   type: string
   default: NugetKritikos
