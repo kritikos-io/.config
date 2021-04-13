@@ -1,4 +1,7 @@
 <Project>
+  <!--Uses existing Directory.Build.Props defined higher in folder structure --> 
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
   <PropertyGroup Label="Project">
     <!-- Prepend organization name to default namespace -->
     <RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
