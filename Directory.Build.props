@@ -27,6 +27,8 @@
     <Nullable>enable</Nullable>
     <!-- Enable .NET 5+ native analyzers -->
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <!-- Decouples Analyzers from SDK -->
+    <_SkipUpgradeNetAnalyzersNuGetWarning>true</_SkipUpgradeNetAnalyzersNuGetWarning>
     <!-- Use latest stable language features -->
     <AnalysisLevel>latest</AnalysisLevel>
     <!-- Use latest language version supported by the SDK -->
