@@ -18,6 +18,7 @@ steps:
       packagesToPack: ${{ parameters.projectsToPack }}
       packDirectory: ${{ parameters.packDirectory }}
       configuration: ${{ parameters.configuration }}
-      versioningScheme: byBuildNumber
+      versioningScheme: byEnvVar
+      versionEnvVar: Build.BuildNumber
       verbosityRestore: Minimal
       verbosityPack: Minimal
