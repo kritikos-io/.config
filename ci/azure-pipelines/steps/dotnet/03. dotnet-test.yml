@@ -13,6 +13,6 @@ steps:
     testRunTitle: Unit Tests
     # Multiple comma seperated msbuild parameters should be seperated with %2c
     # VSTS does not need escaped quotes, escape for other platforms
-    arguments: --collect:"XPlat Code Coverage" --logger trx /p:CollectCoverage=true /p:ExcludeByAttribute="Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute" /p:DeterministicReport=true /p:UseSourceLink=true /p:CoverletOutputFormat="opencover%2ccobertura" /p:CoverletOutput=$(build.artifactStagingDirectory)/coverage/ /p:MergeWith=$(build.artifactStagingDirectory)/coverage/coverage.json
+    arguments: --collect:"XPlat Code Coverage" --logger trx /p:CollectCoverage=true /p:ExcludeByAttribute="Obsolete,GeneratedCode,CompilerGenerated" /p:ExcludeByFile="samples/**/*.cs" /p:DeterministicReport=true /p:UseSourceLink=true /p:CoverletOutputFormat="opencover%2ccobertura" /p:CoverletOutput=$(build.artifactStagingDirectory)/coverage/ /p:MergeWith=$(build.artifactStagingDirectory)/coverage/coverage.json
     verbosityPack: Minimal
     verbosityRestore: Minimal
