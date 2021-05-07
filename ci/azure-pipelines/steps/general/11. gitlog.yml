@@ -1,6 +1,6 @@
 steps:
 - bash: -|
-    TAG=$(git describe --tags --abbrev=0)
+    TAG=`git describe --tags --abbrev=0`
 
     if [[ $? -eq 0 ]]; then
       echo "Found tag $TAG"
