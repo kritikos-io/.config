@@ -1,5 +1,5 @@
 steps:
-- bash: -|
+- bash: |-
     TAG=`git describe --tags --abbrev=0`
 
     if [ "$?" -eq 0 ]
