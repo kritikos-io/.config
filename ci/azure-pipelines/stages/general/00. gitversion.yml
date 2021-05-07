@@ -20,5 +20,5 @@ stages:
           displayName: Save SemVer to AssemblyInfo file
         - template: ../../steps/general/06. publish-build-artifact.yml
           parameters:
-            pathtoPublish: $(Build.SourcesDirectory)/*
+            pathtoPublish: $(Build.SourcesDirectory)
             artifactName: AssemblyInfo
