@@ -59,6 +59,17 @@
     <ProjectCapability Include="DynamicDependentFile" />
   </ItemGroup>
 
+  <!-- Use icon for nuget -->
+  <ItemGroup Label="Icon" Condition="Exists('$(MSBuildThisFileDirectory)\icon.png')">
+    <None Include="$(MSBuildThisFileDirectory)\icon.png" Link="icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!-- Use repo readme as nuget information -->
+  <!-- Currently bugged with new symbols package, awaiting fix -->
+  <!-- <ItemGroup Label="Readme" Condition="Exists('$(MSBuildThisFileDirectory)\README.md')">
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+  </ItemGroup> -->
+
   <!-- Use submodule .NET ruleset for analyzers -->
   <PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\dotnet.ruleset')">
     <CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotnet.ruleset</CodeAnalysisRuleset>
@@ -105,7 +116,11 @@
     <PackageId>$(RootNamespace)</PackageId>
     <Company>Kritikos IO</Company>
     <Authors>Alexandros Kritikos</Authors>
-    <Copyright>© Kritikos IO. All rights reserved.</Copyright>
+    <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
+    <Copyright>Copyright © 2017-$(CurrentYear) Kritikos IO. All rights reserved.</Copyright>
+    <PackageIcon Condition="Exists('$(MSBuildThisFileDirectory)\icon.png')">icon.png</PackageIcon>
+    <!-- Currently bugged with new symbols package, awaiting fix -->
+    <!-- <PackageReadmeFile Condition="Exists('$(MSBuildThisFileDirectory)\README.md')">README.md</PackageReadmeFile> -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
