@@ -14,6 +14,7 @@ stages:
           toolName: gitversion.tool
       - pwsh: ../dotnet-gitversion /output buildserver
         displayName: Set SemVer from git history
+      - template: ../../steps/general/11. gitlog.yml
       - ${{ if parameters.updateAssemblyInfo }}:
         - pwsh: ../dotnet-gitversion /output json /showvariable SemVer /updateassemblyinfo AssemblyInfo.cs /ensureassemblyinfo
           displayName: Save SemVer to AssemblyInfo file

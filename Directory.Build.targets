@@ -24,6 +24,15 @@
     <Exec Command='$HOME/.dotnet/tools/dotnet-gitversion /output json /showvariable SemVer /updateassemblyinfo ../../AssemblyInfo/AssemblyInfo.cs /ensureassemblyinfo' Condition="Exists('$(HOME)/.dotnet/tools/dotnet-gitversion')" />
   </Target>
 
+  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo\changes.log')">
+    <ReadLinesFromFile File="$(MSBuildThisFileDirectory)\AssemblyInfo\changes.log">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+
   <Target Name="AfterBuild" Condition="$(PackageVersion) == '1.0.0'">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="PackAssembly" />
