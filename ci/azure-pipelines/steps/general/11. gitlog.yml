@@ -2,8 +2,7 @@ steps:
 - bash: -|
     TAG=$(git describe --tags --abbrev=0)
 
-    if [[ $? -eq 0 ]]
-    then
+    if [[ $? -eq 0 ]]; then
       echo "Found tag $TAG"
       git log --format=format:"- %s" --no-merges $TAG..HEAD > $(Build.ArtifactStagingDirectory)/changes.log
     else
