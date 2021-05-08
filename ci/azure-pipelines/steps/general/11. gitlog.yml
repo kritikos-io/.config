@@ -10,5 +10,5 @@ steps:
       git log --format=format:"- %s" --no-merges > $(Build.ArtifactStagingDirectory)/changes.log
     fi
 
-    echo "\n Emoji legend available at https://gitmoji.dev" >> $(Build.ArtifactStagingDirectory)/changes.log
+    echo $'\n\nEmoji legend available at https://gitmoji.dev' >> $(Build.ArtifactStagingDirectory)/changes.log
   displayName: Set changelog from git history
