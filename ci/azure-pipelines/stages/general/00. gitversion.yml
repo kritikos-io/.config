@@ -2,6 +2,9 @@ parameters:
 - name: updateAssemblyInfo
   type: boolean
   default: false
+- name: createTag
+  type: boolean
+  default: false
 
 stages:
 - stage: Version
@@ -15,6 +18,10 @@ stages:
       - pwsh: ../dotnet-gitversion /output buildserver
         displayName: Set SemVer from git history
       - template: ../../steps/general/11. gitlog.yml
+      - ${{ if and(parameters.createTag,or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))) }}:
+          - bash: |
+              git tag -fa "v$(Build.BuildNumber)" -m "Version $(Build.BuildNumber)"
+              git push origin --tags
       - ${{ if parameters.updateAssemblyInfo }}:
         - pwsh: ../dotnet-gitversion /output json /showvariable SemVer /updateassemblyinfo AssemblyInfo.cs /ensureassemblyinfo
           displayName: Save SemVer to AssemblyInfo file
