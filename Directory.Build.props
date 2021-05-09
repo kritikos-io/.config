@@ -64,11 +64,15 @@
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Link="icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
-  <!-- Use repo readme as nuget information -->
-  <!-- Currently bugged with new symbols package, awaiting fix -->
-  <!-- <ItemGroup Label="Readme" Condition="Exists('$(MSBuildThisFileDirectory)\README.md')">
-    <None Include="..\..\README.md" Pack="true" PackagePath="" />
-  </ItemGroup> -->
+  <!-- Use repo readme as nuget information if no project readme exists -->
+  <ItemGroup Label="Readme" Condition="Exists('$(MSBuildThisFileDirectory)\README.md') AND !Exists('$(MSBuildProjectDirectory)\README.md')">
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Link="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!-- Use project readme as nuget information -->
+  <ItemGroup Label="Readme" Condition="Exists('$(MSBuildProjectDirectory)\README.md')">
+    <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <!-- Use submodule .NET ruleset for analyzers -->
   <PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\dotnet.ruleset')">
@@ -118,9 +122,12 @@
     <Authors>Alexandros Kritikos</Authors>
     <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
     <Copyright>Copyright © 2017-$(CurrentYear) Kritikos IO. All rights reserved.</Copyright>
-    <PackageIcon Condition="Exists('$(MSBuildThisFileDirectory)\icon.png')">icon.png</PackageIcon>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)/packages</PackageOutputPath>
+    <PackageIcon Condition="Exists('$(MSBuildThisFileDirectory)/icon.png')">icon.png</PackageIcon>
     <!-- Currently bugged with new symbols package, awaiting fix -->
-    <!-- <PackageReadmeFile Condition="Exists('$(MSBuildThisFileDirectory)\README.md')">README.md</PackageReadmeFile> -->
+    <!-- <PackageReadmeFile Condition="Exists('$(MSBuildThisFileDirectory)/README.md')">README.md</PackageReadmeFile> -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.md</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
