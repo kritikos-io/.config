@@ -18,7 +18,7 @@ steps:
       tag: 'v$(Build.BuildNumber)'
       title: 'Version $(Build.BuildNumber)'
       releaseNotesFilePath: '$(Pipeline.Workspace)/AssemblyInfo/changes.log'
-      assets: '$(Build.ArtifactStagingDirectory)/${{ parameters.publishedArtifact }}/*'
+      assets: '$(Pipeline.Workspace)/${{ parameters.artifact }}/*'
       isDraft: $(ne(variables['Build.SourceBranch'], 'refs/heads/master'))
       isPreRelease: ${{ parameters.isPreRelease }}
       changeLogCompareToRelease: 'lastFullRelease'
