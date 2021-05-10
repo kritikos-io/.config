@@ -33,6 +33,8 @@ jobs:
         steps:
           - download: current
             artifact: ${{ parameters.artifact }}
+          - download: current
+            artifact: AssemblyInfo
           - ${{ if and(parameters.tagOnGit,or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'),or(eq(variables['Build.SourceBranch'], 'refs/heads/master'),eq(variables['Build.SourceBranch'], 'refs/heads/main')))) }}:
             - template: ../../steps/general/12. github-release.yml
               parameters:
