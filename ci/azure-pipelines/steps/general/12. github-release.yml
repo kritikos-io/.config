@@ -6,6 +6,8 @@ parameters:
 - name: isPreRelease
   type: boolean
   default: true
+- name: publshFileType
+  type: string
 
 steps:
   - task: GitHubRelease@1
@@ -18,7 +20,7 @@ steps:
       tag: 'v$(Build.BuildNumber)'
       title: 'Version $(Build.BuildNumber)'
       releaseNotesFilePath: '$(Pipeline.Workspace)/AssemblyInfo/changes.log'
-      assets: '$(Pipeline.Workspace)/${{ parameters.publishedArtifact }}/*'
+      assets: '$(Pipeline.Workspace)/${{ parameters.publishedArtifact }}/${{ parameters.publshFileType }}'
       isDraft: $(ne(variables['Build.SourceBranch'], 'refs/heads/master'))
       isPreRelease: ${{ parameters.isPreRelease }}
       changeLogCompareToRelease: 'lastFullRelease'

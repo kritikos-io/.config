@@ -43,6 +43,7 @@ jobs:
                 gitHubConnection: ${{ parameters.gitHubConnection }}
                 publishedArtifact: ${{ parameters.artifact }}
                 isPreRelease: ${{ parameters.isPreRelease }}
+                publshFileType: '*.nupkg'
           - template: ../../steps/nuget/01. nuget-push.yml
             parameters:
               packagesToPush: $(Pipeline.Workspace)/${{ parameters.artifact }}/${{ parameters.packagesToPush }}
