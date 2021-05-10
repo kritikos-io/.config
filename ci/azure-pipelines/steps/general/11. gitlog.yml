@@ -1,6 +1,11 @@
 steps:
 - bash: |-
-    TAG=`git describe --tags --abbrev=0`
+    if [ "$Build.SourceBranch" -eq "refs/heads/master" ] "| [ "$Build.SourceBranch" -eq "refs/heads/master" ]
+    then
+      TAG=`git describe --tags --abbrev=0 --exclude "v*-*"`
+    else
+      TAG=`git describe --tags --abbrev=0`
+    fi
 
     if [ "$?" -eq 0 ]
     then
