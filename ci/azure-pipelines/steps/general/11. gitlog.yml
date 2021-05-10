@@ -1,6 +1,6 @@
 steps:
 - bash: |-
-    if [ "$Build.SourceBranch" -eq "refs/heads/master" ] "| [ "$Build.SourceBranch" -eq "refs/heads/master" ]
+    if [ "$Build.SourceBranch" -eq "refs/heads/master" ] || [ "$Build.SourceBranch" -eq "refs/heads/master" ]
     then
       TAG=`git describe --tags --abbrev=0 --exclude "v*-*"`
     else
