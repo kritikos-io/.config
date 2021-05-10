@@ -23,6 +23,14 @@ parameters:
 - name: feedNameRelease
   type: string
   default: NugetOrgKritikos
+- name: tagOnGitDevelop
+  type: boolean
+  default: false
+- name: tagOnGitMaster
+  type: boolean
+  default: false
+- name: gitHubConnection
+  type: string
 
 stages:
 - stage: Deploy
@@ -39,6 +47,9 @@ stages:
           environment: ${{ parameters.environmentRelease }}
           jobName: ${{ parameters.jobNameRelease }}
           feedName: ${{ parameters.feedNameRelease }}
+          tagOnGit: ${{ parameters.tagOnGitMaster }}
+          gitHubConnection: ${{ parameters.gitHubConnection }}
+          isPreRelease: false
   - ${{ if or(eq(variables['Build.Reason'], 'PullRequest'),and(ne(variables['Build.SourceBranch'], 'refs/heads/master'),ne(variables['Build.SourceBranch'], 'refs/heads/main'))) }}:
       - template: ../../jobs/dotnet/02. nuget-deploy.yml
         parameters:
@@ -47,3 +58,6 @@ stages:
           environment: ${{ parameters.environmentPullRequest }}
           jobName: ${{ parameters.jobNamePullRequest }}
           feedName: ${{ parameters.feedNamePullRequest }}
+          tagOnGit: ${{ parameters.tagOnGitDevelop }}
+          gitHubConnection: ${{ parameters.gitHubConnection }}
+          isPreRelease: true
