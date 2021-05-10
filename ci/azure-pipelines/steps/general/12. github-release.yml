@@ -20,7 +20,7 @@ steps:
       releaseNotesFilePath: '$(Pipeline.Workspace)/AssemblyInfo/changes.log'
       assets: '$(Build.ArtifactStagingDirectory)/${{ parameters.publishedArtifact }}/*'
       isDraft: $(ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-      isPreRelease: ${{ parameters.boolean }}
+      isPreRelease: ${{ parameters.isPreRelease }}
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
     displayName: Create Github Release
