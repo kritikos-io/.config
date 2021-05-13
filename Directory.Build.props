@@ -95,15 +95,6 @@
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
 
-  <!-- Disable packable/publishable for test projects -->
-  <PropertyGroup Label="Output Modifiers">
-    <InTestFolder>false</InTestFolder>
-    <InTestFolder Condition="'$([System.IO.Directory]::GetParent($(MSBuildProjectDirectory)).Name)' == 'tests'">true</InTestFolder>
-    <IsTest Condition="$(MSBuildProjectName.ToLowerInvariant().EndsWith('tests'))">true</IsTest>
-    <IsPackable Condition="'$(IsTest)' == 'true' OR '$(InTestFolder)' == 'true'">false</IsPackable>
-    <IsPublishable Condition="'$(IsTest)' == 'true' OR '$(InTestFolder)' == 'true'">false</IsPublishable>
-  </PropertyGroup>
-
   <!-- Uses pretty xunit configuration -->
   <ItemGroup Label="xUnit Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json" Link="xunit.runner.json">
@@ -124,6 +115,7 @@
     <Copyright>Copyright © 2017-$(CurrentYear) Kritikos IO. All rights reserved.</Copyright>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageOutputPath>$(MSBuildThisFileDirectory)/packages</PackageOutputPath>
+    <PublishDir>$(MSBuildThisFileDirectory)/upload/$(ProjectName)</PublishDir>
     <PackageIcon Condition="Exists('$(MSBuildThisFileDirectory)/icon.png')">icon.png</PackageIcon>
     <!-- Currently bugged with new symbols package, awaiting fix -->
     <!-- <PackageReadmeFile Condition="Exists('$(MSBuildThisFileDirectory)/README.md')">README.md</PackageReadmeFile> -->
@@ -170,7 +162,7 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Label="SourceLink" Condition="$(IsPackable)">
+  <ItemGroup Label="SourceLink" Condition="$(IsPackable) == 'true'">
     <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0" PrivateAssets="All" />
