@@ -19,11 +19,6 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="BeforeBuild">
-    <Exec Command="dotnet gitversion /output json /showvariable SemVer /updateassemblyinfo $(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs /ensureassemblyinfo" Condition="Exists('$(HOMEDRIVE)$(HOMEPATH)\.dotnet\tools\dotnet-gitversion.exe')" />
-    <Exec Command='$HOME/.dotnet/tools/dotnet-gitversion /output json /showvariable SemVer /updateassemblyinfo ../../AssemblyInfo/AssemblyInfo.cs /ensureassemblyinfo' Condition="Exists('$(HOME)/.dotnet/tools/dotnet-gitversion')" />
-  </Target>
-
   <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo\changes.log')">
     <ReadLinesFromFile File="$(MSBuildThisFileDirectory)\AssemblyInfo\changes.log">
       <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
