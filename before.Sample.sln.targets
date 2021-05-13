@@ -1,0 +1,6 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="GitVersion" BeforeTargets="Build">
+    <Exec Command="dotnet gitversion /output json /showvariable SemVer /updateassemblyinfo $(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs /ensureassemblyinfo" Condition="Exists('$(HOMEDRIVE)$(HOMEPATH)\.dotnet\tools\dotnet-gitversion.exe')" />
+    <Exec Command='$HOME/.dotnet/tools/dotnet-gitversion /output json /showvariable SemVer /updateassemblyinfo ../../AssemblyInfo/AssemblyInfo.cs /ensureassemblyinfo' Condition="Exists('$(HOME)/.dotnet/tools/dotnet-gitversion')" />
+  </Target>
+</Project>

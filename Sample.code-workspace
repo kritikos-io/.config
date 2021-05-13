@@ -30,7 +30,7 @@
   },
   "extensions": {
     "recommendations": [
-      "augustocdias.tasks-shell-input"
+      "augustocdias.tasks-shell-input",
     ]
   }
 }
