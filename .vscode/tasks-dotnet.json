@@ -57,7 +57,8 @@
         "minimal",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "/p:TF_BUILD=true"
+        "/p:TF_BUILD=true",
+        "/p:Version=${input:version}"
       ],
       "dependsOn": [
         "version",
@@ -78,8 +79,9 @@
       "args": [
         "test",
         "--configuration",
-        "Debug",
+        "Release",
         "--no-restore",
+        "--no-build",
         "--nologo",
         "--verbosity",
         "normal",
@@ -100,7 +102,9 @@
         "kind": "test",
         "isDefault": true
       },
-      "dependsOn": [],
+      "dependsOn": [
+        "build"
+      ],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -127,13 +131,11 @@
         "packages",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
-        "/p:TF_BUILD=true"
+        "/p:TF_BUILD=true",
+        "/p:Version=${input:version}"
       ],
       "dependsOn": [
-        "cleanPackages",
-        "clean",
-        "build",
-        "test"
+        "publish"
       ],
       "group": {
         "kind": "build",
@@ -160,16 +162,11 @@
         "--no-restore",
         "--no-build",
         "--nologo",
-        "--output",
-        "upload",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary",
         "/p:TF_BUILD=true"
       ],
       "dependsOn": [
-        "cleanPublish",
-        "clean",
-        "build",
         "test"
       ],
       "group": {
@@ -206,26 +203,8 @@
         "panel": "shared"
       },
       "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "cleanPackages",
-      "command": "rm",
-      "type": "shell",
-      "args": [
-        "packages/*"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "cleanPublish",
-      "command": "rm",
-      "type": "shell",
-      "args": [
-        "upload/*"
-      ],
-      "problemMatcher": []
     }
-  ],
+    ],
   "inputs": [
     {
       "id": "version",
