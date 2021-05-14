@@ -39,7 +39,6 @@
     <Exec Condition="$([MSBuild]::IsOSPlatform('Windows')) != 'true'" Command="sed -i '/^- 💚/ d' changes.log" />
     <Exec Condition="$([MSBuild]::IsOSPlatform('Windows')) != 'true'" Command="sed -i '/^- 🔧/ d' changes.log" />
 
-
     <Exec Command='echo Emoji legend available at https://gitmoji.dev >> changes.log' />
   </Target>
 

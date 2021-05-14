@@ -1080,3 +1080,4 @@ upload/*
 packages/*
 !packages/.gitkeep
 !upload/.gitkeep
+AssemblyInfo.cs
