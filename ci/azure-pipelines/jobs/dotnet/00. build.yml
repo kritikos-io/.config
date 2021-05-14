@@ -77,6 +77,16 @@ jobs:
         parameters:
           downloadPath: ${{ parameters.assemblyInfoPath }}
           artifactName: ${{ parameters.assemblyInfoArtifactName }}
+      - task: CopyFiles@2
+        inputs:
+          sourceFolder: ${{ parameters.assemblyInfoPath }}
+          contents: AssemblyInfo.cs
+          targetFolder: $(Build.SourcesDirectory)
+      - task: CopyFiles@2
+        inputs:
+          sourceFolder: ${{ parameters.assemblyInfoPath }}
+          contents: changes.log
+          targetFolder: $(Build.SourcesDirectory)
     - template: ../../steps/dotnet/02. dotnet-build.yml
       parameters:
         configuration: ${{ parameters.configuration }}

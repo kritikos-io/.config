@@ -85,11 +85,11 @@
   </ItemGroup>
 
   <!-- Use common AssemblyInfo versioning -->
-  <ItemGroup Label="AssemblyInfo Versioning" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs')">
-    <Compile Include="$(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs" Link="Properties\AssemblyInfo.cs" />
+  <ItemGroup Label="AssemblyInfo Versioning" Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
+    <Compile Include="$(MSBuildThisFileDirectory)/AssemblyInfo.cs" Link="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
-  <PropertyGroup Label="Disable AssemblyInfo Generation" Condition="Exists('$(MSBuildThisFileDirectory)\AssemblyInfo\AssemblyInfo.cs')">
+  <PropertyGroup Label="Disable AssemblyInfo Generation" Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>

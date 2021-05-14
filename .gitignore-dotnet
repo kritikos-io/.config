@@ -1078,3 +1078,5 @@ TestResults
 ## Public Assets
 upload/*
 packages/*
+!packages/.gitkeep
+!upload/.gitkeep
