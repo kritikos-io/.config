@@ -82,6 +82,18 @@ jobs:
       parameters:
         downloadPath: ${{ parameters.assemblyInfoPath }}
         artifactName: ${{ parameters.assemblyInfoArtifactName }}
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: ${{ parameters.assemblyInfoPath }}
+        contents: AssemblyInfo.cs
+        targetFolder: $(Build.SourcesDirectory)
+        displayName: Copy AssemblyInfo.cs to proper location
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: ${{ parameters.assemblyInfoPath }}
+        contents: changes.log
+        targetFolder: $(Build.SourcesDirectory)
+        displayName: Copy changes.log to proper location
   - ${{ if parameters.sonarAnalysis }}:
     - template: ../../steps/general/02. sonarscanner-begin.yml
       parameters:

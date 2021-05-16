@@ -82,11 +82,13 @@ jobs:
           sourceFolder: ${{ parameters.assemblyInfoPath }}
           contents: AssemblyInfo.cs
           targetFolder: $(Build.SourcesDirectory)
+          displayName: Copy AssemblyInfo.cs to proper location
       - task: CopyFiles@2
         inputs:
           sourceFolder: ${{ parameters.assemblyInfoPath }}
           contents: changes.log
           targetFolder: $(Build.SourcesDirectory)
+          displayName: Copy changes.log to proper location
     - template: ../../steps/dotnet/02. dotnet-build.yml
       parameters:
         configuration: ${{ parameters.configuration }}
