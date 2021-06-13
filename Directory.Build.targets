@@ -49,5 +49,6 @@
   <PropertyGroup Label="Test Functionality" Condition="$(IsTest) == 'true'">
     <IsPackable>false</IsPackable>
     <PackAsTool>false</PackAsTool>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
   </PropertyGroup>
 </Project>
