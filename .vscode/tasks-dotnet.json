@@ -60,16 +60,17 @@
         "/p:TF_BUILD=true",
         "/p:Version=${input:version}"
       ],
+      "dependsOrder": "sequence",
       "dependsOn": [
         "version",
         "restore"
       ],
       "group": "build",
-        "presentation": {
-          "reveal": "silent",
-          "panel": "shared",
-          "clear": true
-        },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear": true
+      },
       "problemMatcher": "$msCompile"
     },
     {
@@ -102,6 +103,7 @@
         "kind": "test",
         "isDefault": true
       },
+      "dependsOrder": "sequence",
       "dependsOn": [
         "build"
       ],
@@ -134,6 +136,7 @@
         "/p:TF_BUILD=true",
         "/p:Version=${input:version}"
       ],
+      "dependsOrder": "sequence",
       "dependsOn": [
         "publish"
       ],
@@ -166,6 +169,7 @@
         "/consoleloggerparameters:NoSummary",
         "/p:TF_BUILD=true"
       ],
+      "dependsOrder": "sequence",
       "dependsOn": [
         "test"
       ],
@@ -203,14 +207,26 @@
         "panel": "shared"
       },
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "cleanPublished",
+      "type":"command",
+      "command":"del",
+      "args": [
+        "-rf",
+        "upload/*"
+      ],
+      "group":"build",
+      "presentation":{},
+      "problemMatcher":"$msCompile"
     }
-    ],
+  ],
   "inputs": [
     {
       "id": "version",
       "type": "command",
       "command": "shellCommand.execute",
-      "args":{
+      "args": {
         "command": "dotnet gitversion /showvariable SemVer",
         "cwd": "${workspaceFolder}"
       }
