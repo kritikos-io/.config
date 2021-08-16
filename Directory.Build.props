@@ -31,6 +31,7 @@
     <_SkipUpgradeNetAnalyzersNuGetWarning>true</_SkipUpgradeNetAnalyzersNuGetWarning>
     <!-- Use latest stable language features -->
     <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <!-- Use latest language version supported by the SDK -->
     <LangVersion>latest</LangVersion>
     <!-- Use deterministic builds -->
@@ -60,17 +61,22 @@
   </ItemGroup>
 
   <!-- Use icon for nuget -->
-  <ItemGroup Label="Icon" Condition="Exists('$(MSBuildThisFileDirectory)\icon.png')">
-    <None Include="$(MSBuildThisFileDirectory)\icon.png" Link="icon.png" Pack="true" PackagePath="" />
+  <ItemGroup Label="Icon" Condition="$(IsTest) != 'True' AND (Exists('$(MSBuildThisFileDirectory)\icon.png') AND !Exists('$(MSBuildProjectDirectory)\icon.png'))">
+    <None Include="$(MSBuildThisFileDirectory)\icon.png" Link="icon.png" Pack="true" PackagePath="" Visible="false" />
+  </ItemGroup>
+
+  <!-- Use project icon for nuget -->
+  <ItemGroup Label="Icon" Condition="$(IsTest) != 'True' AND Exists('$(MSBuildProjectDirectory)\icon.png')">
+    <None Include="$(MSBuildProjectDirectory)\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <!-- Use repo readme as nuget information if no project readme exists -->
-  <ItemGroup Label="Readme" Condition="Exists('$(MSBuildThisFileDirectory)\README.md') AND !Exists('$(MSBuildProjectDirectory)\README.md')">
-    <None Include="$(MSBuildThisFileDirectory)\README.md" Link="README.md" Pack="true" PackagePath="" />
+  <ItemGroup Label="Readme" Condition="$(IsTest) != 'True' AND (Exists('$(MSBuildThisFileDirectory)\README.md') AND !Exists('$(MSBuildProjectDirectory)\README.md'))">
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Link="README.md" Pack="true" PackagePath="" Visible="false"/>
   </ItemGroup>
 
   <!-- Use project readme as nuget information -->
-  <ItemGroup Label="Readme" Condition="Exists('$(MSBuildProjectDirectory)\README.md')">
+  <ItemGroup Label="Readme" Condition="$(IsTest) != 'True' AND Exists('$(MSBuildProjectDirectory)\README.md')">
     <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
@@ -81,7 +87,7 @@
 
   <!-- Use submodule stylecop configuration -->
   <ItemGroup Label="Code Analysis Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\stylecop.json')">
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json" />
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json" Visible="false" />
   </ItemGroup>
 
   <!-- Use common AssemblyInfo versioning -->
@@ -97,7 +103,7 @@
 
   <!-- Uses pretty xunit configuration -->
   <ItemGroup Label="xUnit Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json" Link="xunit.runner.json">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json" Link="xunit.runner.json" Visible="false">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
   </ItemGroup>
@@ -133,7 +139,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Test Dependencies" Condition="'$(IsTest)'=='true'">
-    <PackageReference Include="coverlet.msbuild" Version="3.0.3">
+    <PackageReference Include="coverlet.msbuild" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -144,7 +150,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.333">
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -152,7 +158,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SmartanAlyzers.ExceptionAnalyzer" Version="1.0.10">
+    <PackageReference Include="SmartAnalyzers.ExceptionAnalyzer" Version="1.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
