@@ -5,7 +5,7 @@
 
   <PropertyGroup Label="Project">
     <!-- Prepend organization name to default namespace -->
-    <RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
+    <RootNamespace>Kkokkino.$(MSBuildProjectName)</RootNamespace>
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
@@ -115,10 +115,10 @@
 
   <PropertyGroup Label="Package">
     <PackageId>$(RootNamespace)</PackageId>
-    <Company>Kritikos IO</Company>
-    <Authors>Alexandros Kritikos</Authors>
+    <Company>k-kokkino</Company>
+    <Authors>Konstantinos Kokkinopoulos</Authors>
     <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
-    <Copyright>Copyright © 2017-$(CurrentYear) Kritikos IO. All rights reserved.</Copyright>
+    <Copyright>Copyright © 2017-$(CurrentYear) k-kokkino. All rights reserved.</Copyright>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageOutputPath>$(MSBuildThisFileDirectory)/packages</PackageOutputPath>
     <PublishDir>$(MSBuildThisFileDirectory)/upload/$(ProjectName)</PublishDir>
@@ -169,12 +169,6 @@
   </ItemGroup>
 
   <ItemGroup Label="SourceLink" Condition="$(IsPackable) == 'true'">
-    <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0" PrivateAssets="All" />
-
-    <SourceLinkGitLabHost Include="git.kritikos.io" />
-    <SourceLinkGitHubHost Include="github.com" />
-    <SourceLinkBitBucketHost Include="bitbucket.org" />
   </ItemGroup>
 </Project>
