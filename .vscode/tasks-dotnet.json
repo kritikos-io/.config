@@ -10,7 +10,7 @@
         "/showvariable",
         "SemVer",
         "/updateassemblyinfo",
-        "AssemblyInfo/AssemblyInfo.cs",
+        "AssemblyInfo.cs",
         "/ensureassemblyinfo"
       ],
       "group": "build",
