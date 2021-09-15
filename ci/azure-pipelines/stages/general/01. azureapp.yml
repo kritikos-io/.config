@@ -26,7 +26,7 @@ parameters:
 stages:
 - stage: AzureDeploy
   displayName: Deploy to azure webApp
-  # dependsOn: Deploy
+  dependsOn: Deploy
   jobs:
   - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
     - template: ../../jobs/general/01. azureapp.yml
