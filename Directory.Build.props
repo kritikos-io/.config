@@ -6,6 +6,8 @@
   <PropertyGroup Label="Project">
     <!-- Prepend organization name to default namespace -->
     <RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
+    <!-- Enable global usings based on project type -->
+    <ImplicitUsings>true</ImplicitUsings>
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
@@ -26,7 +28,7 @@
     <!-- Enable nullable context by default for all projects -->
     <Nullable>enable</Nullable>
     <!-- Enable .NET 5+ native analyzers -->
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <!-- Decouples Analyzers from SDK -->
     <_SkipUpgradeNetAnalyzersNuGetWarning>true</_SkipUpgradeNetAnalyzersNuGetWarning>
     <!-- Use latest stable language features -->
