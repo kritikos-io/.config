@@ -6,6 +6,8 @@
   <PropertyGroup Label="Project">
     <!-- Prepend organization name to default namespace -->
     <RootNamespace>Kkokkino.$(MSBuildProjectName)</RootNamespace>
+    <!-- Enable global usings based on project type -->
+    <!-- <ImplicitUsings>true</ImplicitUsings> -->
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
@@ -26,16 +28,16 @@
     <!-- Enable nullable context by default for all projects -->
     <Nullable>enable</Nullable>
     <!-- Enable .NET 5+ native analyzers -->
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <!-- Decouples Analyzers from SDK -->
     <_SkipUpgradeNetAnalyzersNuGetWarning>true</_SkipUpgradeNetAnalyzersNuGetWarning>
     <!-- Use latest stable language features -->
     <AnalysisLevel>latest</AnalysisLevel>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <!-- Use latest language version supported by the SDK -->
-    <LangVersion>latest</LangVersion>
+    <LangVersion>preview</LangVersion>
     <!-- Use deterministic builds -->
-    <Deterministic Condition="'$(ContinuousIntegrationBuild)' == 'True'">true</Deterministic>
+    <!-- <Deterministic Condition="'$(ContinuousIntegrationBuild)' == 'True'">true</Deterministic> -->
   </PropertyGroup>
 
   <!-- Sets deterministic source paths for CI builds -->
