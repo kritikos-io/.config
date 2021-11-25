@@ -62,6 +62,14 @@
     <ProjectCapability Include="DynamicDependentFile" />
   </ItemGroup>
 
+  <!-- Mark assemblies as CLS compliant so the compiler warns on non compliant usage -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.CLSCompliant">
+      <_Parameter1>true</_Parameter1>
+      <_Parameter1_TypeName>System.Boolean</_Parameter1_TypeName>
+    </AssemblyAttribute>
+  </ItemGroup>
+
   <!-- Use icon for nuget -->
   <ItemGroup Label="Icon" Condition="$(IsTest) != 'True' AND (Exists('$(MSBuildThisFileDirectory)\icon.png') AND !Exists('$(MSBuildProjectDirectory)\icon.png'))">
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Link="icon.png" Pack="true" PackagePath="" Visible="false" />
@@ -126,7 +134,7 @@
     <PublishDir>$(MSBuildThisFileDirectory)/upload/$(ProjectName)</PublishDir>
     <PackageIcon Condition="Exists('$(MSBuildThisFileDirectory)/icon.png')">icon.png</PackageIcon>
     <!-- Currently bugged with new symbols package, awaiting fix -->
-    <!-- <PackageReadmeFile Condition="Exists('$(MSBuildThisFileDirectory)/README.md')">README.md</PackageReadmeFile> -->
+    <PackageReadmeFile Condition="Exists('$(MSBuildThisFileDirectory)/README.md')">README.md</PackageReadmeFile>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.md</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
