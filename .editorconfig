@@ -97,7 +97,7 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 ## Index and Range preferences
 csharp_style_prefer_index_operator = true:suggestion
 csharp_style_prefer_range_operator = true:suggestion
-## Miscellaneuous preferences
+## Miscellaneous preferences
 csharp_style_deconstructed_variable_declaration = true:suggestion
 csharp_style_pattern_local_over_anonymous_function = true:suggestion
 csharp_using_directive_placement = inside_namespace:suggestion
@@ -148,6 +148,8 @@ csharp_preserve_single_line_statements = true
 csharp_preserve_single_line_blocks = true
 ## Using directive options
 csharp_using_directive_placement = inside_namespace
+## Namespace options
+csharp_style_namespace_declarations = file_scoped
 
 [*.{vb,vbx}]
 # Language Conventions
