@@ -7,7 +7,7 @@
     <!-- Prepend organization name to default namespace -->
     <RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
     <!-- Enable global usings based on project type -->
-    <!-- <ImplicitUsings>true</ImplicitUsings> -->
+    <ImplicitUsings>true</ImplicitUsings>
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
@@ -82,7 +82,7 @@
 
   <!-- Use repo readme as nuget information if no project readme exists -->
   <ItemGroup Label="Readme" Condition="$(IsTest) != 'True' AND (Exists('$(MSBuildThisFileDirectory)\README.md') AND !Exists('$(MSBuildProjectDirectory)\README.md'))">
-    <None Include="$(MSBuildThisFileDirectory)\README.md" Link="README.md" Pack="true" PackagePath="" Visible="false"/>
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Link="README.md" Pack="true" PackagePath="" Visible="false" />
   </ItemGroup>
 
   <!-- Use project readme as nuget information -->
