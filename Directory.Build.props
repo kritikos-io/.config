@@ -12,7 +12,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <!-- Error out upon trying to package projects marked as not packable -->
-    <WarnOnPackingNonPackableProject>true</WarnOnPackingNonPackableProject>
+    <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
     <!-- Disable warnings on preview SDK versions -->
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <!-- We only target a single framework hence the subdir is not needed -->
@@ -46,9 +46,7 @@
     <PackAsTool>false</PackAsTool>
   </PropertyGroup>
 
-  <PropertyGroup Label="Test Functionality" Condition="$(IsTest) == 'true'">
-    <IsPackable>false</IsPackable>
-    <PackAsTool>false</PackAsTool>
+  <PropertyGroup Label="Disable Launch Settings for Worker Service" Condition="'$(UsingMicrosoftNETSdkWorker)' == 'True'">
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
   </PropertyGroup>
 
