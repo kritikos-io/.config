@@ -3,6 +3,12 @@
     <Exec Command="npm install" />
   </Target>
 
+  <PropertyGroup Label="Test Functionality" Condition="$(IsTest) == 'true'">
+    <IsPackable>false</IsPackable>
+    <PackAsTool>false</PackAsTool>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+  </PropertyGroup>
+
   <Target Name="AddInternalsVisibleTo" BeforeTargets="BeforeCompile">
     <!-- Handle InternalsVisibleTo -->
     <ItemGroup Condition="'@(InternalsVisibleTo->Count())' &gt; 0">
@@ -37,18 +43,4 @@
     </PropertyGroup>
   </Target>
 
-  <PropertyGroup Label="OpenAPI Analyzers" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True'">
-    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
-  </PropertyGroup>
-
-  <PropertyGroup Label="SDK Functionality" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True' OR '$(UsingMicrosoftNETSdkWorker)' == 'True'">
-    <IsPackable>false</IsPackable>
-    <PackAsTool>false</PackAsTool>
-  </PropertyGroup>
-
-  <PropertyGroup Label="Test Functionality" Condition="$(IsTest) == 'true'">
-    <IsPackable>false</IsPackable>
-    <PackAsTool>false</PackAsTool>
-    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
-  </PropertyGroup>
 </Project>

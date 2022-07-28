@@ -13,6 +13,7 @@
   </Rules>
   <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
     <Rule Id="CA1303" Action="None" />
+    <Rule Id="CA1848" Action="None" />
     <Rule Id="CA2007" Action="None" />
   </Rules>
   <Rules AnalyzerId="SerilogAnalyzer" RuleNamespace="SerilogAnalyzer">

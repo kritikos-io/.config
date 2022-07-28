@@ -7,12 +7,12 @@
     <!-- Prepend organization name to default namespace -->
     <RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
     <!-- Enable global usings based on project type -->
-    <ImplicitUsings>true</ImplicitUsings>
+    <ImplicitUsings>enable</ImplicitUsings>
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <!-- Error out upon trying to package projects marked as not packable -->
-    <WarnOnPackingNonPackableProject>true</WarnOnPackingNonPackableProject>
+    <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
     <!-- Disable warnings on preview SDK versions -->
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <!-- We only target a single framework hence the subdir is not needed -->
@@ -21,8 +21,6 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <!-- Enable lock files -->
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <!-- Locked mode should only be enabled on CI -->
-    <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
     <!-- Disable nugets from SDK fallback folders -->
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <!-- Enable nullable context by default for all projects -->
@@ -33,11 +31,38 @@
     <_SkipUpgradeNetAnalyzersNuGetWarning>true</_SkipUpgradeNetAnalyzersNuGetWarning>
     <!-- Use latest stable language features -->
     <AnalysisLevel>latest</AnalysisLevel>
-    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisMode>All</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Locked mode should only be enabled on CI -->
+    <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
+    <!-- Use deterministic builds -->
+    <Deterministic Condition="'$(ContinuousIntegrationBuild)' == 'True'">true</Deterministic>
     <!-- Use latest language version supported by the SDK -->
     <LangVersion>preview</LangVersion>
-    <!-- Use deterministic builds -->
-    <!-- <Deterministic Condition="'$(ContinuousIntegrationBuild)' == 'True'">true</Deterministic> -->
+    <ClsCompliant>false</ClsCompliant>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Project Assets">
+    <ProjectIconExists>$(Exists('$(MSBuildProjectDirectory)\icon.png') OR Exists('$(MSBuildThisFileDirectory)\icon.png'))</ProjectIconExists>
+    <ProjectIcon Condition="Exists('$(MSBuildThisFileDirectory)\icon.png')">$(MSBuildThisFileDirectory)\icon.png</ProjectIcon>
+    <ProjectIcon Condition="Exists('$(MSBuildProjectDirectory)\icon.png')">$(MSBuildProjectDirectory)\icon.png</ProjectIcon>
+
+    <ProjectReadMe Condition="Exists('$(MSBuildThisFileDirectory)\README.md')">$(MSBuildThisFileDirectory)\README.md</ProjectReadMe>
+    <ProjectReadMe Condition="Exists('$(MSBuildProjectDirectory)\README.md')">$(MSBuildProjectDirectory)\README.md</ProjectReadMe>
+  </PropertyGroup>
+
+  <PropertyGroup Label="SDK Functionality" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True' OR '$(UsingMicrosoftNETSdkWorker)' == 'True'">
+    <IsPackable>false</IsPackable>
+    <PackAsTool>false</PackAsTool>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Disable Launch Settings for Worker Service" Condition="'$(UsingMicrosoftNETSdkWorker)' == 'True'">
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="OpenAPI Analyzers" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True'">
+    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
   </PropertyGroup>
 
   <!-- Sets deterministic source paths for CI builds -->
@@ -63,39 +88,32 @@
   </ItemGroup>
 
   <!-- Mark assemblies as CLS compliant so the compiler warns on non compliant usage -->
+  <PropertyGroup Condition="$(IsPackable) == 'true'">
+    <ClsCompliant>true</ClsCompliant>
+  </PropertyGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.CLSCompliant">
-      <_Parameter1>true</_Parameter1>
+      <_Parameter1>$(ClsCompliant)</_Parameter1>
       <_Parameter1_TypeName>System.Boolean</_Parameter1_TypeName>
     </AssemblyAttribute>
   </ItemGroup>
 
-  <!-- Use icon for nuget -->
-  <ItemGroup Label="Icon" Condition="$(IsTest) != 'True' AND (Exists('$(MSBuildThisFileDirectory)\icon.png') AND !Exists('$(MSBuildProjectDirectory)\icon.png'))">
-    <None Include="$(MSBuildThisFileDirectory)\icon.png" Link="icon.png" Pack="true" PackagePath="" Visible="false" />
+  <!-- Use nuget icon -->
+  <ItemGroup Label="Icon" Condition="$(IsPackable) == 'True' AND $(ProjectIconExists) == 'True'">
+    <None Include="$(ProjectIcon)" Link="icon.png" Pack="true" PackagePath="" Visible="false" />
   </ItemGroup>
 
-  <!-- Use project icon for nuget -->
-  <ItemGroup Label="Icon" Condition="$(IsTest) != 'True' AND Exists('$(MSBuildProjectDirectory)\icon.png')">
-    <None Include="$(MSBuildProjectDirectory)\icon.png" Pack="true" PackagePath="" />
+  <!-- Use readme as nuget information -->
+  <ItemGroup Label="Readme" Condition="$(IsPackable) == 'True'">
+    <None Include="$(ProjectReadMe)" Pack="true" PackagePath="" />
   </ItemGroup>
 
-  <!-- Use repo readme as nuget information if no project readme exists -->
-  <ItemGroup Label="Readme" Condition="$(IsTest) != 'True' AND (Exists('$(MSBuildThisFileDirectory)\README.md') AND !Exists('$(MSBuildProjectDirectory)\README.md'))">
-    <None Include="$(MSBuildThisFileDirectory)\README.md" Link="README.md" Pack="true" PackagePath="" Visible="false" />
-  </ItemGroup>
-
-  <!-- Use project readme as nuget information -->
-  <ItemGroup Label="Readme" Condition="$(IsTest) != 'True' AND Exists('$(MSBuildProjectDirectory)\README.md')">
-    <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="" />
-  </ItemGroup>
-
-  <!-- Use submodule .NET ruleset for analyzers -->
+  <!-- Use .NET ruleset for analyzers -->
   <PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\dotnet.ruleset')">
     <CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotnet.ruleset</CodeAnalysisRuleset>
   </PropertyGroup>
 
-  <!-- Use submodule stylecop configuration -->
+  <!-- Use stylecop configuration -->
   <ItemGroup Label="Code Analysis Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\stylecop.json')">
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json" Visible="false" />
   </ItemGroup>
@@ -121,6 +139,7 @@
   <!-- Project internals are exposed to projects named $(Project).Tests by default -->
   <ItemGroup Condition="@(InternalsVisibleToSuffix->Count()) == 0 AND @(InternalsVisibleTo->Count()) == 0">
     <InternalsVisibleToSuffix Include=".Tests" />
+    <InternalsVisibleToSuffix Include="Tests" />
   </ItemGroup>
 
   <PropertyGroup Label="Package">
@@ -132,10 +151,8 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageOutputPath>$(MSBuildThisFileDirectory)/packages</PackageOutputPath>
     <PublishDir>$(MSBuildThisFileDirectory)/upload/$(ProjectName)</PublishDir>
-    <PackageIcon Condition="Exists('$(MSBuildThisFileDirectory)/icon.png')">icon.png</PackageIcon>
-    <!-- Currently bugged with new symbols package, awaiting fix -->
-    <PackageReadmeFile Condition="Exists('$(MSBuildThisFileDirectory)/README.md')">README.md</PackageReadmeFile>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.md</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageIcon Condition="$(ProjectIconExists) == 'True'">icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
@@ -143,24 +160,14 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
     <IncludeSymbols>true</IncludeSymbols>
+    <EnablePackageValidation>true</EnablePackageValidation>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
-  <ItemGroup Label="Test Dependencies" Condition="'$(IsTest)'=='true'">
-    <PackageReference Include="coverlet.msbuild" Version="3.1.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
   <ItemGroup Label="Nugets" Condition="'$(IsTest)' != 'true'">
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.376">
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -172,19 +179,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SmartAnalyzers.MultithreadingAnalyzer" Version="1.1.31">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup Label="SourceLink" Condition="$(IsPackable) == 'true'">
-    <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.1.1" PrivateAssets="All" />
+    <!-- <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" PrivateAssets="All" /> -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.1.1" PrivateAssets="All" /> -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All" />
-
-    <SourceLinkGitLabHost Include="git.kritikos.io" />
-    <SourceLinkGitHubHost Include="github.com" />
-    <SourceLinkBitBucketHost Include="bitbucket.org" />
+    <!-- <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All" /> -->
   </ItemGroup>
 </Project>
