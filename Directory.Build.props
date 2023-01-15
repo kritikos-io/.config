@@ -1,6 +1,8 @@
 <Project>
-  <ImportGroup Condition="Exists($([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))) == 'true'">
-    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  <ImportGroup
+    Condition="Exists($([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))) == 'true'">
+    <Import
+      Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
   </ImportGroup>
 
   <PropertyGroup Label="Project">
@@ -44,20 +46,27 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Project Assets">
-    <ProjectIconExists>$(Exists('$(MSBuildProjectDirectory)\icon.png') OR Exists('$(MSBuildThisFileDirectory)\icon.png'))</ProjectIconExists>
-    <ProjectIcon Condition="Exists('$(MSBuildThisFileDirectory)\icon.png')">$(MSBuildThisFileDirectory)\icon.png</ProjectIcon>
-    <ProjectIcon Condition="Exists('$(MSBuildProjectDirectory)\icon.png')">$(MSBuildProjectDirectory)\icon.png</ProjectIcon>
+    <ProjectIconExists>$(Exists('$(MSBuildProjectDirectory)\icon.png') OR
+      Exists('$(MSBuildThisFileDirectory)\icon.png'))</ProjectIconExists>
+    <ProjectIcon Condition="Exists('$(MSBuildThisFileDirectory)\icon.png')">
+      $(MSBuildThisFileDirectory)\icon.png</ProjectIcon>
+    <ProjectIcon Condition="Exists('$(MSBuildProjectDirectory)\icon.png')">
+      $(MSBuildProjectDirectory)\icon.png</ProjectIcon>
 
-    <ProjectReadMe Condition="Exists('$(MSBuildThisFileDirectory)\README.md')">$(MSBuildThisFileDirectory)\README.md</ProjectReadMe>
-    <ProjectReadMe Condition="Exists('$(MSBuildProjectDirectory)\README.md')">$(MSBuildProjectDirectory)\README.md</ProjectReadMe>
+    <ProjectReadMe Condition="Exists('$(MSBuildThisFileDirectory)\README.md')">
+      $(MSBuildThisFileDirectory)\README.md</ProjectReadMe>
+    <ProjectReadMe Condition="Exists('$(MSBuildProjectDirectory)\README.md')">
+      $(MSBuildProjectDirectory)\README.md</ProjectReadMe>
   </PropertyGroup>
 
-  <PropertyGroup Label="SDK Functionality" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True' OR '$(UsingMicrosoftNETSdkWorker)' == 'True'">
+  <PropertyGroup Label="SDK Functionality"
+    Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True' OR '$(UsingMicrosoftNETSdkWorker)' == 'True'">
     <IsPackable>false</IsPackable>
     <PackAsTool>false</PackAsTool>
   </PropertyGroup>
 
-  <PropertyGroup Label="Disable Launch Settings for Worker Service" Condition="'$(UsingMicrosoftNETSdkWorker)' == 'True'">
+  <PropertyGroup Label="Disable Launch Settings for Worker Service"
+    Condition="'$(UsingMicrosoftNETSdkWorker)' == 'True'">
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
   </PropertyGroup>
 
@@ -67,10 +76,12 @@
 
   <!-- Sets deterministic source paths for CI builds -->
   <PropertyGroup Label="CI Build">
-    <!-- https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml#system-variables -->
+    <!--
+    https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml#system-variables -->
     <ContinuousIntegrationBuild Condition="'$(TF_BUILD)' == 'true'">true</ContinuousIntegrationBuild>
 
-    <!-- https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables -->
+    <!--
+    https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables -->
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
 
     <!-- https://docs.gitlab.com/ee/ci/variables/predefined_variables.html -->
@@ -109,35 +120,43 @@
   </ItemGroup>
 
   <!-- Use .NET ruleset for analyzers -->
-  <PropertyGroup Label="Code Analysis Ruleset" Condition="Exists('$(MSBuildThisFileDirectory)\dotnet.ruleset')">
+  <PropertyGroup Label="Code Analysis Ruleset"
+    Condition="Exists('$(MSBuildThisFileDirectory)\dotnet.ruleset')">
     <CodeAnalysisRuleset>$(MSBuildThisFileDirectory)\dotnet.ruleset</CodeAnalysisRuleset>
   </PropertyGroup>
 
   <!-- Use stylecop configuration -->
-  <ItemGroup Label="Code Analysis Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\stylecop.json')">
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json" Visible="false" />
+  <ItemGroup Label="Code Analysis Configuration"
+    Condition="Exists('$(MSBuildThisFileDirectory)\stylecop.json')">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json"
+      Visible="false" />
   </ItemGroup>
 
   <!-- Use common AssemblyInfo versioning -->
-  <ItemGroup Label="AssemblyInfo Versioning" Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
+  <ItemGroup Label="AssemblyInfo Versioning"
+    Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
     <Compile Include="$(MSBuildThisFileDirectory)/AssemblyInfo.cs" Link="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
-  <PropertyGroup Label="Disable AssemblyInfo Generation" Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
+  <PropertyGroup Label="Disable AssemblyInfo Generation"
+    Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
 
   <!-- Uses pretty xunit configuration -->
-  <ItemGroup Label="xUnit Configuration" Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json" Link="xunit.runner.json" Visible="false">
+  <ItemGroup Label="xUnit Configuration"
+    Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json"
+      Link="xunit.runner.json" Visible="false">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
   </ItemGroup>
 
   <!-- Project internals are exposed to projects named $(Project).Tests by default -->
-  <ItemGroup Condition="@(InternalsVisibleToSuffix->Count()) == 0 AND @(InternalsVisibleTo->Count()) == 0">
+  <ItemGroup
+    Condition="@(InternalsVisibleToSuffix->Count()) == 0 AND @(InternalsVisibleTo->Count()) == 0">
     <InternalsVisibleToSuffix Include=".Tests" />
     <InternalsVisibleToSuffix Include="Tests" />
   </ItemGroup>
@@ -182,9 +201,12 @@
   </ItemGroup>
 
   <ItemGroup Label="SourceLink" Condition="$(IsPackable) == 'true'">
-    <!-- <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" PrivateAssets="All" /> -->
-    <!-- <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.1.1" PrivateAssets="All" /> -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1"
+    PrivateAssets="All" /> -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.1.1"
+    PrivateAssets="All" /> -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <!-- <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All" /> -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All"
+    /> -->
   </ItemGroup>
 </Project>
