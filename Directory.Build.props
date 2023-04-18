@@ -141,19 +141,6 @@
       Visible="false" />
   </ItemGroup>
 
-  <!-- Use common AssemblyInfo versioning -->
-  <ItemGroup Label="AssemblyInfo Versioning"
-    Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
-    <Compile Include="$(MSBuildThisFileDirectory)/AssemblyInfo.cs" Link="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-
-  <PropertyGroup Label="Disable AssemblyInfo Generation"
-    Condition="Exists('$(MSBuildThisFileDirectory)/AssemblyInfo.cs')">
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-  </PropertyGroup>
-
   <!-- Uses pretty xunit configuration -->
   <ItemGroup Label="xUnit Configuration"
     Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
