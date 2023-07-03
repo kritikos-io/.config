@@ -12,15 +12,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn> $(NoWarn);1591</NoWarn>
+    <NoWarn>$(NoWarn);1591</NoWarn>
     <!-- Error out upon trying to package projects marked as not packable -->
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
     <!-- Disable warnings on preview SDK versions -->
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <!-- We only target a single framework hence the subdir is not needed -->
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <!-- Same but for runtime assemblies -->
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>
     <!-- Enable lock files -->
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <!-- Disable nugets from SDK fallback folders -->
