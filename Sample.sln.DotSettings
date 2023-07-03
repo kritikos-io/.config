@@ -23,6 +23,8 @@
 
   <s:Boolean x:Key="/Default/CodeInspection/Highlighting/MergeVsBulbItemsIntoReSharperBulb/@EntryValue">True</s:Boolean>
   <s:Boolean x:Key="/Default/CodeInspection/Highlighting/ReadSettingsFromFileLevel/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeInspection/XmlDocInspections/TypeAccessibility/@EntryValue">None</s:String>
+	<s:String x:Key="/Default/CodeInspection/XmlDocInspections/TypeMemberAccessibility/@EntryValue">None</s:String>
   <s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CommonFormatter/AUTODETECT_INDENT_SETTINGS/@EntryValue">True</s:Boolean>
   <s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/ALIGNMENT_TAB_FILL_STYLE/@EntryValue">USE_TABS_ONLY</s:String>
   <s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/BLANK_LINES_AROUND_REGION/@EntryValue">0</s:Int64>
