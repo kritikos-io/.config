@@ -15,6 +15,7 @@
     <Rule Id="CA1303" Action="None" />
     <Rule Id="CA1848" Action="None" />
     <Rule Id="CA2007" Action="None" />
+    <Rule Id="CA1707" Action="None" />
   </Rules>
   <Rules AnalyzerId="SerilogAnalyzer" RuleNamespace="SerilogAnalyzer">
     <Rule Id="Serilog004" Action="None" />
