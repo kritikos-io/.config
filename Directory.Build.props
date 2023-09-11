@@ -42,6 +42,8 @@
     <!-- Use latest language version supported by the SDK -->
     <LangVersion>preview</LangVersion>
     <ClsCompliant>false</ClsCompliant>
+    <!-- Defaults to checked context for math operations, throws OverflowException when needed -->
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>obj/Generated</CompilerGeneratedFilesOutputPath>
