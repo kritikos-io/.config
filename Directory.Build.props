@@ -32,7 +32,7 @@
     <!-- Decouples Analyzers from SDK -->
     <_SkipUpgradeNetAnalyzersNuGetWarning>true</_SkipUpgradeNetAnalyzersNuGetWarning>
     <!-- Use latest stable language features -->
-    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisLevel>preview</AnalysisLevel>
     <AnalysisMode>All</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <!-- Locked mode should only be enabled on CI -->
