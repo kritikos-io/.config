@@ -6,6 +6,8 @@
   </ImportGroup>
 
   <PropertyGroup Label="Project">
+    <!-- Suppresses display of the sign-on banner -->
+    <NoLogo>true</NoLogo>
     <!-- Prepend organization name to default namespace -->
     <RootNamespace>Kritikos.$(MSBuildProjectName)</RootNamespace>
     <!-- Enable global usings based on project type -->
