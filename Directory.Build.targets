@@ -3,7 +3,7 @@
     <Exec Command="npm install" />
   </Target>
 
-  <PropertyGroup Label="Test Functionality" Condition="$(IsTest) == 'true'">
+  <PropertyGroup Label="Test Functionality" Condition="$(IsTestProject) == 'true'">
     <IsPackable>false</IsPackable>
     <PackAsTool>false</PackAsTool>
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
@@ -19,13 +19,15 @@
 
     <!-- Handle InternalsVisibleToSuffix -->
     <ItemGroup Condition="@(InternalsVisibleToSuffix->Count()) &gt; 0">
-      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo" Condition="$(AssemblyName.EndsWith(%(InternalsVisibleToSuffix.Identity))) == 'false'">
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo"
+        Condition="$(AssemblyName.EndsWith(%(InternalsVisibleToSuffix.Identity))) == 'false'">
         <_Parameter1>$(AssemblyName)%(InternalsVisibleToSuffix.Identity)</_Parameter1>
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
 
-  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec" Condition="Exists('$(MSBuildThisFileDirectory)/changes.log')">
+  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec"
+    Condition="Exists('$(MSBuildThisFileDirectory)/changes.log')">
     <ReadLinesFromFile File="$(MSBuildThisFileDirectory)/changes.log">
       <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
     </ReadLinesFromFile>

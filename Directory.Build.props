@@ -146,9 +146,9 @@
       Visible="false" />
   </ItemGroup>
 
-  <!-- Uses pretty xunit configuration -->
+  <!-- Uses pretty xUnit configuration -->
   <ItemGroup Label="xUnit Configuration"
-    Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTest)=='True'">
+    Condition="Exists('$(MSBuildThisFileDirectory)\xunit.runner.json') AND $(IsTestProject)=='True'">
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\xunit.runner.json"
       Link="xunit.runner.json" Visible="false">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -186,7 +186,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
-  <ItemGroup Label="Nugets" Condition="'$(IsTest)' != 'true'">
+  <ItemGroup Label="Nugets" Condition="'$(IsTestProject)' != 'true'">
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -206,5 +206,6 @@
     <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitLab" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.Gitea" PrivateAssets="All" />
   </ItemGroup>
 </Project>
