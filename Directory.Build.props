@@ -210,10 +210,6 @@
 
   <ItemGroup Label="SourceLink" Condition="$(IsPackable) == 'true'">
     <SourceLinkGiteaHost Include="git.kritikos.io" />
-    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitLab" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.Gitea" PrivateAssets="All" />
   </ItemGroup>
+
 </Project>
