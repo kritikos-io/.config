@@ -14,7 +14,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
+    <NoWarn>$(NoWarn);1591;1701;1702</NoWarn>
     <!-- Error out upon trying to package projects marked as not packable -->
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
     <!-- Disable warnings on preview SDK versions -->
