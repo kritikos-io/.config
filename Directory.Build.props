@@ -21,10 +21,6 @@
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
     <!-- Disable warnings on preview SDK versions -->
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-    <!-- We only target a single framework hence the subdir is not needed -->
-    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
-    <!-- Same but for runtime assemblies -->
-    <AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>
     <!-- Enable lock files -->
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <!-- Disable nugets from SDK fallback folders -->
