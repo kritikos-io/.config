@@ -1152,6 +1152,8 @@ TestResults
 
 ## Public Assets
 packages/*
+upload/*
+!upload/.gitkeep
 !packages/.gitkeep
 !artifacts/.gitkeep
 AssemblyInfo.cs
