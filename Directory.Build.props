@@ -6,6 +6,7 @@
   </ImportGroup>
 
   <PropertyGroup Label="Project">
+    <NuGetAudit>true</NuGetAudit>
     <!-- Suppresses display of the sign-on banner -->
     <NoLogo>true</NoLogo>
     <!-- Prepend organization name to default namespace -->
@@ -41,6 +42,7 @@
     <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
     <!-- Use deterministic builds -->
     <Deterministic Condition="'$(ContinuousIntegrationBuild)' == 'True'">true</Deterministic>
+    <DeterministicSourcePaths Condition="'$(IsTestProject)' == 'true'">false</DeterministicSourcePaths>
     <!-- Use latest language version supported by the SDK -->
     <LangVersion>preview</LangVersion>
     <ClsCompliant>false</ClsCompliant>
@@ -50,7 +52,6 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>obj/Generated</CompilerGeneratedFilesOutputPath>
     <GenerateRequiresPreviewFeaturesAttribute>False</GenerateRequiresPreviewFeaturesAttribute>
-
     <DefaultItemExcludes>$(DefaultItemExcludes);*.log;*.binlog</DefaultItemExcludes>
   </PropertyGroup>
 
@@ -189,6 +190,10 @@
   </PropertyGroup>
 
   <ItemGroup Label="Nugets" Condition="'$(IsTestProject)' != 'true'">
+    <PackageReference Include="GitVersion.MsBuild">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -204,6 +209,7 @@
   </ItemGroup>
 
   <ItemGroup Label="SourceLink" Condition="$(IsPackable) == 'true'">
+    <SourceLinkGiteaHost Include="git.kritikos.io" />
     <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
