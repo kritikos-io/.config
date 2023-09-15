@@ -273,7 +273,7 @@ __pycache__/
 
 ### Csharp ###
 ##
-## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # User-specific files
 *.rsuser
@@ -318,6 +318,7 @@ StyleCopReport.xml
 *.iobj
 *.ipdb
 *_wpftmp.csproj
+*.tlog
 
 # Chutzpah Test files
 
@@ -343,7 +344,9 @@ StyleCopReport.xml
 !.axoCover/settings.json
 
 # Coverlet is a free, cross platform Code Coverage Tool
-coverage*[.json, .xml, .info]
+coverage*.json
+coverage*.xml
+coverage*.info
 
 # Visual Studio code coverage results
 
@@ -431,6 +434,15 @@ ServiceFabricBackup/
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 *.vbw
 
+# Visual Studio 6 auto-generated project file (contains which files were open etc.)
+*.vbp
+
+# Visual Studio 6 workspace and project file (working project files containing files to include in project)
+*.dsw
+*.dsp
+
+# Visual Studio 6 technical files
+
 # Visual Studio LightSwitch build output
 
 # Paket dependency manager
@@ -476,6 +488,9 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+# Visual Studio History (VSHistory) files
+.vshistory/
+
 # BeatPulse healthcheck temp database
 healthchecksdb
 
@@ -487,6 +502,26 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# VS Code files for those working on multiple tools
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Windows Installer files from build outputs
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# JetBrains Rider
 
 ### DotnetCore ###
 # .NET Core build folders
@@ -506,6 +541,7 @@ bin
 /build/
 *.exe
 !.paket/paket.bootstrapper.exe
+.fake
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -517,6 +553,9 @@ bin
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -568,6 +607,9 @@ atlassian-ide-plugin.xml
 # Cursive Clojure plugin
 .idea/replstate.xml
 
+# SonarLint plugin
+.idea/sonarlint/
+
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
 crashlytics.properties
@@ -610,11 +652,17 @@ fabric.properties
 # https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
 
+# Azure Toolkit for IntelliJ plugin
+# https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij
+.idea/**/azureSettings.xml
+
 ### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+
+# AWS User-specific
 
 # Generated files
 
@@ -649,6 +697,8 @@ fabric.properties
 
 # Cursive Clojure plugin
 
+# SonarLint plugin
+
 # Crashlytics plugin (for Android Studio and IntelliJ)
 
 # Editor-based Rest Client
@@ -656,19 +706,13 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 
 ### Intellij+all Patch ###
-# Ignores the whole .idea folder and all .iml files
-# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+# Ignore everything but code style settings and run configurations
+# that are supposed to be shared within teams.
 
+.idea/*
 
-# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
-
-*.iml
-modules.xml
-.idea/misc.xml
-*.ipr
-
-# Sonarlint plugin
-.idea/sonarlint
+!.idea/codeStyles
+!.idea/runConfigurations
 
 ### Linux ###
 
@@ -713,6 +757,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
 ### Node ###
 # Logs
 logs
@@ -720,6 +768,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+.pnpm-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -755,8 +804,8 @@ build/Release
 # Dependency directories
 jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -785,10 +834,12 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# dotenv environment variable files
 .env
-.env.test
-.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -796,18 +847,11 @@ typings/
 
 # Next.js build output
 .next
+out
 
 # Nuxt.js build / generate output
 .nuxt
 dist
-
-# Storybook build outputs
-.out
-.storybook-out
-storybook-static
-
-# rollup.js default build output
-dist/
 
 # Gatsby files
 .cache/
@@ -817,6 +861,12 @@ dist/
 
 # vuepress build output
 .vuepress/dist
+
+# vuepress v2.x temp and cache directory
+.temp
+
+# Docusaurus cache and generated files
+.docusaurus
 
 # Serverless directories
 .serverless/
@@ -833,9 +883,21 @@ dist/
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# Temporary folders
-tmp/
-temp/
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+### Node Patch ###
+# Serverless Webpack directories
+.webpack/
+
+# Optional stylelint cache
+
+# SvelteKit build / generate output
+.svelte-kit
 
 ### Sonar ###
 #Sonar generated dir
@@ -847,6 +909,7 @@ temp/
 # https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
 # Sonar Scanner working directories
 .sonar/
+.sonarqube/
 .scannerwork/
 
 # http://www.sonarlint.org/commandline/
@@ -854,10 +917,12 @@ temp/
 .sonarlint/
 
 ### VisualStudioCode ###
-.vscode/*
-!.vscode/tasks.json
-!.vscode/launch.json
-*.code-workspace
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+
+# Built Visual Studio Code Extensions
+*.vsix
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
@@ -881,11 +946,6 @@ ehthumbs_vista.db
 $RECYCLE.BIN/
 
 # Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
 
 # Windows shortcuts
 *.lnk
@@ -1012,6 +1072,12 @@ $RECYCLE.BIN/
 
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 
+# Visual Studio 6 auto-generated project file (contains which files were open etc.)
+
+# Visual Studio 6 workspace and project file (working project files containing files to include in project)
+
+# Visual Studio 6 technical files
+
 # Visual Studio LightSwitch build output
 
 # Paket dependency manager
@@ -1044,6 +1110,8 @@ $RECYCLE.BIN/
 
 # Local History for Visual Studio
 
+# Visual Studio History (VSHistory) files
+
 # BeatPulse healthcheck temp database
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
@@ -1052,9 +1120,16 @@ $RECYCLE.BIN/
 
 # Fody - auto-generated XML schema
 
+# VS Code files for those working on multiple tools
+
+# Local History for Visual Studio Code
+
+# Windows Installer files from build outputs
+
+# JetBrains Rider
+
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
-*.tlog
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,intellij,intellij+all,sonar,sonarqube,csharp,fsharp,aspnetcore,dotnetcore,node
 
@@ -1076,8 +1151,7 @@ TestResults
 *.coverage.xml
 
 ## Public Assets
-upload/*
 packages/*
 !packages/.gitkeep
-!upload/.gitkeep
+!artifacts/.gitkeep
 AssemblyInfo.cs
