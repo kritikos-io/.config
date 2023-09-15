@@ -7,6 +7,7 @@
 
   <PropertyGroup Label="Project">
     <NuGetAudit>true</NuGetAudit>
+    <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
     <!-- Suppresses display of the sign-on banner -->
     <NoLogo>true</NoLogo>
     <!-- Prepend organization name to default namespace -->
