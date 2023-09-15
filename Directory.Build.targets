@@ -26,6 +26,10 @@
     </ItemGroup>
   </Target>
 
+  <ItemGroup Label="Hide package lock files">
+    <None Update="packages.lock.json" Visible="false" />
+  </ItemGroup>
+
   <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec"
     Condition="Exists('$(MSBuildThisFileDirectory)/changes.log')">
     <ReadLinesFromFile File="$(MSBuildThisFileDirectory)/changes.log">
