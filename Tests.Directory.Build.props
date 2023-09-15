@@ -6,10 +6,6 @@
   </ImportGroup>
 
   <PropertyGroup>
-    <IsTest>
-      true</IsTest>
-    <IsPackable>false</IsPackable>
-    <PackAsTool>false</PackAsTool>
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
