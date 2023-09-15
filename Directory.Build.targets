@@ -26,27 +26,7 @@
     </ItemGroup>
   </Target>
 
-  <ItemGroup Label="Hide package lock files">
+  <ItemGroup Label="Hide package">
     <None Update="packages.lock.json" Visible="false" />
   </ItemGroup>
-
-  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec"
-    Condition="Exists('$(MSBuildThisFileDirectory)/changes.log')">
-    <ReadLinesFromFile File="$(MSBuildThisFileDirectory)/changes.log">
-      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
-    </ReadLinesFromFile>
-    <PropertyGroup>
-      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="AfterBuild" Condition="$(PackageVersion) == '1.0.0'">
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
-      <Output TaskParameter="Assemblies" ItemName="PackAssembly" />
-    </GetAssemblyIdentity>
-    <PropertyGroup>
-      <PackageVersion>%(PackAssembly.Version)</PackageVersion>
-    </PropertyGroup>
-  </Target>
-
 </Project>
