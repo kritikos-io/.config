@@ -1,6 +1,6 @@
 {
   "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
-  "methodDisplay": "method",
+  "methodDisplay": "classAndMethod",
   "methodDisplayOptions": "all",
   "parallelizeAssembly": true,
   "longRunningTestSeconds": 5
