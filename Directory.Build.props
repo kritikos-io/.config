@@ -206,6 +206,19 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup Label="Test Frameworks">
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="FluentAssertions.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="NSubstitute.Analyzers.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <ItemGroup Label="SourceLink" Condition="$(IsPackable) == 'true'">
     <SourceLinkGiteaHost Include="git.kritikos.io" />
   </ItemGroup>
