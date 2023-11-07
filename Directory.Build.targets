@@ -10,11 +10,32 @@
   </PropertyGroup>
 
   <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)\packages.lock.json')">
-    <Content Update="packages.lock.json" Visible="false" />
     <None Update="packages.lock.json" Visible="false" />
   </ItemGroup>
 
   <Target Name="AddInternalsVisibleTo" BeforeTargets="BeforeCompile">
+    <!--
+      Add an ItemGroup with tags in the following format:
+      <InternalsVisibleTo Include="CustomTest1" />
+        -> [assembly: InternalsVisibleTo("CustomTest1")]
+      <InternalsVisibleTo Include="CustomTest2, PublicKey=abc" />
+        -> [assembly: InternalsVisibleTo("CustomTest2, PublicKey=abc")]
+      <InternalsVisibleTo Include="$(AssemblyName).Custom" />
+        -> [assembly: InternalsVisibleTo("ClassLibrary1.Custom")]
+
+      on a project with assembly name ClasLibrary1:
+      <InternalsVisibleToSuffix Include=".Tests" />
+        -> [assembly: InternalsVisibleTo("ClassLibrary1.Tests")]
+      <InternalsVisibleToSuffix Include=".FunctionalTests" />
+        -> [assembly: InternalsVisibleTo("ClassLibrary1.FunctionalTests")]
+     -->
+
+    <!-- Add default suffix if there is no InternalsVisibleTo or InternalsVisibleToSuffix defined -->
+    <ItemGroup
+      Condition="@(InternalsVisibleToSuffix->Count()) == 0 AND @(InternalsVisibleTo->Count()) == 0">
+      <InternalsVisibleToSuffix Include=".Tests" />
+    </ItemGroup>
+
     <!-- Handle InternalsVisibleTo -->
     <ItemGroup Condition="'@(InternalsVisibleTo->Count())' &gt; 0">
       <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
@@ -30,9 +51,5 @@
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
-
-  <ItemGroup Label="Hide package">
-    <None Update="packages.lock.json" Visible="false" />
-  </ItemGroup>
 
 </Project>
