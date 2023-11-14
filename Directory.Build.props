@@ -7,8 +7,7 @@
 
   <PropertyGroup Label="Project">
     <NuGetAudit>true</NuGetAudit>
-    <!-- ArtifactsPath breaks EF Core migrations on 8.0-rc.1 -->
-    <!-- <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath> -->
+    <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
     <!-- Suppresses display of the sign-on banner -->
     <NoLogo>true</NoLogo>
     <!-- Prepend organization name to default namespace -->
