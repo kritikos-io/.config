@@ -131,7 +131,7 @@
 
   <!-- Use nuget icon -->
   <ItemGroup Label="Icon" Condition="$(IsPackable) == 'True' AND $(ProjectIconExists) == 'True'">
-    <None Include="$(ProjectIcon)" Pack="true" PackagePath="icon.png" Visible="true" />
+    <None Include="$(ProjectIcon)" Pack="true" PackagePath="icon.png" Visible="false" />
   </ItemGroup>
 
   <!-- Use .NET ruleset for analyzers -->
