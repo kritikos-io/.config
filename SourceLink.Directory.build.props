@@ -5,6 +5,5 @@
 
   <PropertyGroup Label="Package">
     <PackageProjectUrl>https://github.com/kritikos-io/.config</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/kritikos-io/.config</RepositoryUrl>
   </PropertyGroup>
 </Project>
