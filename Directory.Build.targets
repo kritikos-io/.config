@@ -52,4 +52,12 @@
     </ItemGroup>
   </Target>
 
+  <Target Name="CreateReleaseNotesFromFile" BeforeTargets="GenerateNuspec" Condition="Exists('$(MSBuildThisFileDirectory)\changes.log')">
+    <ReadLinesFromFile File="$(MSBuildThisFileDirectory)/changes.log">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
 </Project>
