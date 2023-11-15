@@ -1135,7 +1135,6 @@ $RECYCLE.BIN/
 
 # .NET Core
 **/Properties/launchSettings.json
-AssemblyInfo/*
 TestResults
 
 # Visual Studio Code
@@ -1155,5 +1154,6 @@ packages/*
 upload/*
 !upload/.gitkeep
 !packages/.gitkeep
+!artifacts/
+artifacts/*
 !artifacts/.gitkeep
-AssemblyInfo.cs
