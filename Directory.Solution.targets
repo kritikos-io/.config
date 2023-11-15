@@ -1,49 +1,35 @@
 <Project>
-  <Target Name="GetGitBranch" BeforeTargets="DispatchToInnerBuilds"
-    Condition="!Exists('$(MSBuildThisFileDirectory)\changes.log')">
-    <Exec ConsoleToMSBuild="True" IgnoreExitCode="true" Command="git rev-parse --abbrev-ref HEAD"
-      StandardOutputImportance="low" StandardErrorImportance="low">
+  <Target Name="GetGitBranch" BeforeTargets="ValidateSolutionConfiguration"
+    Condition="!Exists('$(SolutionDir)changes.log')">
+    <Exec ConsoleToMSBuild="True" IgnoreExitCode="true" Command="git rev-parse --abbrev-ref HEAD" StandardOutputImportance="low" StandardErrorImportance="low" ContinueOnError="WarnAndContinue">
       <Output TaskParameter="ConsoleOutput" PropertyName="GitBranch" />
       <Output TaskParameter="ExitCode" PropertyName="GitBranchExitCode" />
     </Exec>
   </Target>
 
-  <Target Name="GetGitTag" AfterTargets="GetGitBranch"
-    Condition="$(GitBranch) != '' AND Exists('$(MSBuildThisFileDirectory)\changes.log')">
-    <Exec ConsoleToMSBuild="True" IgnoreExitCode="true"
-      Condition="$(GitBranch) == 'master' OR $(GitBranch) == 'main'"
-      Command='git describe --tags --abbrev=0 --exclude "v*-*"'
-      StandardOutputImportance="low" StandardErrorImportance="low">
+  <Target Name="GetGitTag" AfterTargets="GetGitBranch" Condition="$(GitBranch) != '' AND !Exists('$(SolutionDir)changes.log')">
+    <Exec ConsoleToMSBuild="True" IgnoreExitCode="true" Condition="$(GitBranch) == 'master' OR $(GitBranch) == 'main'" Command='git describe --tags --abbrev=0 --exclude "v*-*"' StandardOutputImportance="low" StandardErrorImportance="low" ContinueOnError="WarnAndContinue">
       <Output TaskParameter="ConsoleOutput" PropertyName="GitTag" />
       <Output TaskParameter="ConsoleOutput" PropertyName="GitVerTag" />
       <Output TaskParameter="ExitCode" PropertyName="GitTagExitCode" />
     </Exec>
-    <Exec ConsoleToMSBuild="True" IgnoreExitCode="true"
-      Condition="$(GitBranch) != 'master' AND $(GitBranch) != 'main'"
-      Command="git describe --tags --abbrev=0"
-      StandardOutputImportance="low" StandardErrorImportance="low">
+    <Exec ConsoleToMSBuild="True" IgnoreExitCode="true" Condition="$(GitBranch) != 'master' AND $(GitBranch) != 'main'" Command="git describe --tags --abbrev=0" StandardOutputImportance="low" StandardErrorImportance="low" ContinueOnError="WarnAndContinue">
       <Output TaskParameter="ConsoleOutput" PropertyName="GitTag" />
       <Output TaskParameter="ExitCode" PropertyName="GitTagExitCode" />
     </Exec>
   </Target>
 
   <Target Name="CreateGitLog" AfterTargets="GetGitTag"
-    Condition="$(GitTag) != '' AND Exists('$(MSBuildThisFileDirectory)\changes.log')">
-    <Exec Condition="$(GitTagExitCode) == 0"
-      Command='git log --no-merges --pretty=format:&quot; - $(AddGitEscapeIfWindows)%25s&quot; $(GitTag)..HEAD> &quot;$(MSBuildThisFileDirectory)/changes.log&quot;'
-      StandardOutputImportance="low" StandardErrorImportance="low" />
-    <Exec Condition="$(GitTagExitCode) != 0"
-      Command='git log --no-merges --pretty=format:&quot; - $(AddGitEscapeIfWindows)%25s&quot; > &quot;$(MSBuildThisFileDirectory)/changes.log&quot;'
-      StandardOutputImportance="low" StandardErrorImportance="low" />
+    Condition="!Exists('$(MSBuildThisFileDirectory)\changes.log')">
+    <PropertyGroup>
+      <GitBaseCommand>git log --no-merges</GitBaseCommand>
+      <GitCommand Condition="$([MSBuild]::IsOSPlatform('Windows')) == 'true'">$(GitBaseCommand) --pretty=format:&quot;- %25%25s&quot;</GitCommand>
+      <GitCommand Condition="$([MSBuild]::IsOSPlatform('Windows')) != 'true'">$(GitBaseCommand) --pretty=format:&quot;- %25s&quot;</GitCommand>
+    </PropertyGroup>
 
-    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows')) == 'true'"
-      Command='type &quot;$(MSBuildThisFileDirectory)/changes.log&quot; | findstr /v 💚 | findstr /v 🔧 | findstr /v : > &quot;$(MSBuildThisFileDirectory)/changes.log&quot;'
-      StandardOutputImportance="low" StandardErrorImportance="low" />
-    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows')) != 'true'"
-      Command="sed -i '/^- 💚/ d' $(MSBuildThisFileDirectory)/changes.log"
-      StandardOutputImportance="low" StandardErrorImportance="low" />
-    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows')) != 'true'"
-      Command="sed -i '/^- 🔧/ d' $(MSBuildThisFileDirectory)/changes.log"
-      StandardOutputImportance="low" StandardErrorImportance="low" />
+    <Exec Condition="$(GitTagExitCode) == 0" Command='$(GitCommand) $(GitTag)..HEAD > &quot;$(MSBuildThisFileDirectory)changes.log&quot;' StandardOutputImportance="low" StandardErrorImportance="low" ContinueOnError="WarnAndContinue" />
+    <Exec Condition="$(GitTagExitCode) != 0" Command="$(GitCommand) > &quot;$(MSBuildThisFileDirectory)changes.log&quot;" StandardOutputImportance="low" StandardErrorImportance="low" ContinueOnError="WarnAndContinue" />
+    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows')) == 'true'" Command="type $(MSBuildThisFileDirectory)changes.log | findstr -v 💚 | findstr -v : | findstr -v 🔧 > $(MSBuildThisFileDirectory)changes.log" StandardOutputImportance="low" StandardErrorImportance="low" ContinueOnError="WarnAndContinue" />
+    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows')) != 'true'" Command="sed -i '/^- 💚/ d' $(MSBuildThisFileDirectory)changes.log &amp;&amp; sed -i '/^- 🔧/ d' $(MSBuildThisFileDirectory)changes.log &amp;&amp; sed -i '/:/d' $(MSBuildThisFileDirectory)changes.log" StandardOutputImportance="low" StandardErrorImportance="low" ContinueOnError="WarnAndContinue" />
   </Target>
 </Project>

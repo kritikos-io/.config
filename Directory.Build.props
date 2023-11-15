@@ -52,7 +52,6 @@
     <CompilerGeneratedFilesOutputPath>obj/Generated</CompilerGeneratedFilesOutputPath>
     <GenerateRequiresPreviewFeaturesAttribute>False</GenerateRequiresPreviewFeaturesAttribute>
     <DefaultItemExcludes>$(DefaultItemExcludes);*.log;*.binlog</DefaultItemExcludes>
-    <AddGitEscapeIfWindows Condition="$([MSBuild]::IsOSPlatform('Windows')) == 'true'">%25</AddGitEscapeIfWindows>
   </PropertyGroup>
 
   <PropertyGroup Label="Central Package Management">
