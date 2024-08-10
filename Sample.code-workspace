@@ -26,7 +26,12 @@
   },
   "extensions": {
     "recommendations": [
-      "augustocdias.tasks-shell-input",
+      "EditorConfig.EditorConfig",
+      "mhutchie.git-graph",
+      "GitHub.copilot",
+      "GitHub.copilot-chat",
+      "seatonjiang.gitmoji-vscode",
+      "ms-dotnettools.csdevkit",
     ]
   }
 }
