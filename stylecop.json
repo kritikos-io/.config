@@ -1,9 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
   "settings": {
-    "indentation": {
-      "useTabs": false
-    },
     "orderingRules": {
       "blankLinesBetweenUsingGroups": "require",
       "systemUsingDirectivesFirst": true,
@@ -36,10 +33,7 @@
     "spacingRules": {
     },
     "documentationRules": {
-      "companyName": "Kritikos IO",
-      "copyrightText": "Copyright (c) {companyName}. All rights reserved.",
-      "xmlHeader": false,
-      "headerDecoration": "-----------------------------------------------------------------------",
+      "xmlHeader": true,
       "documentInterfaces": false,
       "documentExposedElements": true,
       "documentInternalElements": false,
