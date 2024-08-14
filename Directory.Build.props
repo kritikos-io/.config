@@ -17,7 +17,7 @@
     <!-- Generate documentation file and ignore warnings for undocumented elements -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PublishDocumentationFile>true</PublishDocumentationFile>
-    <NoWarn>$(NoWarn);1591;1701;1702;NU1507</NoWarn>
+    <NoWarn>$(NoWarn);1591;1701;1702;NU1507;IDE0290</NoWarn>
     <!-- Error out upon trying to package projects marked as not packable -->
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
     <!-- Disable warnings on preview SDK versions -->
