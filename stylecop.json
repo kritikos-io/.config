@@ -33,7 +33,6 @@
     "spacingRules": {
     },
     "documentationRules": {
-      "xmlHeader": true,
       "documentInterfaces": false,
       "documentExposedElements": true,
       "documentInternalElements": false,
