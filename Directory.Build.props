@@ -87,6 +87,7 @@
 
   <PropertyGroup Label="OpenAPI Analyzers" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'True'">
     <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+    <OpenApiDocumentsDirectory>$(MSBuildProjectDirectory)/OpenApi</OpenApiDocumentsDirectory>
   </PropertyGroup>
 
   <!-- Sets deterministic source paths for CI builds -->

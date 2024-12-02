@@ -1157,3 +1157,4 @@ upload/*
 !artifacts/
 artifacts/*
 !artifacts/.gitkeep
+**/OpenApi/*.json
