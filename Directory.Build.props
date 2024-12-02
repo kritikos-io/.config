@@ -90,6 +90,12 @@
     <OpenApiDocumentsDirectory>$(MSBuildProjectDirectory)/OpenApi</OpenApiDocumentsDirectory>
   </PropertyGroup>
 
+  <PropertyGroup Label="MAUI Features">
+    <TrimMode>Full</TrimMode>
+    <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+    <MauiStrictXamlCompilation>true</MauiStrictXamlCompilation>
+  </PropertyGroup>
+
   <!-- Sets deterministic source paths for CI builds -->
   <PropertyGroup Label="CI Build">
     <!--
